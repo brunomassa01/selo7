@@ -1,0 +1,1439 @@
+<!DOCTYPE HTML>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Selo7 — Agência de Marketing e Comunicação</title>
+  <meta name="description" content="Agência de marketing estratégico. Criação de sites, SEO, consultoria, automação e gestão de marketing para empresas de todos os portes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f4f0;
+      --accent: #c8ff00;
+      --gray-dark: #1a1a1a;
+      --gray-mid: #333;
+      --gray-light: #888;
+      --gray-border: #222;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 4vw;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    nav.scrolled {
+      border-color: var(--gray-border);
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--gray-light);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--accent) !important;
+      color: var(--black) !important;
+      padding: 0.6rem 1.4rem;
+      border-radius: 2px;
+      font-weight: 500 !important;
+      font-size: 0.85rem !important;
+      transition: opacity 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--white);
+      transition: transform 0.3s;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 4vw 8vh;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200,255,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,255,0,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at 60% 40%, black 30%, transparent 70%);
+    }
+    .hero-accent-circle {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,255,0,0.08) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+      width: 100%;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 9vw, 9rem);
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.35s forwards;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.55s forwards;
+    }
+    .hero-desc {
+      max-width: 420px;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--gray-light);
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: var(--black);
+      padding: 1rem 2rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid var(--gray-border);
+      color: var(--white);
+      padding: 1rem 2rem;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--white); transform: translateY(-1px); }
+    .hero-scroll {
+      position: absolute;
+      bottom: 3rem;
+      right: 4vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      opacity: 0;
+      animation: fadeIn 1s 1s forwards;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--gray-border), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+
+    /* ─── MARQUEE ─── */
+    .marquee-section {
+      border-top: 1px solid var(--gray-border);
+      border-bottom: 1px solid var(--gray-border);
+      padding: 1.25rem 0;
+      overflow: hidden;
+      background: var(--gray-dark);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 4rem;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-item {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .marquee-item::after {
+      content: '✦';
+      color: var(--accent);
+      font-size: 0.6rem;
+    }
+
+    /* ─── SECTIONS COMMON ─── */
+    section { padding: 8rem 4vw; }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-bottom: 2rem;
+    }
+    .section-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .section-body {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--gray-light);
+      max-width: 560px;
+    }
+
+    /* ─── ABOUT ─── */
+    #sobre {
+      border-top: 1px solid var(--gray-border);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 3rem;
+    }
+    .stat-box {
+      background: var(--gray-dark);
+      padding: 2rem;
+      border: 1px solid var(--gray-border);
+    }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--gray-light);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-card {
+      background: var(--gray-dark);
+      border: 1px solid var(--gray-border);
+      padding: 3rem;
+      position: relative;
+    }
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent);
+    }
+    .about-card-quote {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+    .about-card-author {
+      font-size: 0.8rem;
+      color: var(--gray-light);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .kommo-badge {
+      margin-top: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.25rem;
+      border: 1px solid var(--gray-border);
+      font-size: 0.75rem;
+      color: var(--gray-light);
+      letter-spacing: 0.05em;
+    }
+    .kommo-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* ─── SERVIÇOS ─── */
+    #servicos {
+      border-top: 1px solid var(--gray-border);
+      background: var(--gray-dark);
+    }
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .service-card {
+      background: var(--black);
+      border: 1px solid var(--gray-border);
+      padding: 2.5rem;
+      cursor: default;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card:hover {
+      background: var(--gray-dark);
+    }
+    .service-card:hover .service-number { color: var(--accent); }
+    .service-number {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--gray-border);
+      margin-bottom: 2rem;
+      transition: color 0.3s;
+    }
+    .service-icon {
+      font-size: 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .service-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .service-desc {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: var(--gray-light);
+    }
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid var(--gray-border);
+      padding: 0.25rem 0.6rem;
+      color: var(--gray-light);
+    }
+
+    /* ─── COMO FUNCIONA ─── */
+    #processo {
+      border-top: 1px solid var(--gray-border);
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      max-width: 1400px;
+      margin: 4rem auto 0;
+      border: 1px solid var(--gray-border);
+    }
+    .process-step {
+      padding: 2.5rem;
+      border-right: 1px solid var(--gray-border);
+      position: relative;
+    }
+    .process-step:last-child { border-right: none; }
+    .process-step-num {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--gray-border);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .process-step-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .process-step-desc {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--gray-light);
+    }
+
+    /* ─── CLIENTES / PORTFÓLIO CTA ─── */
+    #resultados {
+      border-top: 1px solid var(--gray-border);
+      background: var(--gray-dark);
+    }
+    .results-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .results-list {
+      list-style: none;
+      margin-top: 2rem;
+    }
+    .results-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--gray-border);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--gray-light);
+    }
+    .results-list li:first-child { border-top: 1px solid var(--gray-border); }
+    .check {
+      color: var(--accent);
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .cta-block {
+      background: var(--black);
+      border: 1px solid var(--gray-border);
+      padding: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-block::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,255,0,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-block h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .cta-block p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--gray-light);
+      margin-bottom: 2rem;
+    }
+
+    /* ─── ÁREA DO CLIENTE ─── */
+    #area-cliente {
+      border-top: 1px solid var(--gray-border);
+    }
+    .client-area-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .client-panel-preview {
+      margin-top: 4rem;
+      border: 1px solid var(--gray-border);
+      overflow: hidden;
+    }
+    .client-panel-bar {
+      background: var(--gray-dark);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--gray-border);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gray-border); }
+    .dot.red { background: #ff5f57; }
+    .dot.yellow { background: #febc2e; }
+    .dot.green { background: #28c840; }
+    .client-panel-url {
+      margin-left: 1rem;
+      font-size: 0.75rem;
+      color: var(--gray-light);
+      font-family: monospace;
+    }
+    .client-panel-body {
+      background: var(--gray-dark);
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0;
+      min-height: 300px;
+    }
+    .client-sidebar {
+      border-right: 1px solid var(--gray-border);
+      padding-right: 2rem;
+    }
+    .client-sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      font-size: 0.8rem;
+      color: var(--gray-light);
+      border-bottom: 1px solid var(--gray-border);
+      cursor: default;
+    }
+    .client-sidebar-item.active { color: var(--accent); }
+    .client-sidebar-icon { font-size: 1rem; }
+    .client-main-area {
+      padding-left: 2rem;
+    }
+    .client-main-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+    .client-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .client-card {
+      border: 1px solid var(--gray-border);
+      padding: 1.25rem;
+    }
+    .client-card-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray-light);
+      margin-bottom: 0.5rem;
+    }
+    .client-card-value {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .client-panel-coming {
+      text-align: center;
+      padding: 2rem;
+      color: var(--gray-light);
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .coming-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(200,255,0,0.08);
+      border: 1px solid rgba(200,255,0,0.2);
+      color: var(--accent);
+      padding: 0.4rem 1rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── CONTATO ─── */
+    #contato {
+      border-top: 1px solid var(--gray-border);
+      background: var(--gray-dark);
+    }
+    .contact-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+    }
+    .contact-info-list {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+    .contact-info-icon {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--gray-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .contact-info-content a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .contact-info-content a:hover { color: var(--accent); }
+    .contact-info-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray-light);
+      margin-bottom: 0.25rem;
+    }
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+    }
+    .social-link {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--gray-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--gray-light);
+      font-size: 0.9rem;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-link:hover {
+      border-color: var(--accent);
+      color: var(--black);
+      background: var(--accent);
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .form-group label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray-light);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--black);
+      border: 1px solid var(--gray-border);
+      color: var(--white);
+      padding: 0.875rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--accent);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-success {
+      display: none;
+      background: rgba(200,255,0,0.1);
+      border: 1px solid rgba(200,255,0,0.3);
+      color: var(--accent);
+      padding: 1rem;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      margin-top: 2rem;
+    }
+    .newsletter-form input {
+      flex: 1;
+      background: var(--black);
+      border: 1px solid var(--gray-border);
+      border-right: none;
+      color: var(--white);
+      padding: 0.875rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      outline: none;
+    }
+    .newsletter-form input:focus { border-color: var(--accent); }
+    .newsletter-form button {
+      background: var(--accent);
+      color: var(--black);
+      border: none;
+      padding: 0.875rem 1.5rem;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .newsletter-form button:hover { opacity: 0.85; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--gray-border);
+      padding: 3rem 4vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--gray-light);
+    }
+    .footer-legal {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-legal a {
+      font-size: 0.78rem;
+      color: var(--gray-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: var(--white); }
+
+    /* ─── WHATSAPP FLOAT ─── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+    }
+    .whatsapp-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 5vw; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--black);
+        z-index: 99;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        padding: 2rem;
+      }
+      .nav-links.open a { font-size: 1.2rem; color: var(--white); }
+
+      #hero { padding: 0 5vw 10vh; min-height: 100svh; }
+      h1 { font-size: clamp(3rem, 12vw, 5rem); }
+      .hero-bottom { flex-direction: column; align-items: flex-start; }
+      .hero-actions { flex-direction: column; width: 100%; }
+      .btn-primary, .btn-outline { justify-content: center; }
+
+      section { padding: 5rem 5vw; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .process-step { border-bottom: 1px solid var(--gray-border); }
+      .results-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .client-panel-body { grid-template-columns: 1fr; }
+      .client-sidebar { border-right: none; padding-right: 0; border-bottom: 1px solid var(--gray-border); padding-bottom: 1rem; margin-bottom: 1rem; }
+      .client-cards { grid-template-columns: 1fr; }
+      .services-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-legal { justify-content: center; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="nav-logo" href="#hero">Selo<span>7</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#processo">Como funciona</a></li>
+    <li><a href="#area-cliente">Área do Cliente</a></li>
+    <li><a href="#contato" class="nav-cta">Falar com a equipe</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-accent-circle"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Agência de Marketing Estratégico · São Paulo</div>
+    <h1>Marketing que<br>gera <em>resultado</em><br>real.</h1>
+    <div class="hero-bottom">
+      <p class="hero-desc">
+        Da estratégia à execução. Construímos presença digital, automatizamos processos e entregamos crescimento mensurável para negócios de todos os portes.
+      </p>
+      <div class="hero-actions">
+        <a href="https://api.whatsapp.com/send?phone=5511981655857&text=Ol%C3%A1,%20acessei%20o%20site%20da%20Selo7%20e%20gostaria%20de%20uma%20proposta." class="btn-primary" target="_blank">
+          Solicitar proposta →
+        </a>
+        <a href="#servicos" class="btn-outline">Ver serviços</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-item">Criação de Sites</div>
+    <div class="marquee-item">SEO</div>
+    <div class="marquee-item">Marketing Digital</div>
+    <div class="marquee-item">Automação</div>
+    <div class="marquee-item">Consultoria</div>
+    <div class="marquee-item">Gestão de Redes Sociais</div>
+    <div class="marquee-item">Lives e Transmissões</div>
+    <div class="marquee-item">CRM</div>
+    <div class="marquee-item">Parceiro Kommo</div>
+    <!-- duplicate -->
+    <div class="marquee-item">Criação de Sites</div>
+    <div class="marquee-item">SEO</div>
+    <div class="marquee-item">Marketing Digital</div>
+    <div class="marquee-item">Automação</div>
+    <div class="marquee-item">Consultoria</div>
+    <div class="marquee-item">Gestão de Redes Sociais</div>
+    <div class="marquee-item">Lives e Transmissões</div>
+    <div class="marquee-item">CRM</div>
+    <div class="marquee-item">Parceiro Kommo</div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="section-label">Sobre a Selo7</div>
+      <h2 class="section-title">Criada por quem<br>foi <em>cliente</em> primeiro.</h2>
+      <p class="section-body">
+        A Selo7 nasceu da inquietação de quem por anos atuou no lado mais exigente do marketing — o do cliente. Focada em negócios empreendedores, projetos disruptivos e executivos que precisam de resultados reais, não de relatórios bonitos.
+      </p>
+      <p class="section-body" style="margin-top:1rem;">
+        Nossa metodologia simplifica processos, aumenta o engajamento de todo o ecossistema do negócio e conecta estratégia com execução.
+      </p>
+      <div class="about-stats">
+        <div class="stat-box">
+          <div class="stat-number">+10</div>
+          <div class="stat-label">Anos de experiência</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">360°</div>
+          <div class="stat-label">Visão de marketing</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">B2B</div>
+          <div class="stat-label">Foco em negócios</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">SP</div>
+          <div class="stat-label">São Paulo — Brasil</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <div class="about-card">
+        <div class="about-card-quote">
+          "O bom conteúdo é a melhor ferramenta de vendas do mundo."
+        </div>
+        <div class="about-card-author">— Filosofia Selo7</div>
+        <div class="kommo-badge">
+          <div class="kommo-dot"></div>
+          Parceiro Oficial Kommo CRM
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="services-header reveal">
+    <div>
+      <div class="section-label">O que fazemos</div>
+      <h2 class="section-title">Serviços que<br><em>movem negócios.</em></h2>
+    </div>
+    <a href="https://api.whatsapp.com/send?phone=5511981655857&text=Ol%C3%A1,%20gostaria%20de%20uma%20proposta%20personalizada." class="btn-outline" target="_blank">
+      Proposta personalizada →
+    </a>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-number">01</div>
+      <div class="service-icon">🌐</div>
+      <div class="service-title">Criação de Sites</div>
+      <div class="service-desc">Sites profissionais em WordPress ou HTML/CSS/JS. Do institucional ao e-commerce, entregamos performance, design e conversão.</div>
+      <div class="service-tags">
+        <span class="tag">WordPress</span>
+        <span class="tag">HTML/CSS/JS</span>
+        <span class="tag">Landing Pages</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-number">02</div>
+      <div class="service-icon">🔍</div>
+      <div class="service-title">SEO</div>
+      <div class="service-desc">Estratégia orgânica de longo prazo. Rankeamos seu negócio nas primeiras posições do Google e geramos tráfego qualificado de forma consistente.</div>
+      <div class="service-tags">
+        <span class="tag">On-page</span>
+        <span class="tag">Off-page</span>
+        <span class="tag">Conteúdo</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-number">03</div>
+      <div class="service-icon">📊</div>
+      <div class="service-title">Consultoria</div>
+      <div class="service-desc">Para empreendedores e executivos que precisam de clareza estratégica. Mapeamos o negócio, identificamos gargalos e criamos o plano de ação.</div>
+      <div class="service-tags">
+        <span class="tag">Estratégia</span>
+        <span class="tag">Planejamento</span>
+        <span class="tag">Performance</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-number">04</div>
+      <div class="service-icon">⚡</div>
+      <div class="service-title">Automação de Marketing</div>
+      <div class="service-desc">Fluxos inteligentes que trabalham enquanto você dorme. Integração com CRM, e-mail marketing, WhatsApp e pipelines de vendas automatizados.</div>
+      <div class="service-tags">
+        <span class="tag">Kommo CRM</span>
+        <span class="tag">WhatsApp</span>
+        <span class="tag">E-mail</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-number">05</div>
+      <div class="service-icon">📱</div>
+      <div class="service-title">Gestão de Redes Sociais</div>
+      <div class="service-desc">Estratégia, produção de conteúdo e gestão de comunidade. Presença consistente nas plataformas certas para o seu negócio.</div>
+      <div class="service-tags">
+        <span class="tag">Instagram</span>
+        <span class="tag">LinkedIn</span>
+        <span class="tag">Meta Ads</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-number">06</div>
+      <div class="service-icon">🎥</div>
+      <div class="service-title">Lives e Transmissões</div>
+      <div class="service-desc">Produção completa de conteúdo ao vivo. Eventos corporativos, lançamentos, webinars e transmissões multicanal com qualidade profissional.</div>
+      <div class="service-tags">
+        <span class="tag">Produção</span>
+        <span class="tag">Multicanal</span>
+        <span class="tag">Corporativo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo">
+  <div style="max-width:1400px;margin:0 auto;" class="reveal">
+    <div class="section-label">Como trabalhamos</div>
+    <h2 class="section-title">Método claro,<br><em>resultado previsível.</em></h2>
+  </div>
+  <div class="process-grid reveal">
+    <div class="process-step">
+      <div class="process-step-num">01</div>
+      <div class="process-step-title">Diagnóstico</div>
+      <div class="process-step-desc">Entendemos profundamente o seu negócio, mercado, concorrência e objetivos antes de propor qualquer ação.</div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">02</div>
+      <div class="process-step-title">Estratégia</div>
+      <div class="process-step-desc">Desenvolvemos o plano: canais, mensagens, prazos e indicadores. Nada genérico — tudo desenhado para o seu contexto.</div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">03</div>
+      <div class="process-step-title">Execução</div>
+      <div class="process-step-desc">Colocamos a mão na massa. Equipe dedicada, processos ágeis e comunicação transparente em cada etapa.</div>
+    </div>
+    <div class="process-step">
+      <div class="process-step-num">04</div>
+      <div class="process-step-title">Resultado</div>
+      <div class="process-step-desc">Medimos, reportamos e otimizamos continuamente. Você acompanha tudo em tempo real pela área do cliente.</div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTADOS / CTA CENTRAL -->
+<section id="resultados">
+  <div class="results-inner">
+    <div class="reveal">
+      <div class="section-label">Por que a Selo7</div>
+      <h2 class="section-title">Departamento de<br>marketing <em>completo.</em></h2>
+      <ul class="results-list">
+        <li><span class="check">✦</span> Estratégia e execução no mesmo time — sem intermediários</li>
+        <li><span class="check">✦</span> Custo menor do que montar um time interno</li>
+        <li><span class="check">✦</span> Metodologia comprovada em múltiplos segmentos</li>
+        <li><span class="check">✦</span> Transparência total: você acompanha cada entrega</li>
+        <li><span class="check">✦</span> Tecnologia de CRM integrada (Parceiro Kommo)</li>
+        <li><span class="check">✦</span> Foco em resultado — não em vaidade de métricas</li>
+      </ul>
+    </div>
+    <div class="cta-block reveal">
+      <h3>Pronto para<br>crescer?</h3>
+      <p>Agende uma conversa sem compromisso. Analisamos o seu negócio e apresentamos o que faz sentido — sem enrolação.</p>
+      <a href="https://api.whatsapp.com/send?phone=5511981655857&text=Ol%C3%A1,%20gostaria%20de%20agendar%20uma%20conversa%20sobre%20marketing." class="btn-primary" target="_blank" style="display:inline-flex;">
+        Agendar conversa →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ÁREA DO CLIENTE -->
+<section id="area-cliente">
+  <div class="client-area-inner">
+    <div class="reveal">
+      <div class="section-label">Para clientes</div>
+      <h2 class="section-title">Tudo do seu projeto<br><em>em um lugar só.</em></h2>
+      <p class="section-body">
+        Cada cliente Selo7 terá acesso a uma área exclusiva: acompanhamento de campanhas, relatórios, aprovação de conteúdos e comunicação direta com a equipe.
+      </p>
+      <div style="margin-top:2rem;display:flex;flex-direction:column;gap:0.5rem;align-items:flex-start;">
+        <span class="coming-badge">🔒 Sistema Aproove</span>
+        <span style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-light);padding-left:0.25rem;">Em desenvolvimento</span>
+      </div>
+    </div>
+
+    <div class="client-panel-preview reveal">
+      <div class="client-panel-bar">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+        <span class="client-panel-url">app.selo7.com.br/cliente/dashboard</span>
+      </div>
+      <div class="client-panel-body">
+        <div class="client-sidebar">
+          <div class="client-sidebar-item active"><span class="client-sidebar-icon">📊</span> Dashboard</div>
+          <div class="client-sidebar-item"><span class="client-sidebar-icon">📋</span> Projetos</div>
+          <div class="client-sidebar-item"><span class="client-sidebar-icon">📁</span> Arquivos</div>
+          <div class="client-sidebar-item"><span class="client-sidebar-icon">💬</span> Mensagens</div>
+          <div class="client-sidebar-item"><span class="client-sidebar-icon">📈</span> Relatórios</div>
+          <div class="client-sidebar-item"><span class="client-sidebar-icon">✅</span> Aprovações</div>
+        </div>
+        <div class="client-main-area">
+          <div class="client-main-title">Visão geral do projeto</div>
+          <div class="client-cards">
+            <div class="client-card">
+              <div class="client-card-label">Entregas no mês</div>
+              <div class="client-card-value">12</div>
+            </div>
+            <div class="client-card">
+              <div class="client-card-label">Pendente aprovação</div>
+              <div class="client-card-value">3</div>
+            </div>
+            <div class="client-card">
+              <div class="client-card-label">Alcance orgânico</div>
+              <div class="client-card-value">+28%</div>
+            </div>
+          </div>
+          <div class="client-panel-coming">
+            Preview da interface · Disponível em breve para todos os clientes Selo7
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="contact-inner">
+    <div class="reveal">
+      <div class="section-label">Fale conosco</div>
+      <h2 class="section-title">Vamos<br><em>conversar?</em></h2>
+      <p class="section-body">
+        Sem formulários intermináveis, sem chatbots. Fale diretamente com a equipe.
+      </p>
+      <div class="contact-info-list">
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📱</div>
+          <div class="contact-info-content">
+            <div class="contact-info-label">WhatsApp</div>
+            <a href="https://api.whatsapp.com/send?phone=5511981655857" target="_blank">+55 11 98165-5857</a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">✉️</div>
+          <div class="contact-info-content">
+            <div class="contact-info-label">E-mail</div>
+            <a href="mailto:contatosite@selo7.com.br">contatosite@selo7.com.br</a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📍</div>
+          <div class="contact-info-content">
+            <div class="contact-info-label">Localização</div>
+            <span style="font-size:0.9rem;color:var(--white)">São Paulo — SP, Brasil</span>
+          </div>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/company/selo7" target="_blank" class="social-link" title="LinkedIn">in</a>
+        <a href="https://www.instagram.com/selo7consultoria/" target="_blank" class="social-link" title="Instagram">ig</a>
+        <a href="https://www.facebook.com/selo7consultoria" target="_blank" class="social-link" title="Facebook">fb</a>
+        <a href="https://github.com/brunomassa01/selo7" target="_blank" class="social-link" title="GitHub">gh</a>
+      </div>
+      <div style="margin-top:3rem;">
+        <p style="font-size:0.8rem;color:var(--gray-light);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">Newsletter</p>
+        <p style="font-size:0.85rem;color:var(--gray-light);margin-bottom:0;">Receba insights de marketing sem spam.</p>
+        <div class="newsletter-form">
+          <input type="email" id="newsletterEmail" placeholder="seu@email.com" />
+          <button onclick="subscribeNewsletter()">Assinar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div style="background:var(--black);border:1px solid var(--gray-border);padding:2.5rem;">
+        <p style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;margin-bottom:2rem;letter-spacing:-0.01em;">Solicite uma proposta</p>
+        <div class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nome *</label>
+              <input type="text" id="fname" placeholder="Seu nome" required />
+            </div>
+            <div class="form-group">
+              <label>Empresa</label>
+              <input type="text" id="fcompany" placeholder="Nome da empresa" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>E-mail *</label>
+            <input type="email" id="femail" placeholder="seu@email.com" required />
+          </div>
+          <div class="form-group">
+            <label>Serviço de interesse</label>
+            <select id="fservice">
+              <option value="">Selecione...</option>
+              <option>Criação de Site</option>
+              <option>SEO</option>
+              <option>Consultoria</option>
+              <option>Automação de Marketing</option>
+              <option>Gestão de Redes Sociais</option>
+              <option>Lives e Transmissões</option>
+              <option>Pacote completo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Mensagem</label>
+            <textarea id="fmessage" placeholder="Conte sobre o seu negócio e o que precisa..."></textarea>
+          </div>
+          <div class="form-success" id="formSuccess">
+            ✦ Mensagem enviada! Retornamos em até 24h.
+          </div>
+          <button class="btn-primary" onclick="submitForm()" style="width:100%;justify-content:center;">
+            Enviar mensagem →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="#hero">Selo<span>7</span></a>
+  <span class="footer-copy">© 2025 Selo7 Comunicação e Marketing. Todos os direitos reservados.</span>
+  <div class="footer-legal">
+    <a href="mailto:contatosite@selo7.com.br">Contato</a>
+    <a href="#">Privacidade</a>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://api.whatsapp.com/send?phone=5511981655857&text=Ol%C3%A1,%20acessei%20o%20site%20da%20Selo7%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" class="whatsapp-float" title="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit (redirects to WhatsApp)
+  function submitForm() {
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    const service = document.getElementById('fservice').value;
+    const message = document.getElementById('fmessage').value.trim();
+    if (!name || !email) { alert('Por favor, preencha nome e e-mail.'); return; }
+    const text = `Olá! Vim pelo site da Selo7.\n\n*Nome:* ${name}\n*E-mail:* ${email}\n*Serviço:* ${service || 'Não informado'}\n*Mensagem:* ${message || 'Não informada'}`;
+    window.open(`https://api.whatsapp.com/send?phone=5511981655857&text=${encodeURIComponent(text)}`, '_blank');
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  function subscribeNewsletter() {
+    const email = document.getElementById('newsletterEmail').value.trim();
+    if (!email) { alert('Digite seu e-mail.'); return; }
+    const text = `Quero assinar a newsletter da Selo7. E-mail: ${email}`;
+    window.open(`https://api.whatsapp.com/send?phone=5511981655857&text=${encodeURIComponent(text)}`, '_blank');
+  }
+</script>
+</body>
+</html>
