@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora INK — Índice de Narrativa em KPI | Selo7</title>
+  <meta name="description" content="Calculadora INK (Índice de Narrativa em KPI). Instrumento autoral do livro Narrativa em KPI, de Bruno Massa. Avalie reconhecimento, coerência e permanência da sua marca." />
+  <meta name="author" content="Bruno Massa" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph (para compartilhamento em redes sociais) -->
+  <meta property="og:title" content="Calculadora INK — Índice de Narrativa em KPI" />
+  <meta property="og:description" content="Avalie o INK da sua empresa em três componentes: Reconhecimento, Coerência e Permanência." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.selo7.com.br/calculadorakpi" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React 18 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Babel para transpilar o JSX no navegador -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body { margin: 0; }
+    /* Garante a fonte serif padrão sem precisar carregar arquivo externo */
+    .font-serif {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" data-presets="react">
+    const { useState } = React;
+
+    function CalculadoraINK() {
+      const [r, setR] = useState(50);
+      const [c, setC] = useState(50);
+      const [p, setP] = useState(50);
+      const [showDerivadas, setShowDerivadas] = useState(false);
+      const [cac, setCac] = useState(1000);
+      const [investimento, setInvestimento] = useState(100000);
+
+      const ink = Math.round((r + c + p) / 3);
+
+      const getEstagio = (valor) => {
+        if (valor <= 30) return {
+          nome: 'NARRATIVA AUSENTE',
+          bg: 'bg-black',
+          text: 'text-white',
+          diagnostico: 'A empresa opera por sentimento. Marketing decorativo, central de pedidos no lugar de marketing estratégico. Estágio em que a maioria absoluta das empresas brasileiras de pequeno e médio porte se encontra. Reconhecimento honesto deste estágio é o ponto de partida do trabalho.',
+        };
+        if (valor <= 60) return {
+          nome: 'EM TRANSIÇÃO',
+          bg: 'bg-neutral-700',
+          text: 'text-white',
+          diagnostico: 'Há eixo identificado, esforço de articulação em curso, mas a narrativa ainda não atravessou todos os pontos de contato da operação. É o estágio em que a maioria das empresas para por exaustão, antes que o esforço dê retorno visível. O trabalho aqui é sustentar a articulação por mais tempo.',
+        };
+        if (valor <= 80) return {
+          nome: 'VIROU ATIVO',
+          bg: 'bg-neutral-300',
+          text: 'text-black',
+          diagnostico: 'Os primeiros frutos visíveis aparecem aqui. Ciclo de venda mais curto, retenção mais alta, indicações espontâneas começando a chegar com regularidade. CAC Narrativo já baixo, indicadores tradicionais melhorando como consequência. A virada aconteceu.',
+        };
+        return {
+          nome: 'ATIVO PLENO',
+          bg: 'bg-white border-2 border-black',
+          text: 'text-black',
+          diagnostico: 'Marca opera com sistema próprio. Talento certo, parceiro certo e cliente certo chegam por reconhecimento, ficam por valor, indicam por convicção. A empresa atravessa férias da liderança, transições de gestão, mudanças de mercado, sem perder coerência. Patrimônio narrativo de longo prazo.',
+        };
+      };
+
+      const estagio = getEstagio(ink);
+      const cacNarrativo = Math.round(cac * (1 - ink / 100));
+      const custoFriccao = Math.round(investimento * (1 - ink / 100));
+
+      const formatBRL = (n) =>
+        n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+
+      const markerPosition = `${ink}%`;
+
+      return (
+        <div className="min-h-screen bg-stone-50 py-8 px-4 font-serif">
+          <div className="max-w-3xl mx-auto bg-white shadow-sm border border-neutral-200 p-8 md:p-12">
+
+            {/* CABEÇALHO */}
+            <header className="border-b border-neutral-300 pb-6 mb-8">
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-black">
+                Calculadora INK
+              </h1>
+              <p className="text-base text-neutral-600 mt-1 italic">
+                Índice de Narrativa em KPI
+              </p>
+              <p className="text-xs text-neutral-500 mt-3">
+                Bruno Massa &nbsp;|&nbsp; Narrativa em KPI
+              </p>
+            </header>
+
+            {/* INSTRUÇÃO */}
+            <div className="mb-8 text-sm text-neutral-700 leading-relaxed">
+              <p>
+                Estime os três componentes da narrativa da sua empresa em escala de zero a cem.
+                O INK é a média simples dos três, na mesma escala. Não precisa ser preciso.
+                Precisa ser honesto.
+              </p>
+            </div>
+
+            {/* SLIDERS */}
+            <div className="space-y-7 mb-10">
+              {/* R */}
+              <div>
+                <div className="flex items-baseline justify-between mb-1">
+                  <label className="font-bold text-base">
+                    <span className="text-xl">R</span> &nbsp; Reconhecimento prévio
+                  </label>
+                  <span className="font-bold text-2xl tabular-nums">{r}</span>
+                </div>
+                <p className="text-xs text-neutral-600 italic mb-2">
+                  % de novos clientes que chegam à empresa já reconhecendo a marca
+                </p>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={r}
+                  onChange={(e) => setR(parseInt(e.target.value))}
+                  className="w-full h-1 bg-neutral-200 rounded-none appearance-none cursor-pointer accent-black"
+                />
+              </div>
+
+              {/* C */}
+              <div>
+                <div className="flex items-baseline justify-between mb-1">
+                  <label className="font-bold text-base">
+                    <span className="text-xl">C</span> &nbsp; Coerência percebida
+                  </label>
+                  <span className="font-bold text-2xl tabular-nums">{c}</span>
+                </div>
+                <p className="text-xs text-neutral-600 italic mb-2">
+                  % de clientes que descrevem a empresa de forma convergente em pesquisa
+                </p>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={c}
+                  onChange={(e) => setC(parseInt(e.target.value))}
+                  className="w-full h-1 bg-neutral-200 rounded-none appearance-none cursor-pointer accent-black"
+                />
+              </div>
+
+              {/* P */}
+              <div>
+                <div className="flex items-baseline justify-between mb-1">
+                  <label className="font-bold text-base">
+                    <span className="text-xl">P</span> &nbsp; Permanência espontânea
+                  </label>
+                  <span className="font-bold text-2xl tabular-nums">{p}</span>
+                </div>
+                <p className="text-xs text-neutral-600 italic mb-2">
+                  % de retenção orgânica, sem programa de fidelidade pesado
+                </p>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={p}
+                  onChange={(e) => setP(parseInt(e.target.value))}
+                  className="w-full h-1 bg-neutral-200 rounded-none appearance-none cursor-pointer accent-black"
+                />
+              </div>
+            </div>
+
+            {/* RESULTADO INK */}
+            <div className="border-t border-b border-black py-8 mb-8 text-center">
+              <p className="text-xs uppercase tracking-widest text-neutral-600 mb-2">Seu INK</p>
+              <p className="text-7xl md:text-8xl font-bold tabular-nums leading-none">{ink}</p>
+              <p className="text-xs text-neutral-500 mt-2 italic">INK = ( R + C + P ) ÷ 3</p>
+            </div>
+
+            {/* RÉGUA VISUAL */}
+            <div className="mb-8">
+              <p className="text-xs uppercase tracking-widest text-neutral-600 mb-3 text-center">
+                A Régua do INK
+              </p>
+
+              <div className="relative h-16 flex border border-neutral-400">
+                <div className="bg-black flex items-center justify-center" style={{ width: '30%' }}>
+                  <span className="text-[10px] text-white font-bold tracking-wide">AUSENTE</span>
+                </div>
+                <div className="bg-neutral-700 flex items-center justify-center" style={{ width: '30%' }}>
+                  <span className="text-[10px] text-white font-bold tracking-wide">TRANSIÇÃO</span>
+                </div>
+                <div className="bg-neutral-300 flex items-center justify-center" style={{ width: '20%' }}>
+                  <span className="text-[10px] text-black font-bold tracking-wide">VIROU ATIVO</span>
+                </div>
+                <div className="bg-white flex items-center justify-center" style={{ width: '20%' }}>
+                  <span className="text-[10px] text-black font-bold tracking-wide">PLENO</span>
+                </div>
+
+                <div
+                  className="absolute top-0 bottom-0 w-1 bg-red-600 transition-all duration-200"
+                  style={{ left: markerPosition, transform: 'translateX(-50%)' }}
+                >
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-red-600 rotate-45"></div>
+                </div>
+              </div>
+
+              <div className="flex justify-between text-xs text-neutral-600 mt-1 font-bold">
+                <span>0</span>
+                <span style={{ marginLeft: '24%' }}>30</span>
+                <span style={{ marginLeft: '24%' }}>60</span>
+                <span style={{ marginLeft: '14%' }}>80</span>
+                <span>100</span>
+              </div>
+            </div>
+
+            {/* DIAGNÓSTICO */}
+            <div className={`${estagio.bg} ${estagio.text} p-6 mb-8`}>
+              <p className="text-xs uppercase tracking-widest opacity-70 mb-2">Estágio</p>
+              <p className="text-2xl font-bold mb-3">{estagio.nome}</p>
+              <p className="text-sm leading-relaxed">{estagio.diagnostico}</p>
+            </div>
+
+            {/* TOGGLE DERIVADAS */}
+            <div className="border-t border-neutral-300 pt-6">
+              <button
+                onClick={() => setShowDerivadas(!showDerivadas)}
+                className="flex items-center gap-2 text-sm font-bold text-black hover:text-neutral-700 transition-colors"
+              >
+                <span className="text-lg leading-none">{showDerivadas ? '−' : '+'}</span>
+                Calcular CAC Narrativo e Custo de Fricção
+              </button>
+
+              {showDerivadas && (
+                <div className="mt-6 space-y-5">
+                  <div className="grid md:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-xs uppercase tracking-wide text-neutral-700 font-bold mb-1">
+                        CAC efetivo (R$)
+                      </label>
+                      <input
+                        type="number"
+                        value={cac}
+                        onChange={(e) => setCac(parseInt(e.target.value) || 0)}
+                        className="w-full border border-neutral-400 px-3 py-2 text-base font-bold tabular-nums focus:outline-none focus:border-black"
+                        min="0"
+                      />
+                      <p className="text-xs text-neutral-500 italic mt-1">
+                        custo médio para conquistar um novo cliente
+                      </p>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs uppercase tracking-wide text-neutral-700 font-bold mb-1">
+                        Investimento total (R$)
+                      </label>
+                      <input
+                        type="number"
+                        value={investimento}
+                        onChange={(e) => setInvestimento(parseInt(e.target.value) || 0)}
+                        className="w-full border border-neutral-400 px-3 py-2 text-base font-bold tabular-nums focus:outline-none focus:border-black"
+                        min="0"
+                      />
+                      <p className="text-xs text-neutral-500 italic mt-1">
+                        verba mensal de aquisição (mídia + comercial)
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-5 pt-4">
+                    <div className="border border-neutral-300 p-5">
+                      <p className="text-xs uppercase tracking-widest text-neutral-600 mb-1">
+                        CAC Narrativo
+                      </p>
+                      <p className="text-3xl font-bold tabular-nums mb-1">
+                        {formatBRL(cacNarrativo)}
+                      </p>
+                      <p className="text-xs text-neutral-600 italic">
+                        parcela do CAC paga para compensar coerência ausente
+                      </p>
+                      <p className="text-[10px] text-neutral-400 mt-2 font-mono">
+                        CAC × ( 1 − INK ÷ 100 )
+                      </p>
+                    </div>
+
+                    <div className="border border-neutral-300 p-5">
+                      <p className="text-xs uppercase tracking-widest text-neutral-600 mb-1">
+                        Custo de Fricção
+                      </p>
+                      <p className="text-3xl font-bold tabular-nums mb-1">
+                        {formatBRL(custoFriccao)}
+                      </p>
+                      <p className="text-xs text-neutral-600 italic">
+                        verba gasta para tapar buraco de coerência
+                      </p>
+                      <p className="text-[10px] text-neutral-400 mt-2 font-mono">
+                        Investimento × ( 1 − INK ÷ 100 )
+                      </p>
+                    </div>
+                  </div>
+
+                  <p className="text-xs text-neutral-600 leading-relaxed pt-2 border-t border-neutral-200">
+                    Quanto maior o INK, menor o CAC Narrativo e o Custo de Fricção.
+                    Subir o INK em vinte pontos significa, para essa operação, reduzir
+                    o CAC Narrativo e o Custo de Fricção em proporção direta. Esse é
+                    o ganho realocável que sustenta o investimento em articulação narrativa.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* RODAPÉ */}
+            <footer className="mt-12 pt-6 border-t border-neutral-300 text-center">
+              <p className="text-xs text-neutral-500 italic">
+                Instrumento autoral do livro <span className="font-bold not-italic">Narrativa em KPI</span>, de Bruno Massa
+              </p>
+              <p className="text-[10px] text-neutral-400 mt-1">
+                Marketing, coerência e o ativo invisível que sustenta empresas duradouras
+              </p>
+            </footer>
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<CalculadoraINK />);
+  </script>
+</body>
+</html>
