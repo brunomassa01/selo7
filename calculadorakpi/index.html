@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,36 +9,38 @@
   <meta name="author" content="Bruno Massa" />
   <meta name="robots" content="index, follow" />
 
-  <!-- Open Graph (para compartilhamento em redes sociais) -->
   <meta property="og:title" content="Calculadora INK — Índice de Narrativa em KPI" />
   <meta property="og:description" content="Avalie o INK da sua empresa em três componentes: Reconhecimento, Coerência e Permanência." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.selo7.com.br/calculadorakpi" />
   <meta property="og:locale" content="pt_BR" />
 
-  <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- React 18 -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-
-  <!-- Babel para transpilar o JSX no navegador -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <style>
     body { margin: 0; }
-    /* Garante a fonte serif padrão sem precisar carregar arquivo externo */
-    .font-serif {
-      font-family: Georgia, 'Times New Roman', Times, serif;
+    .font-serif { font-family: Georgia, 'Times New Roman', Times, serif; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
+    .fade-in { animation: fadeIn 0.5s ease-out; }
   </style>
 </head>
 <body>
   <div id="root"></div>
 
   <script type="text/babel" data-presets="react">
-    const { useState } = React;
+    const { useState, useEffect } = React;
+
+    // ============================================================
+    // URL do Google Apps Script (Web App) — destino dos cadastros
+    // ============================================================
+    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzgaI21c41kMPGWjAgLINosd2jeS4i-2Jrzj1A0HZ6Hk_YLl4p64DrYKb9K8_cXT9k/exec';
 
     function CalculadoraINK() {
       const [r, setR] = useState(50);
@@ -46,7 +49,14 @@
       const [showDerivadas, setShowDerivadas] = useState(false);
       const [cac, setCac] = useState(1000);
       const [investimento, setInvestimento] = useState(100000);
-      const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzgaI21c41kMPGWjAgLINosd2jeS4i-2Jrzj1A0HZ6Hk_YLl4p64DrYKb9K8_cXT9k/exec';
+
+      const [unlocked, setUnlocked] = useState(false);
+      const [showModal, setShowModal] = useState(false);
+      const [nome, setNome] = useState('');
+      const [email, setEmail] = useState('');
+      const [consentimento, setConsentimento] = useState(false);
+      const [submitting, setSubmitting] = useState(false);
+      const [submitError, setSubmitError] = useState('');
 
       const ink = Math.round((r + c + p) / 3);
 
@@ -86,11 +96,248 @@
 
       const markerPosition = `${ink}%`;
 
+      useEffect(() => {
+        try {
+          const cadastro = localStorage.getItem('ink_cadastro');
+          if (cadastro) {
+            const dados = JSON.parse(cadastro);
+            if (dados.email) {
+              setUnlocked(true);
+              setNome(dados.nome || '');
+              setEmail(dados.email);
+            }
+          }
+        } catch (e) {}
+      }, []);
+
+      const enviarParaGoogleSheets = async (dados) => {
+        if (!GOOGLE_SHEETS_URL || GOOGLE_SHEETS_URL.includes('COLE_AQUI')) {
+          console.warn('URL do Google Apps Script não configurada.');
+          return;
+        }
+        const formData = new FormData();
+        formData.append('nome', dados.nome);
+        formData.append('email', dados.email);
+        formData.append('ink', dados.ink);
+        formData.append('r', dados.r);
+        formData.append('c', dados.c);
+        formData.append('p', dados.p);
+        formData.append('estagio', dados.estagio);
+        formData.append('consentimento', dados.consentimento ? 'sim' : 'nao');
+        await fetch(GOOGLE_SHEETS_URL, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors',
+        });
+      };
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        setSubmitError('');
+        if (!nome.trim()) {
+          setSubmitError('Por favor, informe seu nome.');
+          return;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          setSubmitError('Por favor, informe um e-mail válido.');
+          return;
+        }
+        if (!consentimento) {
+          setSubmitError('É necessário concordar com a Política de Privacidade.');
+          return;
+        }
+        setSubmitting(true);
+        try {
+          await enviarParaGoogleSheets({
+            nome: nome.trim(),
+            email: email.trim().toLowerCase(),
+            ink, r, c, p,
+            estagio: estagio.nome,
+            consentimento,
+          });
+          localStorage.setItem('ink_cadastro', JSON.stringify({
+            nome: nome.trim(),
+            email: email.trim().toLowerCase(),
+            data: new Date().toISOString(),
+          }));
+          setUnlocked(true);
+          setShowModal(false);
+        } catch (err) {
+          setSubmitError('Houve um erro ao enviar. Tente novamente em instantes.');
+        } finally {
+          setSubmitting(false);
+        }
+      };
+
+      const baixarPDF = () => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+        const pageWidth = 210;
+        const margin = 20;
+        const contentWidth = pageWidth - margin * 2;
+        let y = margin;
+
+        doc.setFont('times', 'bold');
+        doc.setFontSize(22);
+        doc.text('Calculadora INK', margin, y);
+        y += 7;
+        doc.setFont('times', 'italic');
+        doc.setFontSize(12);
+        doc.setTextColor(80);
+        doc.text('Índice de Narrativa em KPI', margin, y);
+        y += 5;
+        doc.setFont('times', 'normal');
+        doc.setFontSize(9);
+        doc.setTextColor(120);
+        doc.text('Bruno Massa  |  Narrativa em KPI', margin, y);
+        y += 8;
+        doc.setDrawColor(180);
+        doc.setLineWidth(0.2);
+        doc.line(margin, y, pageWidth - margin, y);
+        y += 8;
+
+        doc.setFont('times', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(80);
+        const dataFormatada = new Date().toLocaleDateString('pt-BR', {
+          day: '2-digit', month: 'long', year: 'numeric'
+        });
+        doc.text(`Diagnóstico gerado em ${dataFormatada}`, margin, y);
+        y += 10;
+
+        doc.setTextColor(40);
+        doc.setFont('times', 'bold');
+        doc.setFontSize(11);
+        doc.text('OS TRÊS COMPONENTES', margin, y);
+        y += 6;
+
+        const componentes = [
+          { letra: 'R', nome: 'Reconhecimento prévio', valor: r },
+          { letra: 'C', nome: 'Coerência percebida', valor: c },
+          { letra: 'P', nome: 'Permanência espontânea', valor: p },
+        ];
+        componentes.forEach(comp => {
+          doc.setFont('times', 'bold');
+          doc.setFontSize(11);
+          doc.text(`${comp.letra}`, margin, y);
+          doc.setFont('times', 'normal');
+          doc.text(comp.nome, margin + 10, y);
+          doc.setFont('times', 'bold');
+          doc.text(`${comp.valor}`, pageWidth - margin, y, { align: 'right' });
+          y += 6;
+        });
+
+        y += 4;
+        doc.setDrawColor(0);
+        doc.setLineWidth(0.5);
+        doc.line(margin, y, pageWidth - margin, y);
+        y += 10;
+
+        doc.setFont('times', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        doc.text('SEU INK', pageWidth / 2, y, { align: 'center' });
+        y += 12;
+        doc.setFont('times', 'bold');
+        doc.setFontSize(54);
+        doc.setTextColor(0);
+        doc.text(`${ink}`, pageWidth / 2, y, { align: 'center' });
+        y += 6;
+        doc.setFont('times', 'italic');
+        doc.setFontSize(9);
+        doc.setTextColor(120);
+        doc.text('INK = ( R + C + P ) ÷ 3', pageWidth / 2, y, { align: 'center' });
+        y += 12;
+        doc.setDrawColor(0);
+        doc.line(margin, y, pageWidth - margin, y);
+        y += 10;
+
+        doc.setFont('times', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        doc.text('ESTÁGIO', margin, y);
+        y += 7;
+        doc.setFont('times', 'bold');
+        doc.setFontSize(16);
+        doc.setTextColor(0);
+        doc.text(estagio.nome, margin, y);
+        y += 8;
+        doc.setFont('times', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(50);
+        const linhasDiag = doc.splitTextToSize(estagio.diagnostico, contentWidth);
+        doc.text(linhasDiag, margin, y);
+        y += linhasDiag.length * 5 + 8;
+
+        if (showDerivadas) {
+          doc.setDrawColor(180);
+          doc.setLineWidth(0.2);
+          doc.line(margin, y, pageWidth - margin, y);
+          y += 8;
+          doc.setFont('times', 'bold');
+          doc.setFontSize(11);
+          doc.setTextColor(40);
+          doc.text('INDICADORES DERIVADOS', margin, y);
+          y += 8;
+          doc.setFont('times', 'normal');
+          doc.setFontSize(10);
+          doc.text(`CAC efetivo informado: ${formatBRL(cac)}`, margin, y);
+          y += 5;
+          doc.text(`Investimento total informado: ${formatBRL(investimento)}`, margin, y);
+          y += 8;
+          doc.setFont('times', 'bold');
+          doc.setFontSize(10);
+          doc.setTextColor(100);
+          doc.text('CAC NARRATIVO', margin, y);
+          y += 6;
+          doc.setFontSize(18);
+          doc.setTextColor(0);
+          doc.text(formatBRL(cacNarrativo), margin, y);
+          y += 6;
+          doc.setFont('times', 'italic');
+          doc.setFontSize(9);
+          doc.setTextColor(100);
+          doc.text('parcela do CAC paga para compensar coerência ausente', margin, y);
+          y += 8;
+          doc.setFont('times', 'bold');
+          doc.setFontSize(10);
+          doc.text('CUSTO DE FRICÇÃO', margin, y);
+          y += 6;
+          doc.setFontSize(18);
+          doc.setTextColor(0);
+          doc.text(formatBRL(custoFriccao), margin, y);
+          y += 6;
+          doc.setFont('times', 'italic');
+          doc.setFontSize(9);
+          doc.setTextColor(100);
+          doc.text('verba gasta para tapar buraco de coerência', margin, y);
+          y += 10;
+        }
+
+        const rodapeY = 280;
+        doc.setDrawColor(180);
+        doc.setLineWidth(0.2);
+        doc.line(margin, rodapeY, pageWidth - margin, rodapeY);
+        doc.setFont('times', 'italic');
+        doc.setFontSize(8);
+        doc.setTextColor(120);
+        doc.text(
+          'Instrumento autoral do livro "Narrativa em KPI", de Bruno Massa.',
+          pageWidth / 2, rodapeY + 5, { align: 'center' }
+        );
+        doc.text(
+          'selo7.com.br/calculadorakpi',
+          pageWidth / 2, rodapeY + 10, { align: 'center' }
+        );
+
+        doc.save(`Diagnostico-INK-${new Date().toISOString().split('T')[0]}.pdf`);
+      };
+
       return (
         <div className="min-h-screen bg-stone-50 py-8 px-4 font-serif">
           <div className="max-w-3xl mx-auto bg-white shadow-sm border border-neutral-200 p-8 md:p-12">
 
-            {/* CABEÇALHO */}
             <header className="border-b border-neutral-300 pb-6 mb-8">
               <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-black">
                 Calculadora INK
@@ -103,7 +350,6 @@
               </p>
             </header>
 
-            {/* INSTRUÇÃO */}
             <div className="mb-8 text-sm text-neutral-700 leading-relaxed">
               <p>
                 Estime os três componentes da narrativa da sua empresa em escala de zero a cem.
@@ -112,9 +358,7 @@
               </p>
             </div>
 
-            {/* SLIDERS */}
             <div className="space-y-7 mb-10">
-              {/* R */}
               <div>
                 <div className="flex items-baseline justify-between mb-1">
                   <label className="font-bold text-base">
@@ -125,17 +369,11 @@
                 <p className="text-xs text-neutral-600 italic mb-2">
                   % de novos clientes que chegam à empresa já reconhecendo a marca
                 </p>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  value={r}
+                <input type="range" min="0" max="100" value={r}
                   onChange={(e) => setR(parseInt(e.target.value))}
-                  className="w-full h-1 bg-neutral-200 rounded-none appearance-none cursor-pointer accent-black"
-                />
+                  className="w-full h-1 bg-neutral-200 rounded-none appearance-none cursor-pointer accent-black" />
               </div>
 
-              {/* C */}
               <div>
                 <div className="flex items-baseline justify-between mb-1">
                   <label className="font-bold text-base">
@@ -146,17 +384,11 @@
                 <p className="text-xs text-neutral-600 italic mb-2">
                   % de clientes que descrevem a empresa de forma convergente em pesquisa
                 </p>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  value={c}
+                <input type="range" min="0" max="100" value={c}
                   onChange={(e) => setC(parseInt(e.target.value))}
-                  className="w-full h-1 bg-neutral-200 rounded-none appearance-none cursor-pointer accent-black"
-                />
+                  className="w-full h-1 bg-neutral-200 rounded-none appearance-none cursor-pointer accent-black" />
               </div>
 
-              {/* P */}
               <div>
                 <div className="flex items-baseline justify-between mb-1">
                   <label className="font-bold text-base">
@@ -167,30 +399,41 @@
                 <p className="text-xs text-neutral-600 italic mb-2">
                   % de retenção orgânica, sem programa de fidelidade pesado
                 </p>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  value={p}
+                <input type="range" min="0" max="100" value={p}
                   onChange={(e) => setP(parseInt(e.target.value))}
-                  className="w-full h-1 bg-neutral-200 rounded-none appearance-none cursor-pointer accent-black"
-                />
+                  className="w-full h-1 bg-neutral-200 rounded-none appearance-none cursor-pointer accent-black" />
               </div>
             </div>
 
-            {/* RESULTADO INK */}
-            <div className="border-t border-b border-black py-8 mb-8 text-center">
+            <div className="border-t border-b border-black py-8 mb-8 text-center relative">
               <p className="text-xs uppercase tracking-widest text-neutral-600 mb-2">Seu INK</p>
-              <p className="text-7xl md:text-8xl font-bold tabular-nums leading-none">{ink}</p>
-              <p className="text-xs text-neutral-500 mt-2 italic">INK = ( R + C + P ) ÷ 3</p>
+              {unlocked ? (
+                <div className="fade-in">
+                  <p className="text-7xl md:text-8xl font-bold tabular-nums leading-none">{ink}</p>
+                  <p className="text-xs text-neutral-500 mt-2 italic">INK = ( R + C + P ) ÷ 3</p>
+                </div>
+              ) : (
+                <div className="relative">
+                  <p className="text-7xl md:text-8xl font-bold tabular-nums leading-none select-none" style={{ filter: 'blur(14px)', color: '#888' }}>
+                    {ink}
+                  </p>
+                  <p className="text-xs text-neutral-500 mt-2 italic select-none" style={{ filter: 'blur(4px)' }}>
+                    INK = ( R + C + P ) ÷ 3
+                  </p>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <button onClick={() => setShowModal(true)}
+                      className="bg-black text-white px-6 py-3 text-sm font-bold tracking-wide hover:bg-neutral-800 transition-colors shadow-lg">
+                      REVELAR MEU RESULTADO →
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* RÉGUA VISUAL */}
             <div className="mb-8">
               <p className="text-xs uppercase tracking-widest text-neutral-600 mb-3 text-center">
                 A Régua do INK
               </p>
-
               <div className="relative h-16 flex border border-neutral-400">
                 <div className="bg-black flex items-center justify-center" style={{ width: '30%' }}>
                   <span className="text-[10px] text-white font-bold tracking-wide">AUSENTE</span>
@@ -204,15 +447,13 @@
                 <div className="bg-white flex items-center justify-center" style={{ width: '20%' }}>
                   <span className="text-[10px] text-black font-bold tracking-wide">PLENO</span>
                 </div>
-
-                <div
-                  className="absolute top-0 bottom-0 w-1 bg-red-600 transition-all duration-200"
-                  style={{ left: markerPosition, transform: 'translateX(-50%)' }}
-                >
-                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-red-600 rotate-45"></div>
-                </div>
+                {unlocked && (
+                  <div className="absolute top-0 bottom-0 w-1 bg-red-600 transition-all duration-200 fade-in"
+                    style={{ left: markerPosition, transform: 'translateX(-50%)' }}>
+                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-red-600 rotate-45"></div>
+                  </div>
+                )}
               </div>
-
               <div className="flex justify-between text-xs text-neutral-600 mt-1 font-bold">
                 <span>0</span>
                 <span style={{ marginLeft: '24%' }}>30</span>
@@ -222,102 +463,89 @@
               </div>
             </div>
 
-            {/* DIAGNÓSTICO */}
-            <div className={`${estagio.bg} ${estagio.text} p-6 mb-8`}>
-              <p className="text-xs uppercase tracking-widest opacity-70 mb-2">Estágio</p>
-              <p className="text-2xl font-bold mb-3">{estagio.nome}</p>
-              <p className="text-sm leading-relaxed">{estagio.diagnostico}</p>
-            </div>
+            {unlocked ? (
+              <div className={`${estagio.bg} ${estagio.text} p-6 mb-8 fade-in`}>
+                <p className="text-xs uppercase tracking-widest opacity-70 mb-2">Estágio</p>
+                <p className="text-2xl font-bold mb-3">{estagio.nome}</p>
+                <p className="text-sm leading-relaxed">{estagio.diagnostico}</p>
+              </div>
+            ) : (
+              <div className="border-2 border-dashed border-neutral-300 p-6 mb-8 text-center">
+                <p className="text-sm text-neutral-600 italic">
+                  Diagnóstico completo do seu estágio narrativo disponível após o cadastro acima.
+                </p>
+              </div>
+            )}
 
-            {/* TOGGLE DERIVADAS */}
-            <div className="border-t border-neutral-300 pt-6">
-              <button
-                onClick={() => setShowDerivadas(!showDerivadas)}
-                className="flex items-center gap-2 text-sm font-bold text-black hover:text-neutral-700 transition-colors"
-              >
-                <span className="text-lg leading-none">{showDerivadas ? '−' : '+'}</span>
-                Calcular CAC Narrativo e Custo de Fricção
-              </button>
+            {unlocked && (
+              <div className="mb-8 text-center fade-in">
+                <button onClick={baixarPDF}
+                  className="border-2 border-black px-6 py-3 text-sm font-bold tracking-wide hover:bg-black hover:text-white transition-colors">
+                  ↓ BAIXAR DIAGNÓSTICO EM PDF
+                </button>
+              </div>
+            )}
 
-              {showDerivadas && (
-                <div className="mt-6 space-y-5">
-                  <div className="grid md:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-xs uppercase tracking-wide text-neutral-700 font-bold mb-1">
-                        CAC efetivo (R$)
-                      </label>
-                      <input
-                        type="number"
-                        value={cac}
-                        onChange={(e) => setCac(parseInt(e.target.value) || 0)}
-                        className="w-full border border-neutral-400 px-3 py-2 text-base font-bold tabular-nums focus:outline-none focus:border-black"
-                        min="0"
-                      />
-                      <p className="text-xs text-neutral-500 italic mt-1">
-                        custo médio para conquistar um novo cliente
-                      </p>
+            {unlocked && (
+              <div className="border-t border-neutral-300 pt-6 fade-in">
+                <button onClick={() => setShowDerivadas(!showDerivadas)}
+                  className="flex items-center gap-2 text-sm font-bold text-black hover:text-neutral-700 transition-colors">
+                  <span className="text-lg leading-none">{showDerivadas ? '−' : '+'}</span>
+                  Calcular CAC Narrativo e Custo de Fricção
+                </button>
+                {showDerivadas && (
+                  <div className="mt-6 space-y-5">
+                    <div className="grid md:grid-cols-2 gap-5">
+                      <div>
+                        <label className="block text-xs uppercase tracking-wide text-neutral-700 font-bold mb-1">
+                          CAC efetivo (R$)
+                        </label>
+                        <input type="number" value={cac}
+                          onChange={(e) => setCac(parseInt(e.target.value) || 0)}
+                          className="w-full border border-neutral-400 px-3 py-2 text-base font-bold tabular-nums focus:outline-none focus:border-black" min="0" />
+                        <p className="text-xs text-neutral-500 italic mt-1">
+                          custo médio para conquistar um novo cliente
+                        </p>
+                      </div>
+                      <div>
+                        <label className="block text-xs uppercase tracking-wide text-neutral-700 font-bold mb-1">
+                          Investimento total (R$)
+                        </label>
+                        <input type="number" value={investimento}
+                          onChange={(e) => setInvestimento(parseInt(e.target.value) || 0)}
+                          className="w-full border border-neutral-400 px-3 py-2 text-base font-bold tabular-nums focus:outline-none focus:border-black" min="0" />
+                        <p className="text-xs text-neutral-500 italic mt-1">
+                          verba mensal de aquisição (mídia + comercial)
+                        </p>
+                      </div>
                     </div>
-
-                    <div>
-                      <label className="block text-xs uppercase tracking-wide text-neutral-700 font-bold mb-1">
-                        Investimento total (R$)
-                      </label>
-                      <input
-                        type="number"
-                        value={investimento}
-                        onChange={(e) => setInvestimento(parseInt(e.target.value) || 0)}
-                        className="w-full border border-neutral-400 px-3 py-2 text-base font-bold tabular-nums focus:outline-none focus:border-black"
-                        min="0"
-                      />
-                      <p className="text-xs text-neutral-500 italic mt-1">
-                        verba mensal de aquisição (mídia + comercial)
-                      </p>
+                    <div className="grid md:grid-cols-2 gap-5 pt-4">
+                      <div className="border border-neutral-300 p-5">
+                        <p className="text-xs uppercase tracking-widest text-neutral-600 mb-1">CAC Narrativo</p>
+                        <p className="text-3xl font-bold tabular-nums mb-1">{formatBRL(cacNarrativo)}</p>
+                        <p className="text-xs text-neutral-600 italic">
+                          parcela do CAC paga para compensar coerência ausente
+                        </p>
+                        <p className="text-[10px] text-neutral-400 mt-2 font-mono">CAC × ( 1 − INK ÷ 100 )</p>
+                      </div>
+                      <div className="border border-neutral-300 p-5">
+                        <p className="text-xs uppercase tracking-widest text-neutral-600 mb-1">Custo de Fricção</p>
+                        <p className="text-3xl font-bold tabular-nums mb-1">{formatBRL(custoFriccao)}</p>
+                        <p className="text-xs text-neutral-600 italic">verba gasta para tapar buraco de coerência</p>
+                        <p className="text-[10px] text-neutral-400 mt-2 font-mono">Investimento × ( 1 − INK ÷ 100 )</p>
+                      </div>
                     </div>
+                    <p className="text-xs text-neutral-600 leading-relaxed pt-2 border-t border-neutral-200">
+                      Quanto maior o INK, menor o CAC Narrativo e o Custo de Fricção.
+                      Subir o INK em vinte pontos significa, para essa operação, reduzir
+                      o CAC Narrativo e o Custo de Fricção em proporção direta. Esse é
+                      o ganho realocável que sustenta o investimento em articulação narrativa.
+                    </p>
                   </div>
+                )}
+              </div>
+            )}
 
-                  <div className="grid md:grid-cols-2 gap-5 pt-4">
-                    <div className="border border-neutral-300 p-5">
-                      <p className="text-xs uppercase tracking-widest text-neutral-600 mb-1">
-                        CAC Narrativo
-                      </p>
-                      <p className="text-3xl font-bold tabular-nums mb-1">
-                        {formatBRL(cacNarrativo)}
-                      </p>
-                      <p className="text-xs text-neutral-600 italic">
-                        parcela do CAC paga para compensar coerência ausente
-                      </p>
-                      <p className="text-[10px] text-neutral-400 mt-2 font-mono">
-                        CAC × ( 1 − INK ÷ 100 )
-                      </p>
-                    </div>
-
-                    <div className="border border-neutral-300 p-5">
-                      <p className="text-xs uppercase tracking-widest text-neutral-600 mb-1">
-                        Custo de Fricção
-                      </p>
-                      <p className="text-3xl font-bold tabular-nums mb-1">
-                        {formatBRL(custoFriccao)}
-                      </p>
-                      <p className="text-xs text-neutral-600 italic">
-                        verba gasta para tapar buraco de coerência
-                      </p>
-                      <p className="text-[10px] text-neutral-400 mt-2 font-mono">
-                        Investimento × ( 1 − INK ÷ 100 )
-                      </p>
-                    </div>
-                  </div>
-
-                  <p className="text-xs text-neutral-600 leading-relaxed pt-2 border-t border-neutral-200">
-                    Quanto maior o INK, menor o CAC Narrativo e o Custo de Fricção.
-                    Subir o INK em vinte pontos significa, para essa operação, reduzir
-                    o CAC Narrativo e o Custo de Fricção em proporção direta. Esse é
-                    o ganho realocável que sustenta o investimento em articulação narrativa.
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {/* RODAPÉ */}
             <footer className="mt-12 pt-6 border-t border-neutral-300 text-center">
               <p className="text-xs text-neutral-500 italic">
                 Instrumento autoral do livro <span className="font-bold not-italic">Narrativa em KPI</span>, de Bruno Massa
@@ -325,8 +553,64 @@
               <p className="text-[10px] text-neutral-400 mt-1">
                 Marketing, coerência e o ativo invisível que sustenta empresas duradouras
               </p>
+              <p className="text-[10px] text-neutral-400 mt-2">
+                <a href="./politica.html" className="underline hover:text-neutral-600">Política de Privacidade</a>
+              </p>
             </footer>
           </div>
+
+          {showModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
+              style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
+              <div className="bg-white max-w-md w-full p-8 fade-in">
+                <h2 className="text-2xl font-bold mb-1">Quase lá.</h2>
+                <p className="text-sm text-neutral-600 italic mb-6">
+                  Preencha para revelar seu diagnóstico completo.
+                </p>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-xs uppercase tracking-wide font-bold mb-1">Nome</label>
+                    <input type="text" value={nome} onChange={(e) => setNome(e.target.value)}
+                      className="w-full border border-neutral-400 px-3 py-2 text-base focus:outline-none focus:border-black"
+                      placeholder="Seu nome" autoFocus />
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase tracking-wide font-bold mb-1">E-mail</label>
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                      className="w-full border border-neutral-400 px-3 py-2 text-base focus:outline-none focus:border-black"
+                      placeholder="seu@email.com" />
+                  </div>
+                  <label className="flex items-start gap-2 text-xs text-neutral-700 cursor-pointer">
+                    <input type="checkbox" checked={consentimento}
+                      onChange={(e) => setConsentimento(e.target.checked)} className="mt-0.5 cursor-pointer" />
+                    <span>
+                      Concordo em receber comunicações da Selo7 sobre Narrativa em KPI
+                      e li a{' '}
+                      <a href="./politica.html" target="_blank" rel="noopener noreferrer" className="underline font-bold">
+                        Política de Privacidade
+                      </a>.
+                    </span>
+                  </label>
+                  {submitError && <p className="text-xs text-red-600 font-bold">{submitError}</p>}
+                  <div className="flex gap-3 pt-2">
+                    <button type="button" onClick={() => setShowModal(false)}
+                      className="flex-1 border border-neutral-400 px-4 py-3 text-sm font-bold hover:bg-neutral-100 transition-colors"
+                      disabled={submitting}>
+                      Cancelar
+                    </button>
+                    <button type="submit"
+                      className="flex-1 bg-black text-white px-4 py-3 text-sm font-bold hover:bg-neutral-800 transition-colors disabled:opacity-50"
+                      disabled={submitting}>
+                      {submitting ? 'Enviando...' : 'Ver resultado'}
+                    </button>
+                  </div>
+                  <p className="text-[10px] text-neutral-500 italic pt-2 border-t border-neutral-200">
+                    Seus dados são tratados conforme a LGPD. Não compartilhamos com terceiros.
+                  </p>
+                </form>
+              </div>
+            </div>
+          )}
         </div>
       );
     }
