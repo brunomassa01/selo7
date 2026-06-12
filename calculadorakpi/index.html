@@ -42,6 +42,53 @@
     // ============================================================
     const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzgaI21c41kMPGWjAgLINosd2jeS4i-2Jrzj1A0HZ6Hk_YLl4p64DrYKb9K8_cXT9k/exec';
 
+    // ============================================================
+    // Gráfico aranha — mapa visual dos três componentes (R, C, P)
+    // ============================================================
+    function RadarINK({ r, c, p }) {
+      const cx = 150, cy = 148, raio = 96;
+      const angulos = [-90, 30, 150]; // R no topo, C embaixo à direita, P embaixo à esquerda
+      const ponto = (angulo, dist) => {
+        const rad = (angulo * Math.PI) / 180;
+        return [cx + dist * Math.cos(rad), cy + dist * Math.sin(rad)];
+      };
+      const poligono = (dist) => angulos.map((a) => ponto(a, dist).join(',')).join(' ');
+      const valores = [r, c, p];
+      const dados = angulos.map((a, i) => ponto(a, (valores[i] / 100) * raio));
+      const rotulos = [
+        { letra: 'R', nome: 'Reconhecimento', valor: r },
+        { letra: 'C', nome: 'Coerência', valor: c },
+        { letra: 'P', nome: 'Permanência', valor: p },
+      ];
+      return (
+        <svg viewBox="0 0 300 240" className="w-full max-w-sm mx-auto" role="img"
+          aria-label={`Gráfico aranha: Reconhecimento ${r}, Coerência ${c}, Permanência ${p}`}>
+          {[0.25, 0.5, 0.75, 1].map((f) => (
+            <polygon key={f} points={poligono(raio * f)} fill="none" stroke="#d4d4d4"
+              strokeWidth={f === 1 ? 1.2 : 0.7} />
+          ))}
+          {angulos.map((a) => {
+            const [x, y] = ponto(a, raio);
+            return <line key={a} x1={cx} y1={cy} x2={x} y2={y} stroke="#d4d4d4" strokeWidth="0.7" />;
+          })}
+          {[25, 50, 75, 100].map((v) => (
+            <text key={v} x={cx + 5} y={cy - (raio * v) / 100 + 3} fontSize="7" fill="#a3a3a3">{v}</text>
+          ))}
+          <polygon points={dados.map((d) => d.join(',')).join(' ')}
+            fill="rgba(0,0,0,0.08)" stroke="#000" strokeWidth="2" strokeLinejoin="round" />
+          {dados.map((d, i) => <circle key={i} cx={d[0]} cy={d[1]} r="4" fill="#000" />)}
+          {rotulos.map((rot, i) => {
+            const [x, y] = ponto(angulos[i], raio + 24);
+            return (
+              <text key={rot.letra} x={x} y={y} textAnchor="middle" fontFamily="Georgia, serif">
+                <tspan x={x} dy="-2" fontSize="13" fontWeight="bold" fill="#000">{rot.letra} {rot.valor}</tspan>
+                <tspan x={x} dy="11" fontSize="8" fill="#737373" fontStyle="italic">{rot.nome}</tspan>
+              </text>
+            );
+          })}
+        </svg>
+      );
+    }
 
     function CalculadoraINK() {
       const [r, setR] = useState(50);
@@ -121,7 +168,8 @@
         formData.append('email', dados.email);
         formData.append('ink', dados.ink);
         formData.append('r', dados.r);
-        formData.append('c', dados.c);
+        // 'c' é nome de parâmetro reservado pelo Google (rejeita o POST com erro 400)
+        formData.append('coerencia', dados.c);
         formData.append('p', dados.p);
         formData.append('estagio', dados.estagio);
         formData.append('consentimento', dados.consentimento ? 'sim' : 'nao');
@@ -271,7 +319,56 @@
         doc.text(linhasDiag, margin, y);
         y += linhasDiag.length * 5 + 8;
 
+        // Gráfico aranha — mapa R, C, P
+        if (y > 190) { doc.addPage(); y = margin; }
+        doc.setDrawColor(180);
+        doc.setLineWidth(0.2);
+        doc.line(margin, y, pageWidth - margin, y);
+        y += 8;
+        doc.setFont('times', 'bold');
+        doc.setFontSize(11);
+        doc.setTextColor(40);
+        doc.text('MAPA DA NARRATIVA', margin, y);
+        y += 4;
+
+        const cxRadar = pageWidth / 2;
+        const cyRadar = y + 34;
+        const raioRadar = 26;
+        const angulosRadar = [-90, 30, 150];
+        const pontoRadar = (angulo, dist) => {
+          const rad = (angulo * Math.PI) / 180;
+          return [cxRadar + dist * Math.cos(rad), cyRadar + dist * Math.sin(rad)];
+        };
+        doc.setDrawColor(200);
+        doc.setLineWidth(0.2);
+        [0.25, 0.5, 0.75, 1].forEach((f) => {
+          const [gx1, gy1] = pontoRadar(angulosRadar[0], raioRadar * f);
+          const [gx2, gy2] = pontoRadar(angulosRadar[1], raioRadar * f);
+          const [gx3, gy3] = pontoRadar(angulosRadar[2], raioRadar * f);
+          doc.triangle(gx1, gy1, gx2, gy2, gx3, gy3, 'S');
+        });
+        angulosRadar.forEach((a) => {
+          const [ax, ay] = pontoRadar(a, raioRadar);
+          doc.line(cxRadar, cyRadar, ax, ay);
+        });
+        const [vx1, vy1] = pontoRadar(angulosRadar[0], (r / 100) * raioRadar);
+        const [vx2, vy2] = pontoRadar(angulosRadar[1], (c / 100) * raioRadar);
+        const [vx3, vy3] = pontoRadar(angulosRadar[2], (p / 100) * raioRadar);
+        doc.setDrawColor(0);
+        doc.setLineWidth(0.5);
+        doc.setFillColor(225, 225, 225);
+        doc.triangle(vx1, vy1, vx2, vy2, vx3, vy3, 'FD');
+        doc.setFont('times', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(0);
+        [{ letra: 'R', valor: r }, { letra: 'C', valor: c }, { letra: 'P', valor: p }].forEach((comp, i) => {
+          const [lx, ly] = pontoRadar(angulosRadar[i], raioRadar + 7);
+          doc.text(`${comp.letra} ${comp.valor}`, lx, ly, { align: 'center' });
+        });
+        y = cyRadar + raioRadar / 2 + 16;
+
         if (showDerivadas) {
+          if (y > 195) { doc.addPage(); y = margin; }
           doc.setDrawColor(180);
           doc.setLineWidth(0.2);
           doc.line(margin, y, pageWidth - margin, y);
@@ -474,6 +571,18 @@
               <div className="border-2 border-dashed border-neutral-300 p-6 mb-8 text-center">
                 <p className="text-sm text-neutral-600 italic">
                   Diagnóstico completo do seu estágio narrativo disponível após o cadastro acima.
+                </p>
+              </div>
+            )}
+
+            {unlocked && (
+              <div className="mb-8 fade-in">
+                <p className="text-xs uppercase tracking-widest text-neutral-600 mb-3 text-center">
+                  Mapa da Narrativa
+                </p>
+                <RadarINK r={r} c={c} p={p} />
+                <p className="text-xs text-neutral-500 italic text-center mt-2">
+                  Quanto mais amplo e equilibrado o triângulo, mais a narrativa sustenta a operação.
                 </p>
               </div>
             )}
