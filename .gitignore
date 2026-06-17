@@ -1,0 +1,5 @@
+# Arquivos internos — NÃO publicar no site/GitHub
+projeto-selo7-ia/
+*.zip
+*.pdf
+README-CLAUDE.md
