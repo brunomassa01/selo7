@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<script>/* acesso reservado - Selo7 */(function(){try{var t=localStorage.getItem("s7p_pagos_ok");if(t&&(Date.now()-parseInt(t,10))<60*864e5)return;var p=location.pathname.split("/").pop();if(/^[a-z0-9-]+\.html$/.test(p))localStorage.setItem("s7p_pagos_next",p);location.replace("./")}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System PAGOS · v0.1 — Selo7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ══ TOKENS OFICIAIS PAGOS ══ */
+  --navy-950:#050F26; --navy-900:#081735; --navy-800:#0D2350; --navy-700:#123067;
+  --blue:#1E6BF2; --cyan:#35C7F0;
+  --green:#2BE39B; --green-dark:#0FBF7E;
+  --paper:#F4F8FE; --card:#FFFFFF;
+  --ink:#0B1B3A; --ink-soft:#44557A; --ink-3:#7A89A8;
+  --line:rgba(255,255,255,.09); --line-ink:rgba(11,27,58,.1);
+  --radius-s:10px; --radius-m:14px; --radius-l:20px;
+  --shadow-soft:0 2px 6px rgba(16,24,40,.04),0 18px 44px rgba(16,24,40,.07);
+  --sans:'Poppins',system-ui,sans-serif; --serif:'Source Serif 4',Georgia,serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:#EEF2FA;color:var(--ink);font-size:15px;line-height:1.6}
+img{max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+
+/* chrome do guia */
+.dhead{background:var(--navy-950);color:#fff;padding:52px 0 44px}
+.dhead .v{display:inline-block;background:var(--green);color:#04351F;font-size:10.5px;font-weight:700;letter-spacing:.14em;padding:5px 12px;border-radius:999px;margin-bottom:16px}
+.dhead h1{font-size:38px;font-weight:700;letter-spacing:-.02em}
+.dhead p{color:#AEC0E6;margin-top:8px;max-width:70ch}
+.dsec{padding:54px 0;border-top:1px solid rgba(11,27,58,.06)}
+.dsec>.wrap>h2{font-size:13px;letter-spacing:.22em;color:var(--blue);font-weight:700;margin-bottom:6px}
+.dsec>.wrap>.sub{color:var(--ink-soft);font-size:14px;margin-bottom:28px;max-width:78ch}
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:1fr 1fr}
+.panel{background:var(--card);border-radius:var(--radius-m);box-shadow:var(--shadow-soft);padding:24px}
+.panel h3{font-size:12px;letter-spacing:.14em;color:var(--ink-3);font-weight:600;margin-bottom:16px}
+
+/* cores */
+.sw{border-radius:var(--radius-s);overflow:hidden;border:1px solid var(--line-ink)}
+.sw .c{height:74px}
+.sw .i{background:#fff;padding:10px 13px;font-size:11.5px}
+.sw .i b{display:block;font-size:12.5px}
+.sw .i code{color:var(--ink-soft);font-family:Consolas,monospace;font-size:11px}
+.sw .i small{display:block;color:var(--ink-3);margin-top:3px;font-size:10.5px}
+
+/* tipografia */
+.type-row{display:flex;align-items:baseline;gap:22px;padding:16px 0;border-top:1px solid var(--line-ink);flex-wrap:wrap}
+.type-row:first-of-type{border-top:0}
+.type-row .lbl{min-width:210px;font-size:11px;color:var(--ink-3);letter-spacing:.08em;font-weight:600}
+.t-h1{font-size:40px;font-weight:700;letter-spacing:-.02em;line-height:1.05}
+.t-h2{font-size:26px;font-weight:700;letter-spacing:-.01em}
+.t-serif{font-family:var(--serif);font-size:24px;font-weight:700;line-height:1.25}
+.t-body{font-size:16px;color:var(--ink-soft);max-width:52ch}
+.t-serif-body{font-family:var(--serif);font-size:17.5px;color:#1C2C52;max-width:52ch;line-height:1.7}
+.t-kicker{font-size:12px;font-weight:600;letter-spacing:.22em;color:var(--green-dark)}
+.t-caps{font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--ink-3)}
+
+/* componentes */
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:14px;border-radius:var(--radius-s);padding:12px 22px;border:0;cursor:pointer}
+.btn--green{background:var(--green);color:#04351F}
+.btn--blue{background:var(--blue);color:#fff}
+.btn--ghost{background:transparent;color:var(--ink);border:1.5px solid rgba(11,27,58,.25)}
+.btn--ghost-d{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.pill{font-size:10.5px;font-weight:700;padding:5px 11px;border-radius:999px;letter-spacing:.06em}
+.pill--ok{background:rgba(15,191,126,.13);color:var(--green-dark)}
+.pill--wait{background:rgba(245,192,68,.18);color:#8A5A00}
+.pill--lock{background:rgba(43,227,155,.13);color:var(--green-dark);border:1px solid rgba(15,191,126,.4)}
+.tagd{background:var(--green);color:#04351F;font-size:10.5px;font-weight:700;letter-spacing:.12em;padding:5px 10px;border-radius:6px}
+.dark-strip{background:var(--navy-900);border-radius:var(--radius-s);padding:22px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.comp-note{font-size:11.5px;color:var(--ink-3);margin-top:12px}
+
+/* princípios */
+.princ{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.princ .panel b{display:block;font-size:14px;margin-bottom:6px}
+.princ .panel p{font-size:13px;color:var(--ink-soft)}
+
+/* ══ TEMPLATES DE REDES ══ */
+.tpl-stage{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
+.tpl-frame{background:var(--card);border-radius:var(--radius-m);box-shadow:var(--shadow-soft);padding:18px;text-align:center}
+.tpl-frame>small{display:block;font-size:11px;color:var(--ink-3);letter-spacing:.1em;font-weight:600;margin-bottom:14px}
+.tpl-scale{position:relative;margin:0 auto;overflow:hidden;border-radius:8px;box-shadow:0 8px 26px rgba(11,27,58,.18)}
+
+/* escala: artes em resolução real, exibidas a 30% */
+.tpl-scale.sq{width:324px;height:324px}
+.art{position:absolute;top:0;left:0;transform:scale(.30);transform-origin:top left;font-family:var(--sans)}
+.art--sq{width:1080px;height:1080px}
+.art--pt{width:1080px;height:1350px}
+.art--ln{width:1200px;height:627px}
+.tpl-scale.pt{width:324px;height:405px}
+.tpl-scale.ln{width:324px;height:169px}
+.tpl-scale.ln .art{transform:scale(.27)}
+
+/* base fotográfica (linguagem das referências: foto full-bleed + gradação azul) */
+.a-foto{color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column;background:#050F26}
+/* duotone de estúdio: P&B + azul multiplicado + glow ciano — unifica qualquer foto enviada */
+.a-foto .pbg{position:absolute;inset:0;background-size:cover;background-position:center 18%;filter:grayscale(1) contrast(1.12) brightness(.96);isolation:isolate}
+.a-foto .pbg::before{content:"";position:absolute;inset:0;background:linear-gradient(160deg,#3D86FF 0%,#123067 52%,#050F26 100%);mix-blend-mode:multiply}
+.a-foto .pbg::after{content:"";position:absolute;inset:0;background:radial-gradient(660px 580px at 50% 24%,rgba(53,199,240,.6),transparent 64%);mix-blend-mode:screen}
+.a-foto .ov{position:absolute;inset:0;background:linear-gradient(182deg,rgba(5,15,38,.34) 4%,rgba(5,15,38,0) 30%,rgba(5,15,38,.42) 58%,rgba(5,15,38,.97) 86%)}
+.a-foto .in{position:relative;z-index:1;display:flex;flex-direction:column;flex:1;padding:64px 72px}
+.a-foto .topbar{display:flex;justify-content:space-between;align-items:center;font-size:24px;color:#DCE9FF;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:22px}
+.a-foto .topbar b{font-weight:500}
+.cy{color:var(--cyan);font-style:normal}
+.gr{color:var(--green);font-style:normal}
+
+/* T1 · notícia */
+.a-not .chip2{width:88px;height:88px;border-radius:22px;background:linear-gradient(140deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;margin-bottom:30px}
+.a-not .chip2 img{height:48px}
+.a-not h4{font-size:74px;font-weight:600;line-height:1.16;letter-spacing:-.01em;max-width:14ch}
+.a-not .sub2{font-size:31px;color:#D5E2F8;line-height:1.5;max-width:26ch;margin-top:28px}
+.a-not .in>div:last-child{margin-top:auto}
+
+/* T2 · aspas */
+.a-asp .etag{font-size:24px;font-weight:600;letter-spacing:.22em;color:var(--green);margin-top:44px}
+.a-asp .qm{font-family:var(--serif);font-size:190px;line-height:.6;color:var(--green);margin:60px 0 6px}
+.a-asp h4{font-size:64px;font-weight:600;line-height:1.28;letter-spacing:-.005em;max-width:16ch}
+.a-asp .who{margin-top:auto}
+.a-asp .hpill{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#0B1B3A;font-size:23px;font-weight:600;border-radius:999px;padding:10px 24px;margin-bottom:18px}
+.a-asp .who b{display:block;font-size:44px;font-weight:700}
+.a-asp .who small{font-size:26px;color:#C7D6F4}
+
+/* T3 · convite */
+.a-con{text-align:left}
+.a-con .k2{font-size:26px;font-weight:600;letter-spacing:.28em;color:var(--green);margin-top:52px}
+.a-con h4{font-size:84px;font-weight:700;line-height:1.08;letter-spacing:-.015em;margin-top:26px;max-width:11ch}
+.a-con .meta2{margin-top:56px;display:flex;flex-direction:column;gap:20px}
+.a-con .meta2 div{display:flex;gap:20px;align-items:center;font-size:30px;color:#DCE9FF}
+.a-con .meta2 i{font-style:normal;width:52px;height:52px;border-radius:50%;border:2px solid rgba(53,199,240,.6);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.a-con .cta2{margin-top:auto;display:flex;align-items:center;justify-content:space-between}
+.a-con .cta2 span{background:var(--green);color:#04351F;font-size:30px;font-weight:700;padding:22px 44px;border-radius:16px}
+.a-con .cta2 img{height:64px}
+
+/* T4 · palestrante (slide de carrossel) */
+.a-pal .lgtop{height:56px;align-self:flex-start}
+.a-pal .who{margin-top:auto}
+.a-pal .hpill{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#0B1B3A;font-size:23px;font-weight:600;border-radius:999px;padding:10px 24px;margin-bottom:20px}
+.a-pal .who b{display:block;font-size:72px;font-weight:700;line-height:1.06;letter-spacing:-.01em}
+.a-pal .who small{display:block;font-size:28px;color:#C7D6F4;margin-top:14px;max-width:22ch}
+
+/* T5 · capa de carrossel */
+.a-cap h4{font-size:72px;font-weight:300;line-height:1.22;letter-spacing:-.005em;max-width:15ch;margin-top:auto}
+.a-cap h4 b{font-weight:700}
+.a-cap .foot3{display:flex;justify-content:space-between;align-items:center;margin-top:48px;border-top:1px solid rgba(255,255,255,.28);padding-top:34px}
+.a-cap .foot3 img{height:56px}
+.a-cap .foot3 span{font-size:27px;color:#DCE9FF;font-weight:600}
+.a-cap .foot3 span i{font-style:normal;color:var(--green)}
+
+.a-post{background:radial-gradient(900px 700px at 82% 12%,var(--navy-700),var(--navy-900) 55%,var(--navy-950));color:#fff;padding:84px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.a-post::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(53,199,240,.16) 2px,transparent 2px);background-size:64px 64px;mask-image:radial-gradient(700px 600px at 80% 20%,#000 20%,transparent 75%)}
+.a-post .k{font-size:26px;font-weight:600;letter-spacing:.24em;color:var(--green);position:relative}
+.a-post h4{font-size:76px;font-weight:700;line-height:1.12;letter-spacing:-.015em;margin-top:36px;position:relative}
+.a-post .rule{width:110px;height:8px;background:var(--green);margin:48px 0;position:relative}
+.a-post .sub2{font-size:32px;color:#C7D6F4;line-height:1.5;max-width:26ch;position:relative}
+.a-post .foot2{margin-top:auto;display:flex;align-items:center;gap:24px;position:relative}
+.a-post .foot2 img.av{width:96px;height:96px;border-radius:50%;object-fit:cover;border:4px solid var(--green)}
+.a-post .foot2 b{font-size:30px;display:block}
+.a-post .foot2 small{font-size:24px;color:#8FA5D0}
+.a-post .foot2 img.lg{height:64px;margin-left:auto}
+
+.a-car{background:var(--paper);color:var(--ink);padding:84px;display:flex;flex-direction:column;position:relative}
+.a-car .num{font-size:200px;font-weight:700;color:rgba(30,107,242,.12);position:absolute;top:30px;right:60px;line-height:1}
+.a-car .k{font-size:26px;font-weight:600;letter-spacing:.24em;color:var(--blue)}
+.a-car h4{font-size:82px;font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-top:40px;max-width:11ch}
+.a-car .item{display:flex;gap:28px;align-items:flex-start;margin-top:56px}
+.a-car .item .n{width:64px;height:64px;border-radius:50%;background:var(--green);color:#04351F;font-weight:700;font-size:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.a-car .item p{font-size:34px;line-height:1.45;color:var(--ink-soft)}
+.a-car .foot2{margin-top:auto;display:flex;align-items:center;justify-content:space-between}
+.a-car .foot2 img{height:60px}
+.a-car .foot2 span{font-size:26px;color:var(--ink-3);font-weight:600;letter-spacing:.08em}
+
+.a-link{background:linear-gradient(120deg,var(--navy-900) 45%,var(--navy-700));color:#fff;padding:64px 72px;display:flex;align-items:center;gap:56px;position:relative;overflow:hidden}
+.a-link::after{content:"";position:absolute;right:-140px;top:50%;transform:translateY(-50%);width:520px;height:520px;border-radius:50%;border:2px solid rgba(53,199,240,.35);box-shadow:0 0 0 80px rgba(53,199,240,.06),0 0 0 160px rgba(53,199,240,.04)}
+.a-link .txt{position:relative;z-index:1}
+.a-link .cat2{display:inline-block;background:var(--green);color:#04351F;font-size:22px;font-weight:700;letter-spacing:.14em;padding:10px 22px;border-radius:10px}
+.a-link h4{font-family:var(--serif);font-size:58px;font-weight:700;line-height:1.15;margin-top:30px;max-width:16ch}
+.a-link .by{margin-top:34px;display:flex;gap:18px;align-items:center}
+.a-link .by img{width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid var(--green)}
+.a-link .by b{font-size:26px;display:block}
+.a-link .by small{font-size:21px;color:#8FA5D0}
+.a-link img.lg{position:absolute;right:60px;bottom:44px;height:56px;z-index:1}
+
+/* ══ v0.3 — chrome oficial PAGOS (a partir do modelo-noticias enviado pelo Bruno) ══ */
+.natural .pbg{filter:none}
+.natural .pbg::before,.natural .pbg::after{display:none}
+.a-foto .scrim{position:absolute;inset:0;background:linear-gradient(184deg,rgba(6,10,22,.40) 0%,rgba(6,10,22,.04) 26%,rgba(6,10,22,.14) 52%,rgba(6,10,22,.86) 86%)}
+.lgbar{padding-bottom:30px;border-bottom:2px solid rgba(110,150,255,.85)}
+.lgbar img{height:76px;display:block}
+.pillcat{display:inline-block;background:#1E6BF2;color:#fff;font-size:27px;font-weight:700;letter-spacing:.08em;padding:15px 40px;border-radius:999px}
+.credit{border-top:2px solid rgba(255,255,255,.85);padding-top:24px;margin-top:36px;font-size:27px;color:#fff}
+.ph-lbl{position:absolute;left:0;right:0;top:38%;text-align:center;color:rgba(255,255,255,.30);font-size:28px;letter-spacing:.22em;font-weight:600;line-height:1.8}
+.a-not2 h4{font-size:56px;font-weight:400;line-height:1.32;max-width:19ch;margin-top:30px}
+.a-not2 .bot{margin-top:auto}
+.a-asp2 h4{font-size:50px;font-weight:400;line-height:1.44;margin-top:32px;max-width:20ch}
+.a-asp2 h4 b{font-weight:600}
+.a-asp2 .who{margin-top:42px}
+.a-asp2 .who b{font-size:40px;font-weight:700;display:block}
+.a-asp2 .who small{font-size:27px;color:#D5E2F8}
+.a-con2 h4{font-size:74px;font-weight:600;line-height:1.12;margin-top:30px;max-width:13ch;letter-spacing:-.01em}
+.a-con2 .meta3{margin-top:44px;font-size:30px;color:#EAF1FF;display:flex;flex-direction:column}
+.a-con2 .meta3 div{padding:19px 0;border-top:1px solid rgba(255,255,255,.35)}
+.a-con2 .cta3{margin-top:auto;display:flex;align-items:center;gap:28px}
+.a-con2 .cta3 span{background:#2BE39B;color:#04351F;font-size:30px;font-weight:700;padding:22px 46px;border-radius:999px}
+.a-con2 .cta3 small{font-size:23px;color:#C7D6F4;max-width:14ch}
+.a-cap2 h4{font-size:64px;font-weight:300;line-height:1.28;max-width:17ch;margin-top:auto}
+.a-cap2 h4 b{font-weight:700}
+.a-cap2 .foot3{display:flex;justify-content:space-between;align-items:center;margin-top:44px;border-top:2px solid rgba(255,255,255,.55);padding-top:30px}
+.a-cap2 .foot3 img{height:58px}
+.a-cap2 .foot3 span{font-size:27px;font-weight:600}
+.a-cap2 .foot3 span i{font-style:normal;color:var(--green)}
+
+/* correções pós-render */
+.art{text-align:left}
+.art .ph-lbl{top:30%}
+/* composição estúdio: retrato circular sobre fundo azul (fotos da diretoria são PNGs circulares) */
+.studio .backdrop{position:absolute;inset:0;background:radial-gradient(780px 780px at 50% 30%,#1E6BF2 0%,#0D2350 56%,#050F26 100%)}
+.studio .in{text-align:center}
+.studio .lgbar{text-align:left}
+.face{width:500px;height:500px;border-radius:50%;object-fit:cover;display:block;margin:60px auto 0;border:6px solid rgba(53,199,240,.55);box-shadow:0 0 140px rgba(30,107,242,.7)}
+.hpill2{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#0B1B3A;font-size:23px;font-weight:600;border-radius:999px;padding:10px 26px}
+.a-pal2 .who{margin-top:56px}
+.a-pal2 .who b{display:block;font-size:74px;font-weight:700;line-height:1.08;margin-top:22px}
+.a-pal2 .who small{display:block;font-size:27px;color:#C7D6F4;margin-top:16px}
+.a-asp3 .face{width:400px;height:400px;margin-top:34px}
+.a-asp3 h4{font-size:46px;font-weight:400;line-height:1.44;margin-top:38px;max-width:20ch;margin-left:auto;margin-right:auto}
+.a-asp3 h4 b{font-weight:600}
+.a-asp3 .who2{margin-top:30px}
+.a-asp3 .who2 b{font-size:38px;font-weight:700;display:block}
+.a-asp3 .who2 small{font-size:25px;color:#D5E2F8}
+
+/* v0.5 — Aspas e Convite fiéis aos modelos oficiais (modelo-posts/) */
+.a-asp4 .pbg{filter:grayscale(1) contrast(1.08)}
+.a-asp4 .topfio{display:flex;justify-content:space-between;align-items:flex-start}
+.a-asp4 .topfio img{height:62px}
+.a-asp4 .topfio small{font-size:24px;letter-spacing:.12em;color:var(--cyan);font-weight:600}
+.qblob{position:absolute;right:54px;top:29%;width:440px;background:#2166C4;border-radius:44px 44px 44px 220px;padding:54px 46px 116px 60px;z-index:2}
+.qblob p{font-size:44px;line-height:1.35;font-weight:500;color:#fff}
+.a-asp4 .who3{margin-top:auto;position:relative;z-index:2;text-align:right}
+.a-asp4 .who3 b{font-size:60px;font-weight:700;display:block;line-height:1.05}
+.a-asp4 .who3 span{font-size:36px;font-weight:300;color:#EAF1FF}
+.a-asp4 .who3 small{display:block;font-size:23px;color:#C7D6F4;border-top:1px solid rgba(255,255,255,.5);margin-top:18px;padding-top:14px}
+
+.a-con3{text-align:center}
+.a-con3 .real{position:absolute;top:54px;right:64px;text-align:right;z-index:2}
+.a-con3 .real small{display:block;font-size:22px;color:#DCE9FF;margin-bottom:10px}
+.a-con3 .real img{height:54px}
+.a-con3 h4{font-size:62px;font-weight:700;letter-spacing:.02em;margin-top:140px}
+.a-con3 .sub4{font-size:33px;color:#EAF1FF;font-weight:400;margin-top:14px;line-height:1.4}
+.a-con3 .meta4{margin:40px auto 0;display:inline-block;text-align:left}
+.a-con3 .meta4 div{font-size:28px;color:#fff;margin-bottom:14px}
+.a-con3 .meta4 i{font-style:normal;color:var(--cyan);margin-right:14px}
+.a-con3 .spk-row{display:flex;justify-content:center;gap:32px;margin-top:46px}
+.a-con3 .spk-c{width:150px}
+.a-con3 .spk-c img{width:128px;height:128px;border-radius:50%;object-fit:cover;filter:grayscale(1);border:3px solid rgba(53,199,240,.5);margin:0 auto;display:block}
+.a-con3 .spk-c b{display:block;font-size:20px;font-weight:700;margin-top:12px;letter-spacing:.04em}
+.a-con3 .spk-c small{display:block;font-size:16px;color:#C7D6F4;line-height:1.35}
+.a-con3 .cta4{margin-top:auto}
+.a-con3 .cta4 span{display:inline-block;background:linear-gradient(90deg,#2E7BFF,#1B4FD8);color:#fff;font-size:31px;font-weight:700;letter-spacing:.06em;padding:23px 86px;border-radius:999px;box-shadow:0 12px 34px rgba(30,107,242,.5)}
+.a-con3 .spons{display:flex;justify-content:center;gap:44px;margin-top:38px;border-top:1px solid rgba(255,255,255,.25);padding-top:24px}
+.a-con3 .spons div{font-size:19px;color:#C7D6F4}
+.a-con3 .spons small{display:block;font-size:14px;color:var(--cyan);margin-bottom:6px;letter-spacing:.12em}
+
+.tpl-frame .use{font-size:11.5px;color:var(--ink-soft);margin-top:14px;text-align:left}
+.tpl-frame .use b{color:var(--ink)}
+
+.dfoot{padding:40px 0 60px;text-align:center;color:var(--ink-3);font-size:12px}
+
+@media(max-width:1000px){.g4{grid-template-columns:1fr 1fr}.g3,.g2,.princ,.tpl-stage{grid-template-columns:1fr}.tpl-frame{overflow-x:auto}}
+/* ── mobile fino ── */
+html,body{overflow-x:hidden}
+@media(max-width:560px){
+  .wrap{padding:0 18px}
+  .dhead{padding:38px 0 32px}
+  .dhead h1{font-size:28px}
+  .dsec{padding:40px 0}
+  .g4{grid-template-columns:1fr 1fr}
+  .type-row .lbl{min-width:100%}
+  .t-h1{font-size:30px}
+  .dark-strip{padding:16px;gap:10px}
+  .tpl-stage{grid-template-columns:1fr;justify-items:center}
+  .tpl-frame{overflow:visible;width:100%;max-width:380px}
+  .tpl-scale{zoom:.82}
+  .princ{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="dhead">
+  <div class="wrap">
+    <span class="v">v0.1 · JULHO 2026 · SELO7</span>
+    <h1>Design System PAGOS</h1>
+    <p>Tokens, tipografia, componentes e templates de redes sociais do novo ambiente digital da Pagos. Uma fonte de verdade: o que está aqui é o que o site usa e o que o Painel gera.</p>
+  </div>
+</header>
+
+<!-- CORES -->
+<section class="dsec">
+  <div class="wrap">
+    <h2>01 · CORES</h2>
+    <p class="sub">Paleta extraída da identidade Pagos (símbolo em gradiente ciano→azul, CTAs verde-neon do mockup aprovado). No código, cada cor vive como CSS variable — trocou o token, o site inteiro acompanha.</p>
+    <div class="grid g4">
+      <div class="sw"><div class="c" style="background:#050F26"></div><div class="i"><b>Navy 950</b><code>#050F26</code><small>fundos profundos, capa dark</small></div></div>
+      <div class="sw"><div class="c" style="background:#081735"></div><div class="i"><b>Navy 900</b><code>#081735</code><small>superfícies dark, nav, rodapé</small></div></div>
+      <div class="sw"><div class="c" style="background:#0D2350"></div><div class="i"><b>Navy 800</b><code>#0D2350</code><small>cards em fundo escuro</small></div></div>
+      <div class="sw"><div class="c" style="background:#1E6BF2"></div><div class="i"><b>Azul Pagos</b><code>#1E6BF2</code><small>marca, links, destaques</small></div></div>
+      <div class="sw"><div class="c" style="background:#35C7F0"></div><div class="i"><b>Ciano</b><code>#35C7F0</code><small>gradientes, dados, gráficos</small></div></div>
+      <div class="sw"><div class="c" style="background:#2BE39B"></div><div class="i"><b>Verde-neon</b><code>#2BE39B</code><small>CTAs e ações (sobre escuro)</small></div></div>
+      <div class="sw"><div class="c" style="background:#0FBF7E"></div><div class="i"><b>Verde escuro</b><code>#0FBF7E</code><small>CTAs e acentos (sobre claro)</small></div></div>
+      <div class="sw"><div class="c" style="background:#0B1B3A"></div><div class="i"><b>Ink</b><code>#0B1B3A</code><small>texto principal em fundo claro</small></div></div>
+    </div>
+    <p class="comp-note">Regra de acessibilidade: verde-neon nunca leva texto branco (contraste insuficiente) — sempre <code>#04351F</code> sobre verde. Texto sobre navy: branco ou <code>#C7D6F4</code>.</p>
+  </div>
+</section>
+
+<!-- TIPOGRAFIA -->
+<section class="dsec">
+  <div class="wrap">
+    <h2>02 · TIPOGRAFIA</h2>
+    <p class="sub">Dois papéis, com intenção: <b>Poppins</b> é a voz institucional (títulos, interface, dados). <b>Source Serif 4</b> é a voz editorial — aparece só onde há jornalismo (manchetes de notícia, corpo de artigo), sinalizando "aqui é conteúdo, não institucional".</p>
+    <div class="panel">
+      <div class="type-row"><span class="lbl">DISPLAY · POPPINS 700</span><div class="t-h1">Construindo o Futuro</div></div>
+      <div class="type-row"><span class="lbl">TÍTULO DE SEÇÃO · POPPINS 700</span><div class="t-h2">Análises assinadas pela diretoria</div></div>
+      <div class="type-row"><span class="lbl">MANCHETE EDITORIAL · SERIF 700</span><div class="t-serif">Pix Automático muda a régua da recorrência</div></div>
+      <div class="type-row"><span class="lbl">CORPO UI · POPPINS 400</span><p class="t-body">Representamos, fortalecemos e impulsionamos a inovação e o desenvolvimento do ecossistema de pagamentos no Brasil.</p></div>
+      <div class="type-row"><span class="lbl">CORPO DE ARTIGO · SERIF 400</span><p class="t-serif-body">Quem opera cobrança recorrente sabe: o problema nunca foi cobrar, foi prever.</p></div>
+      <div class="type-row"><span class="lbl">KICKER · POPPINS 600 · +22 TRACKING</span><span class="t-kicker">O AGORA DO SETOR</span></div>
+      <div class="type-row"><span class="lbl">LABEL/CAPS · POPPINS 600</span><span class="t-caps">PRÓXIMA REUNIÃO MENSAL</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENTES -->
+<section class="dsec">
+  <div class="wrap">
+    <h2>03 · COMPONENTES</h2>
+    <p class="sub">Peças de interface usadas nos protótipos — mesmos raios (10/14/20px), mesmas sombras, nos dois temas (Impacto e Soft).</p>
+    <div class="grid g2">
+      <div class="panel">
+        <h3>BOTÕES · FUNDO CLARO</h3>
+        <p style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn btn--green" style="background:var(--green-dark);color:#fff">Seja associado</button><button class="btn btn--blue">Baixar PDF</button><button class="btn btn--ghost">Ver calendário</button></p>
+        <h3 style="margin-top:24px">BOTÕES · FUNDO ESCURO</h3>
+        <div class="dark-strip"><button class="btn btn--green">eBook Comércio Agêntico →</button><button class="btn btn--ghost-d">Reuniões Mensais →</button></div>
+      </div>
+      <div class="panel">
+        <h3>ETIQUETAS E STATUS</h3>
+        <p style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <span class="tagd">REGULAÇÃO</span>
+          <span class="pill pill--ok">CALIBRADO</span>
+          <span class="pill pill--wait">AGUARDA AMOSTRAS</span>
+          <span class="pill pill--lock">🔒 SÓ ASSOCIADOS ATÉ 15/AGO</span>
+        </p>
+        <h3 style="margin-top:24px">BYLINE (PADRÃO IMPRENSA)</h3>
+        <p style="font-size:12.5px;color:var(--ink-soft);border-top:1px solid var(--line-ink);padding-top:12px">Por <b style="color:var(--ink)">Daniel Nery</b> · VP Facilitadores de Pagamentos<br>16 jul 2026, 09h40 · 6 min de leitura</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCÍPIOS -->
+<section class="dsec">
+  <div class="wrap">
+    <h2>04 · PRINCÍPIOS</h2>
+    <p class="sub">O que faz parecer Pagos — e o que evita a cara de template.</p>
+    <div class="princ">
+      <div class="panel"><b>Portal vivo, não vitrine</b><p>A home abre com o agora do setor (ticker, destaques datados). Institucional fica a um clique.</p></div>
+      <div class="panel"><b>Verde = ação, e só ação</b><p>O verde-neon é reservado para CTAs, indicadores positivos e o kicker. Nunca decoração.</p></div>
+      <div class="panel"><b>Serif sinaliza jornalismo</b><p>Source Serif só em manchete e corpo de artigo. Se está em serif, é conteúdo editorial assinado.</p></div>
+      <div class="panel"><b>Dados com marca</b><p>Números do setor sempre com fonte e data. Gráficos em ciano, uma série por vez, rótulos em texto neutro.</p></div>
+      <div class="panel"><b>Gente real</b><p>Diretoria com foto, nome e cargo em tudo que assina — site, redes e relatórios. Autoridade tem rosto.</p></div>
+      <div class="panel"><b>Fotografia > ilustração genérica</b><p>Eventos e pessoas reais da Pagos. Ilustração só gerada no Painel, na identidade (nunca stock genérico).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMPLATES DE REDES -->
+<section class="dsec">
+  <div class="wrap">
+    <h2>05 · TEMPLATES DE REDES SOCIAIS <span style="color:var(--ink-3);letter-spacing:0;font-weight:500">· construídos a partir dos modelos de referência da Pagos</span></h2>
+    <p class="sub">A linguagem das referências (<code>assets/referencias/Redes-Sociais</code>): fotografia full-bleed com gradação azul profunda, tipografia branca com palavra de destaque em cor, chrome mínimo. <b>No Painel, o usuário sobe a foto e preenche os campos — a IA monta a arte no layout.</b> Artes em resolução real (1080×1350), exibidas aqui a 30%.</p>
+    <div class="tpl-stage">
+
+      <div class="tpl-frame">
+        <small>T1 · NOTÍCIA · 1080×1350 · fiel ao modelo enviado</small>
+        <div class="tpl-scale pt">
+          <div class="art art--pt a-foto natural a-not2">
+            <div class="pbg" style="background-image:url('assets/foto-noticia.webp')"></div>
+            <div class="scrim"></div>
+            <div class="in">
+              <div class="lgbar"><img src="assets/logo-branca.webp" alt="Pagos"></div>
+              <div class="bot">
+                <span class="pillcat">NEWS</span>
+                <h4>Quase 70 trilhões de reais em transações de pagamento foram movimentados no segundo semestre de 2025</h4>
+                <div class="credit">Fonte: Banco Central do Brasil</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="use"><b>Uso:</b> divulgar em imagem uma publicação do site — estrutura idêntica ao modelo oficial (logo + fio azul, pill de categoria, título regular, linha de fonte).<br><b>Campos no Painel:</b> foto · categoria · título · fonte — ou 1 clique a partir do blog post.</p>
+      </div>
+
+      <div class="tpl-frame">
+        <small>T2 · ASPAS PÓS-EVENTO · fiel ao modelo</small>
+        <div class="tpl-scale pt">
+          <div class="art art--pt a-foto natural a-asp4">
+            <div class="pbg" style="background-image:url('assets/foto-palestrante-pb.webp');background-position:center 18%"></div>
+            <div class="scrim" style="background:linear-gradient(184deg,rgba(6,10,22,.30) 0%,rgba(6,10,22,.12) 42%,rgba(6,10,22,.86) 84%)"></div>
+            <div class="in">
+              <div class="topfio"><img src="assets/logo-branca.webp" alt="Pagos"><small>O AGORA DO SETOR</small></div>
+              <div class="qblob"><p>“A frase que ele falou na palestra e que merece destaque”</p></div>
+              <div class="who3">
+                <b>Ernesto Haikewitsch</b>
+                <span>Marketing | Pagos</span>
+                <small>No Xº Encontro mensal da Pagos em São Paulo</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="use"><b>Uso:</b> aspas pós-evento — foto P&amp;B do palestrante, balão-aspas azul com a frase, nome em destaque (estrutura do modelo oficial).<br><b>Campos no Painel:</b> foto do evento · frase · nome · cargo · edição do encontro.</p>
+      </div>
+
+      <div class="tpl-frame">
+        <small>T3 · CONVITE · fiel ao modelo</small>
+        <div class="tpl-scale pt">
+          <div class="art art--pt a-foto natural a-con3">
+            <div class="pbg" style="background-image:url('assets/foto-sp-noite.webp')"></div>
+            <div class="scrim" style="background:linear-gradient(184deg,rgba(5,15,38,.55) 0%,rgba(5,15,38,.45) 40%,rgba(5,15,38,.93) 85%)"></div>
+            <div class="in">
+              <div class="real"><small>Realização</small><img src="assets/logo-branca.webp" alt="Pagos"></div>
+              <h4>ENCONTRO PAGOS:</h4>
+              <p class="sub4">O futuro dos facilitadores e os impactos<br>da nova agenda do Banco Central</p>
+              <div class="meta4">
+                <div><i>▦</i> Segunda-feira, 28 de julho de 2026</div>
+                <div><i>◔</i> 8h30</div>
+                <div><i>◎</i> Café Journal — São Paulo</div>
+              </div>
+              <div class="spk-row">
+                <div class="spk-c"><img src="assets/linconl.webp" alt=""><b>LINCONL ROCHA</b><small>Diretor Presidente<br>PAGOS</small></div>
+                <div class="spk-c"><img src="assets/valeria.webp" alt=""><b>VALÉRIA CARRETE</b><small>VP Emissores<br>PAGOS</small></div>
+                <div class="spk-c"><img src="assets/daniel.webp" alt=""><b>DANIEL NERY</b><small>VP Facilitadores<br>PAGOS</small></div>
+              </div>
+              <div class="cta4"><span>→ INSCREVA-SE</span></div>
+              <div class="spons">
+                <div><small>PATROCÍNIO</small>BMP · Ecomm</div>
+                <div><small>APOIO</small>TNS</div>
+                <div><small>PARCEIRO OFICIAL</small>Café Journal</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="use"><b>Uso:</b> convite pré-evento — cidade ao fundo, "Realização Pagos", palestrantes em P&amp;B, CTA azul e rodapé de patrocinadores (estrutura do modelo oficial).<br><b>Campos no Painel:</b> título · data/hora/local · lista de palestrantes (foto, nome, cargo) · patrocinadores.</p>
+      </div>
+
+      <div class="tpl-frame">
+        <small>T4 · CARROSSEL PALESTRANTES · SLIDE · 1080×1350</small>
+        <div class="tpl-scale pt">
+          <div class="art art--pt a-foto studio a-pal2">
+            <div class="backdrop"></div>
+            <div class="in">
+              <div class="lgbar"><img src="assets/logo-branca.webp" alt="Pagos"></div>
+              <img class="face" src="assets/sandro.webp" alt="Sandro Ari Pinto">
+              <div class="who">
+                <span class="hpill2">Ⓟ @pagos.br</span>
+                <b>Sandro<br>Ari Pinto</b>
+                <small>Painelista · Reunião Mensal de Julho</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="use"><b>Uso:</b> 1 slide por palestrante, no padrão da referência (foto + pill de @ + nome + papel).<br><b>Campos no Painel:</b> lista de palestrantes (foto, nome, cargo) — a IA gera o carrossel inteiro.</p>
+      </div>
+
+      <div class="tpl-frame">
+        <small>T5 · CAPA DE CARROSSEL · 1080×1350</small>
+        <div class="tpl-scale pt">
+          <div class="art art--pt a-foto natural a-cap2">
+            <div class="pbg" style="background-image:url('assets/foto-lifestyle.webp')"></div>
+            <div class="scrim" style="background:linear-gradient(184deg,rgba(6,10,22,.30) 8%,rgba(6,10,22,.42) 44%,rgba(6,10,22,.93) 84%)"></div>
+            <div class="in">
+              <h4>O custo invisível que faz seu negócio <b>perder margem</b> em cada venda. <em class="cy">Entenda.</em></h4>
+              <div class="foot3"><img src="assets/logo-branca.webp" alt="Pagos"><span>Arraste para o lado <i>▶</i></span></div>
+            </div>
+          </div>
+        </div>
+        <p class="use"><b>Uso:</b> capa que abre qualquer carrossel — fiel à referência (foto lifestyle, frase com pesos leve/negrito e destaque em cor, barra inferior com logo + "arraste").<br><b>Campos no Painel:</b> foto · frase-gancho · chamada de ação.</p>
+      </div>
+
+    </div>
+    <p class="comp-note" style="margin-top:18px">Nota: os 5 templates seguem os modelos oficiais de <code>Design/modelo-posts/</code> — <b>T1 Notícia</b> (logo + fio, pill, título regular, fonte), <b>T2 Aspas pós-evento</b> (P&amp;B + balão-aspas azul), <b>T3 Convite</b> (cidade, palestrantes, patrocinadores), <b>T4 Palestrantes</b> (retrato de estúdio) e <b>T5 Capa de carrossel</b>. Fotos de demonstração geradas por IA (as mesmas que o Painel usará); fotos reais dos eventos substituem na operação.</p>
+  </div>
+</section>
+
+<div class="dfoot">Design System PAGOS v0.1 · Selo7 · julho 2026 — evolui junto com o projeto; templates de redes serão refinados com as referências visuais da Pagos.</div>
+
+</body>
+</html>
