@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<script>/* acesso reservado - Selo7 */(function(){try{var t=localStorage.getItem("s7p_pagos_ok");if(t&&(Date.now()-parseInt(t,10))<60*864e5)return;var p=location.pathname.split("/").pop();if(/^[a-z0-9-]+\.html$/.test(p))localStorage.setItem("s7p_pagos_next",p);location.replace("./")}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arquitetas dos Pagamentos — Reunião Mensal PAGOS · evento realizado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-950:#050F26; --navy-900:#081735; --navy-800:#0D2350;
+  --blue:#1E6BF2; --cyan:#35C7F0; --green:#2BE39B; --green-dark:#0FBF7E;
+  --paper:#F4F8FE; --ink:#0B1B3A; --ink-soft:#44557A;
+  --line:rgba(255,255,255,.09); --line-ink:rgba(11,27,58,.1);
+  --sans:'Poppins',system-ui,sans-serif; --serif:'Source Serif 4',Georgia,serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:16px;line-height:1.65}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.proto-badge{position:fixed;bottom:16px;left:16px;z-index:99;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.06em;padding:7px 12px;border-radius:999px;opacity:.85}
+
+.nav{background:var(--navy-900);position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;gap:36px;height:72px}
+.nav__logo img{height:34px;display:block}
+.nav__links{display:flex;gap:30px;margin-left:auto}
+.nav__links a{color:#C7D6F4;font-size:14.5px;font-weight:500}
+.nav__links a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);font-weight:600;font-size:14.5px;border-radius:10px;padding:12px 22px;cursor:pointer;border:0;transition:transform .15s,box-shadow .15s}
+.btn--green{background:var(--green);color:#04351F}
+.btn--green:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(43,227,155,.35)}
+.btn--ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+
+/* hero do evento */
+.ehero{background:radial-gradient(1000px 520px at 80% 10%,#123067,var(--navy-900) 55%,var(--navy-950));color:#fff;padding:64px 0 56px;position:relative;overflow:hidden}
+.ehero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(53,199,240,.12) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(700px 400px at 75% 30%,#000 20%,transparent 75%)}
+.ehero .wrap{position:relative}
+.crumb{font-size:12.5px;color:#8FA5D0;margin-bottom:26px;display:block}
+.crumb a{color:#C7D6F4}
+.crumb a:hover{color:#fff}
+.status{display:inline-flex;align-items:center;gap:8px;background:rgba(43,227,155,.12);border:1px solid rgba(43,227,155,.4);color:var(--green);font-size:11px;font-weight:700;letter-spacing:.14em;padding:6px 14px;border-radius:999px;margin-bottom:20px}
+.etype{font-size:12px;letter-spacing:.22em;color:#8FD4FF;font-weight:600;display:block;margin-bottom:12px}
+.ehero h1{font-size:clamp(34px,4.6vw,54px);line-height:1.08;font-weight:700;letter-spacing:-.015em;max-width:18ch}
+.ehero .sub{color:#C7D6F4;font-size:17px;margin-top:18px;max-width:56ch}
+.efacts{display:flex;gap:36px;flex-wrap:wrap;margin-top:36px;padding-top:26px;border-top:1px solid var(--line)}
+.efact small{display:block;font-size:10.5px;letter-spacing:.16em;color:#8FA5D0;font-weight:600;margin-bottom:4px}
+.efact b{font-size:15px;font-weight:600}
+
+/* corpo */
+.sec{padding:70px 0}
+.kicker{font-size:11.5px;font-weight:600;letter-spacing:.2em;color:var(--blue);display:block;margin-bottom:10px}
+.sec h2{font-size:27px;font-weight:700;letter-spacing:-.01em;margin-bottom:8px}
+.sec .intro{color:var(--ink-soft);font-size:15.5px;max-width:66ch}
+
+/* o que foi discutido */
+.recap{display:grid;grid-template-columns:1.4fr .8fr;gap:34px;margin-top:34px;align-items:start}
+.article{font-size:16px}
+.article p{margin-bottom:18px;color:#22345C}
+.article p:first-of-type::first-letter{font-family:var(--serif);font-size:46px;font-weight:700;float:left;line-height:.9;margin:4px 10px 0 0;color:var(--blue)}
+.pull{font-family:var(--serif);font-size:21px;line-height:1.45;color:var(--ink);border-left:3px solid var(--green-dark);padding-left:22px;margin:26px 0}
+.pull small{display:block;font-family:var(--sans);font-size:12px;color:var(--ink-soft);margin-top:10px;font-weight:600}
+.panels{background:#fff;border:1px solid var(--line-ink);border-radius:16px;padding:26px;position:sticky;top:92px}
+.panels h3{font-size:12px;letter-spacing:.14em;color:var(--ink-soft);font-weight:600;margin-bottom:16px}
+.panel-i{padding:13px 0;border-top:1px solid var(--line-ink)}
+.panel-i:first-of-type{border-top:0}
+.panel-i b{display:block;font-size:14px;font-weight:600}
+.panel-i span{font-size:12.5px;color:var(--ink-soft)}
+
+/* palestrantes */
+.speakers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:34px}
+.spk{background:#fff;border:1px solid var(--line-ink);border-radius:14px;padding:22px;text-align:center}
+.spk .avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(140deg,var(--blue),var(--cyan));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:18px;margin:0 auto 12px;overflow:hidden}
+.spk .avatar img{width:100%;height:100%;object-fit:cover}
+.spk h3{font-size:14.5px;font-weight:600}
+.spk p{font-size:12px;color:var(--ink-soft)}
+
+/* galeria */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:12px;margin-top:34px}
+.gal .ph{border-radius:12px;background:linear-gradient(140deg,var(--navy-800),var(--blue));position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:12px;transition:transform .15s}
+.gal .ph:hover{transform:scale(1.02)}
+.gal .ph::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.16) 1px,transparent 1px);background-size:20px 20px}
+.gal .ph span{position:relative;font-size:10.5px;color:#C7E4FF;letter-spacing:.08em;font-weight:600}
+.gal .ph--wide{grid-column:span 2}
+.gal .ph--v2{background:linear-gradient(140deg,#0A3D63,var(--cyan))}
+.gal .ph--v3{background:linear-gradient(140deg,#123067,var(--green-dark))}
+.gal-note{font-size:12.5px;color:var(--ink-soft);margin-top:14px}
+
+/* vídeos */
+.vids{display:grid;grid-template-columns:1.3fr .85fr .85fr;gap:16px;margin-top:34px}
+.vid{border-radius:14px;background:var(--navy-900);color:#fff;aspect-ratio:16/10;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;cursor:pointer}
+.vid::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 30% 20%,rgba(30,107,242,.5),transparent 70%)}
+.vid .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:rgba(43,227,155,.95);color:#04351F;display:flex;align-items:center;justify-content:center;font-size:18px;transition:transform .15s}
+.vid:hover .play{transform:translate(-50%,-50%) scale(1.1)}
+.vid b{position:relative;font-size:14px;font-weight:600;line-height:1.35}
+.vid small{position:relative;font-size:11px;color:#9FDCFF;letter-spacing:.08em;font-weight:600;margin-bottom:4px}
+
+/* ingressos (como funcionou a inscrição) */
+.tix{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+.tk{background:#fff;border:1px solid var(--line-ink);border-radius:14px;padding:24px;position:relative}
+.tk.sold::after{content:"ESGOTADO";position:absolute;top:16px;right:16px;font-size:9.5px;font-weight:700;letter-spacing:.12em;color:#B4432F;background:rgba(180,67,47,.1);padding:4px 9px;border-radius:6px}
+.tk small{font-size:10.5px;letter-spacing:.14em;color:var(--ink-soft);font-weight:600}
+.tk .p{font-size:23px;font-weight:700;margin:8px 0 4px}
+.tk .p em{font-style:normal;font-size:13px;font-weight:500;color:var(--ink-soft)}
+.tk p{font-size:12.5px;color:var(--ink-soft)}
+
+/* cobertura + clipping */
+.cover2{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;margin-top:34px}
+.covcard{background:#fff;border:1px solid var(--line-ink);border-radius:16px;padding:28px}
+.covcard h3{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1.3;margin:10px 0 8px}
+.covcard p{font-size:14px;color:var(--ink-soft)}
+.byline{margin-top:16px;padding-top:14px;border-top:1px solid var(--line-ink);font-size:12.5px;color:var(--ink-soft)}
+.byline b{color:var(--ink)}
+.clip{background:#fff;border:1px solid var(--line-ink);border-radius:16px;padding:28px}
+.clip h3{font-size:12px;letter-spacing:.14em;color:var(--ink-soft);font-weight:600;margin-bottom:14px}
+.clip-i{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--line-ink);font-size:13.5px}
+.clip-i a{color:var(--blue);font-weight:600;white-space:nowrap}
+
+/* mantenedores */
+.spon{background:var(--navy-900);color:#fff;border-radius:20px;padding:44px;margin-top:70px;text-align:center}
+.spon .kicker{color:var(--green)}
+.spon h2{font-size:24px;font-weight:700;margin-bottom:26px}
+.spon .logos{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:26px}
+.spon .lg{background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:12px;padding:18px 34px;font-weight:700;font-size:17px;letter-spacing:.06em;color:#DCE9FF}
+.spon p{color:#C7D6F4;font-size:14px;margin-bottom:20px}
+
+/* CTA próximo */
+.next{background:linear-gradient(140deg,var(--navy-800),var(--navy-950));color:#fff;padding:70px 0;margin-top:70px}
+.next .wrap{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.next h2{font-size:26px;font-weight:700}
+.next p{color:#C7D6F4;font-size:15px;margin-top:6px}
+
+footer{background:var(--navy-900);color:#8FA5D0;padding:40px 0 30px;border-top:1px solid var(--line)}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px}
+.foot b{color:#C7D6F4;font-weight:500}
+
+@media(max-width:900px){
+  .nav__links{display:none}
+  .recap,.cover2{grid-template-columns:1fr}
+  .panels{position:static}
+  .speakers,.tix{grid-template-columns:1fr 1fr}
+  .gal{grid-template-columns:1fr 1fr;grid-auto-rows:130px}
+  .vids{grid-template-columns:1fr}
+}
+/* ── mobile fino ── */
+html,body{overflow-x:hidden}
+@media(max-width:560px){
+  .wrap{padding:0 20px}
+  .sec{padding:52px 0}
+  .ehero{padding:44px 0 40px}
+  .ehero h1{font-size:30px}
+  .efacts{gap:18px}
+  .speakers,.tix{grid-template-columns:1fr}
+  .gal{grid-template-columns:1fr 1fr;grid-auto-rows:110px}
+  .gal .ph--wide{grid-column:span 2}
+  .article{font-size:15px}
+  .pull{font-size:18px}
+  .spon{padding:28px 20px}
+  .spon .lg{padding:14px 24px;font-size:15px}
+  .next .wrap{flex-direction:column;align-items:flex-start}
+  .cover2{grid-template-columns:1fr}
+}
+/* guias de clique (modo apresentação) */
+.chint{position:absolute;z-index:60;display:inline-flex;align-items:center;gap:6px;background:var(--green);color:#04351F;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:999px;box-shadow:0 6px 22px rgba(43,227,155,.6);animation:chbob 1.3s ease-in-out infinite;pointer-events:none;white-space:nowrap}
+.chint::before{content:"👆";font-size:14px}
+@keyframes chbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.chpulse::after{content:"";position:absolute;inset:-6px;border:3px solid var(--green);border-radius:16px;animation:chring 1.5s ease-out infinite;pointer-events:none;z-index:59}
+@keyframes chring{0%{opacity:.85;transform:scale(1)}100%{opacity:0;transform:scale(1.06)}}
+body.guides-off .chint,body.guides-off .chpulse::after{display:none}
+.gtoggle{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:98;background:var(--navy-900);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:9px 18px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--sans);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+</style>
+</head>
+<body>
+
+<div class="proto-badge">Protótipo Selo7 · dados ilustrativos</div>
+<button class="gtoggle" onclick="document.body.classList.toggle('guides-off');this.textContent=document.body.classList.contains('guides-off')?'💡 Mostrar guias':'🙈 Ocultar guias'">🙈 Ocultar guias</button>
+
+<nav class="nav">
+  <div class="wrap nav__in">
+    <a class="nav__logo" href="prototipo-home.html"><img src="assets/logo-branca.webp" alt="Pagos"></a>
+    <div class="nav__links">
+      <a href="prototipo-home.html">A Pagos</a><a href="prototipo-home.html#publicacoes">Publicações</a><a href="prototipo-home.html#eventos">Eventos</a><a href="prototipo-home.html#conteudo">Conteúdo</a><a href="#">Fale Conosco</a>
+    </div>
+    <button class="btn btn--green">Seja associado</button>
+  </div>
+</nav>
+
+<!-- HERO DO EVENTO -->
+<header class="ehero">
+  <div class="wrap">
+    <span class="crumb"><a href="prototipo-home.html">Home</a> / <a href="prototipo-home.html#eventos">Eventos</a> / Reunião Mensal · Maio 2026</span>
+    <span class="status">✓ EVENTO REALIZADO</span>
+    <span class="etype">REUNIÃO MENSAL PAGOS · EDIÇÃO ESPECIAL</span>
+    <h1>Arquitetas dos Pagamentos</h1>
+    <p class="sub">As mulheres que constroem a infraestrutura do dinheiro no Brasil — um encontro sobre liderança, regulação e o futuro do setor, com a casa cheia no Café Journal.</p>
+    <div class="efacts">
+      <div class="efact"><small>DATA</small><b>27 de maio de 2026 · 8h30</b></div>
+      <div class="efact"><small>LOCAL</small><b>Café Journal · São Paulo, SP</b></div>
+      <div class="efact"><small>PRESENÇAS</small><b>84 participantes · lotado</b></div>
+      <div class="efact"><small>FORMATO</small><b>2 painéis + networking</b></div>
+    </div>
+  </div>
+</header>
+
+<!-- O QUE FOI DISCUTIDO -->
+<section class="sec">
+  <div class="wrap">
+    <span class="kicker">COBERTURA OFICIAL</span>
+    <h2>O que foi discutido</h2>
+    <div class="recap">
+      <div class="article">
+        <p>Num setor em que a liderança feminina ainda é exceção nos palcos, a Reunião Mensal de maio inverteu o roteiro: foram as arquitetas dos pagamentos que ocuparam o centro da conversa — executivas que assinam, na prática, as decisões de produto, risco e regulação que movimentam o dinheiro do país.</p>
+        <p>O primeiro painel abriu com a pergunta que atravessou a manhã: <b>quem desenha os trilhos por onde o dinheiro anda?</b> Da resposta saíram os temas centrais do semestre — a consulta do Banco Central sobre interoperabilidade, o avanço do Pix Automático sobre a recorrência e a pressão de custos sobre os facilitadores.</p>
+        <div class="pull">"Infraestrutura de pagamento é política pública feita por mãos privadas. Quando a mesa não é diversa, o produto nasce enviesado."<small>— PAINELISTA CONVIDADA · PAINEL 1</small></div>
+        <p>No segundo bloco, a régua virou para carreira e ecossistema: mentoria estruturada dentro das associadas, metas de liderança e o papel da Pagos como ponte — com o anúncio de um grupo de trabalho permanente dedicado ao tema, que nasce dentro do pilar <b>Pessoas e Ecossistema</b>.</p>
+        <p>O encontro terminou como toda Reunião Mensal termina: com o networking valendo tanto quanto o palco — e com pauta encaminhada para as próximas edições.</p>
+      </div>
+      <aside class="panels">
+        <h3>PROGRAMAÇÃO REALIZADA</h3>
+        <div class="panel-i"><b>8h30 · Credenciamento e café</b><span>Networking de abertura</span></div>
+        <div class="panel-i"><b>9h10 · Painel 1 — Quem desenha os trilhos</b><span>Infraestrutura, regulação e interoperabilidade</span></div>
+        <div class="panel-i"><b>10h10 · Painel 2 — Carreira e ecossistema</b><span>Liderança feminina no setor de pagamentos</span></div>
+        <div class="panel-i"><b>11h00 · Anúncios da diretoria</b><span>Novo GT permanente · agenda do semestre</span></div>
+        <div class="panel-i"><b>11h20 · Networking</b><span>Encerramento</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- PALESTRANTES -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <span class="kicker">QUEM ESTEVE NO PALCO</span>
+    <h2>Painelistas</h2>
+    <div class="speakers">
+      <div class="spk"><div class="avatar"><img src="assets/valeria.webp" alt="Valéria Carrete"></div><h3>Valéria Carrete</h3><p>VP Emissores · PAGOS<br>mediação</p></div>
+      <div class="spk"><div class="avatar"><img src="assets/pedrina.webp" alt="Pedrina Braga"></div><h3>Pedrina Braga</h3><p>VP Regulatório e Compliance · PAGOS</p></div>
+      <div class="spk"><div class="avatar">C1</div><h3>Convidada · Painel 1</h3><p>Executiva de infraestrutura<br>de pagamentos</p></div>
+      <div class="spk"><div class="avatar">C2</div><h3>Convidada · Painel 2</h3><p>Executiva de fintech<br>associada PAGOS</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <span class="kicker">COMO FOI</span>
+    <h2>Galeria de fotos</h2>
+    <div class="gal">
+      <div class="ph ph--wide"><span>ABERTURA · PLENÁRIA</span></div>
+      <div class="ph ph--v2"><span>PAINEL 1</span></div>
+      <div class="ph ph--v3"><span>CREDENCIAMENTO</span></div>
+      <div class="ph ph--v3"><span>NETWORKING</span></div>
+      <div class="ph"><span>PAINEL 2</span></div>
+      <div class="ph ph--wide ph--v2"><span>FOTO OFICIAL · PAINELISTAS</span></div>
+    </div>
+    <p class="gal-note">No site final: galeria com as fotos oficiais do evento (lightbox + download para associados). As 32+ fotos de cada edição ficam organizadas por evento, para sempre.</p>
+  </div>
+</section>
+
+<!-- VÍDEOS -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <span class="kicker" style="position:relative;display:inline-block">ASSISTA <span class="chint" style="top:-10px;left:calc(100% + 12px)">cortes prontos para as redes</span></span>
+    <h2>Vídeos e cortes</h2>
+    <div class="vids">
+      <div class="vid chpulse" style="position:relative"><div class="play">▶</div><small>ÍNTEGRA · 52 MIN</small><b>Painel 1 — Quem desenha os trilhos do dinheiro</b></div>
+      <div class="vid"><div class="play">▶</div><small>CORTE · 2 MIN</small><b>"Infraestrutura é política pública feita por mãos privadas"</b></div>
+      <div class="vid"><div class="play">▶</div><small>CORTE · 90 SEG</small><b>O anúncio do novo GT de liderança</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONOU A INSCRIÇÃO -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <span class="kicker">INSCRIÇÕES DESTA EDIÇÃO</span>
+    <h2>Como foi participar</h2>
+    <div class="tix">
+      <div class="tk sold"><small>ASSOCIADOS PAGOS</small><div class="p">Incluído <em>no plano</em></div><p>Vagas por plano: Mantenedor até 8 · Pleno até 5 · Start Up até 2 · MEI/PF 1</p></div>
+      <div class="tk sold"><small>CONVIDADO DE ASSOCIADO</small><div class="p">Cortesia <em>limitada</em></div><p>1 convite por associado, sujeito a confirmação da organização</p></div>
+      <div class="tk sold"><small>PROFISSIONAL NÃO ASSOCIADO</small><div class="p">R$ 350 <em>por pessoa</em></div><p>Acesso à edição + material do encontro. Melhor caminho: <a href="prototipo-home.html#associe-se" style="color:var(--blue);font-weight:600">associe-se →</a></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COBERTURA EDITORIAL + CLIPPING -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <span class="kicker">DESDOBRAMENTOS</span>
+    <h2>Leia e compartilhe</h2>
+    <div class="cover2">
+      <div class="covcard">
+        <span class="kicker" style="margin-bottom:0">ARTIGO · BLOG PAGOS</span>
+        <h3>O que as arquitetas dos pagamentos nos ensinaram sobre o futuro do setor</h3>
+        <p>A síntese dos dois painéis, os três recados ao regulador e o compromisso que a Pagos assumiu no palco — por quem mediou a conversa.</p>
+        <div class="byline">Por <b>Valéria Carrete</b> · VP Emissores · 29 mai 2026 · 7 min de leitura</div>
+      </div>
+      <div class="clip">
+        <h3>NA MÍDIA</h3>
+        <div class="clip-i"><span>Reunião da Pagos debate liderança feminina na infraestrutura financeira</span><a href="#">Ler →</a></div>
+        <div class="clip-i"><span>Associação anuncia GT permanente de diversidade</span><a href="#">Ler →</a></div>
+        <div class="clip-i"><span>Cobertura da edição no LinkedIn oficial</span><a href="#">Ver post →</a></div>
+      </div>
+    </div>
+
+    <!-- MANTENEDORES -->
+    <div class="spon">
+      <span class="kicker">ESTA EDIÇÃO FOI VIABILIZADA POR</span>
+      <h2>Mantenedores</h2>
+      <div class="logos"><div class="lg">BMP</div><div class="lg">Ecomm</div><div class="lg">TNS</div></div>
+      <p>Sua marca no palco onde o setor de pagamentos se encontra, todo mês.</p>
+      <button class="btn btn--ghost">Quero ser mantenedor →</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA PRÓXIMO EVENTO -->
+<section class="next">
+  <div class="wrap">
+    <div>
+      <span class="kicker" style="color:var(--green)">PRÓXIMA REUNIÃO MENSAL · 28 JUL</span>
+      <h2>O futuro dos facilitadores: consolidação ou especialização?</h2>
+      <p>Café Journal, São Paulo · 8h30 · vagas por plano de associação</p>
+    </div>
+    <button class="btn btn--green">Garantir presença →</button>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Associação Pagos · pagos.org.br</span>
+    <span>Tecnologia e comunicação: <b>Selo7</b></span>
+  </div>
+</footer>
+
+</body>
+</html>

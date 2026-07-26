@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<script>/* acesso reservado - Selo7 */(function(){try{var t=localStorage.getItem("s7p_pagos_ok");if(t&&(Date.now()-parseInt(t,10))<60*864e5)return;var p=location.pathname.split("/").pop();if(/^[a-z0-9-]+\.html$/.test(p))localStorage.setItem("s7p_pagos_next",p);location.replace("./")}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAGOS — Instituições de Pagamento Construindo o Futuro (versão Soft)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBFBFD; --bg-2:#F5F5F7; --card:#FFFFFF;
+  --ink:#101828; --ink-2:#51586A; --ink-3:#8A91A3;
+  --navy:#0B1B3A; --blue:#1E6BF2; --cyan:#35C7F0; --green:#0FBF7E; --green-soft:#2BE39B;
+  --line:rgba(16,24,40,.08);
+  --shadow:0 2px 6px rgba(16,24,40,.04),0 18px 44px rgba(16,24,40,.07);
+  --sans:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.65}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+.proto-badge{position:fixed;bottom:16px;left:16px;z-index:99;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.06em;padding:7px 12px;border-radius:999px;opacity:.85}
+
+/* ticker */
+.ticker{background:#fff;border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;position:relative}
+.ticker__label{position:absolute;left:0;top:0;bottom:0;z-index:2;display:flex;align-items:center;gap:8px;background:#fff;padding:0 18px 0 28px;color:var(--green);font-size:11px;font-weight:600;letter-spacing:.14em}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.ticker__track{display:inline-block;padding:9px 0;animation:tick 46s linear infinite}
+.ticker__track span{color:var(--ink-2);font-size:12.5px;margin-right:56px}
+.ticker__track b{color:var(--ink);font-weight:500}
+.ticker__track em{color:var(--green);font-style:normal;font-weight:600}
+@keyframes tick{from{transform:translateX(8%)}to{transform:translateX(-100%)}}
+@media (prefers-reduced-motion:reduce){.ticker__track,.dot{animation:none}}
+
+/* nav */
+.nav{background:rgba(251,251,253,.85);backdrop-filter:blur(14px);position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;gap:36px;height:64px}
+.nav__logo img{height:30px;display:block}
+.nav__links{display:flex;gap:30px;margin-left:auto}
+.nav__links a{color:var(--ink-2);font-size:14px;font-weight:500;transition:color .2s}
+.nav__links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);font-weight:600;font-size:14.5px;border-radius:999px;padding:12px 24px;cursor:pointer;border:0;transition:transform .15s,box-shadow .15s,background .15s}
+.btn:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+.btn--green{background:var(--green);color:#fff}
+.btn--green:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(15,191,126,.3)}
+.btn--link{background:transparent;color:var(--blue);padding:12px 6px}
+.btn--link:hover{text-decoration:underline}
+
+/* hero — centrado, estilo apple */
+.hero{padding:96px 0 40px;text-align:center;background:linear-gradient(#fff,var(--bg))}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.22em;color:var(--green);display:block;margin-bottom:20px}
+.hero h1{font-size:clamp(40px,5.4vw,68px);line-height:1.05;font-weight:700;letter-spacing:-.025em;max-width:18ch;margin:0 auto}
+.hero h1 span{font-weight:400;color:var(--ink-2)}
+.hero p{color:var(--ink-2);font-size:18.5px;font-weight:300;max-width:52ch;margin:24px auto 0}
+.hero__ctas{display:flex;gap:16px;justify-content:center;margin-top:34px;flex-wrap:wrap}
+
+/* órbita clara */
+.orbit-stage{padding:30px 0 90px;background:radial-gradient(720px 420px at 50% 42%,rgba(53,199,240,.10),transparent 72%);position:relative}
+.orbit-stage::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(30,107,242,.28) 1.2px,transparent 1.2px);background-size:30px 30px;mask-image:radial-gradient(340px 340px at var(--mx,50%) var(--my,45%),#000 20%,transparent 72%);pointer-events:none}
+.orbit-stage .orbit{position:relative;z-index:1}
+.orbit{position:relative;width:min(520px,92vw);aspect-ratio:1;margin:0 auto}
+.orbit__ring{position:absolute;inset:0;border:1px solid rgba(30,107,242,.14);border-radius:50%}
+.orbit__ring--2{inset:13%;border-color:rgba(30,107,242,.20)}
+.orbit__ring--3{inset:27%;border-color:rgba(30,107,242,.10)}
+.orbit__core{position:absolute;inset:35%;border-radius:50%;background:#fff;box-shadow:0 12px 50px rgba(30,107,242,.22),0 2px 8px rgba(16,24,40,.06);display:flex;align-items:center;justify-content:center}
+.orbit__core img{width:56%;filter:drop-shadow(0 8px 16px rgba(30,107,242,.25))}
+.orbit__spin{position:absolute;inset:0}
+.orbit__sat{position:absolute;inset:0;animation:spin 26s linear infinite;pointer-events:none}
+.orbit__sat--2{inset:13%;animation-duration:40s;animation-direction:reverse}
+.orbit__sat i{position:absolute;top:0;left:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:var(--blue);box-shadow:0 0 12px rgba(30,107,242,.7)}
+/* órbita real: o braço gira; a etiqueta contra-gira na mesma cadência e fica sempre em pé */
+.orbiter{position:absolute;inset:8%;animation:spin 60s linear infinite}
+.chip{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px;width:122px;text-align:center;animation:counter 60s linear infinite;cursor:default}
+.orbiter:nth-child(1),.orbiter:nth-child(1) .chip{animation-delay:0s}
+.orbiter:nth-child(2),.orbiter:nth-child(2) .chip{animation-delay:-10s}
+.orbiter:nth-child(3),.orbiter:nth-child(3) .chip{animation-delay:-20s}
+.orbiter:nth-child(4),.orbiter:nth-child(4) .chip{animation-delay:-30s}
+.orbiter:nth-child(5),.orbiter:nth-child(5) .chip{animation-delay:-40s}
+.orbiter:nth-child(6),.orbiter:nth-child(6) .chip{animation-delay:-50s}
+.chip__ic{width:54px;height:54px;border-radius:50%;background:#fff;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;color:var(--blue);transition:transform .25s,box-shadow .25s}
+.chip__ic svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.chip span{font-size:10px;font-weight:600;letter-spacing:.1em;color:var(--ink-2);line-height:1.4;text-transform:uppercase;transition:color .25s}
+.chip:hover .chip__ic{transform:scale(1.12);box-shadow:0 6px 30px rgba(30,107,242,.35)}
+.chip:hover span{color:var(--ink)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes counter{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(-360deg)}}
+@media (prefers-reduced-motion:reduce){.orbit__sat,.orbiter,.chip{animation:none}}
+
+/* seções */
+.sec{padding:88px 0}
+.sec--gray{background:var(--bg-2)}
+.sec__head{text-align:center;max-width:64ch;margin:0 auto 46px}
+.kicker{font-size:11.5px;font-weight:600;letter-spacing:.2em;color:var(--blue);display:block;margin-bottom:12px}
+.sec__head h2{font-size:clamp(28px,3.4vw,40px);font-weight:700;letter-spacing:-.02em}
+.sec__head p{color:var(--ink-2);font-weight:300;font-size:16.5px;margin-top:12px}
+.all{font-size:14px;font-weight:600;color:var(--blue)}
+
+/* notícias */
+.news{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{background:var(--card);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);transition:transform .18s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-5px)}
+.card__media{height:150px;background:linear-gradient(120deg,var(--navy),var(--blue) 90%);position:relative}
+.card__media.alt{background:linear-gradient(120deg,#0A3D63,var(--cyan))}
+.card__media.alt2{background:linear-gradient(120deg,#123067,var(--green))}
+.tag{position:absolute;left:16px;bottom:16px;background:rgba(255,255,255,.92);color:var(--navy);font-size:10.5px;font-weight:700;letter-spacing:.12em;padding:5px 11px;border-radius:999px}
+.card__media--ph{background-size:cover !important;background-position:center}
+.mag img.mag__cover{width:186px;height:auto;aspect-ratio:auto;padding:0;display:block;background:none;box-shadow:0 26px 50px rgba(30,107,242,.3);border-radius:12px}
+.card__body{padding:24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card__body h3{font-family:var(--serif);font-size:20px;line-height:1.28;font-weight:700}
+.card__body p{font-size:14px;color:var(--ink-2);font-weight:300}
+.byline{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-3)}
+.byline b{color:var(--ink);font-weight:600}
+
+/* e-magazine */
+.mag{background:var(--card);border-radius:26px;box-shadow:var(--shadow);padding:56px;display:grid;grid-template-columns:auto 1fr auto;gap:44px;align-items:center}
+.mag__cover{width:168px;aspect-ratio:3/4;border-radius:12px;background:linear-gradient(160deg,var(--blue),#0A2458 85%);box-shadow:0 26px 50px rgba(30,107,242,.3);padding:18px;display:flex;flex-direction:column;justify-content:space-between;color:#fff}
+.mag__cover .mtitle{font-weight:700;font-size:17px;line-height:1.2}
+.mag__cover .msub{font-size:10px;color:#9FDCFF;letter-spacing:.14em}
+.mag__txt h2{font-size:26px;font-weight:700;letter-spacing:-.01em;margin-bottom:10px}
+.mag__txt p{color:var(--ink-2);font-size:15px;font-weight:300;max-width:44ch}
+.mag__form{display:flex;flex-direction:column;gap:10px;min-width:270px}
+.mag__form input{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:13px 15px;font-family:var(--sans);font-size:14px;color:var(--ink)}
+.mag__form small{color:var(--ink-3);font-size:11.5px}
+
+/* simulador claro */
+.sim__grid{display:grid;grid-template-columns:1fr 1.15fr;gap:24px;align-items:stretch}
+.panel{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:32px}
+.panel .row{margin-bottom:26px}
+.panel label{display:block;font-size:11.5px;font-weight:600;letter-spacing:.1em;color:var(--ink-3);margin-bottom:9px}
+.panel output{float:right;color:var(--green);font-weight:600;font-size:13.5px;letter-spacing:0}
+.panel select{width:100%;background:var(--bg-2);border:1px solid var(--line);color:var(--ink);border-radius:12px;padding:12px;font-family:var(--sans);font-size:14px}
+.panel input[type=range]{width:100%;accent-color:var(--green);margin-top:4px}
+.sim__note{font-size:11.5px;color:var(--ink-3)}
+.sim__res{display:flex;flex-direction:column;border:1px solid rgba(15,191,126,.25)}
+.sim__res>small{font-size:11px;letter-spacing:.18em;font-weight:600;color:var(--ink-3)}
+.sim__big{font-size:clamp(38px,4.4vw,52px);font-weight:700;color:var(--green);letter-spacing:-.02em}
+.sim__big span{font-size:16px;font-weight:400;color:var(--ink-2)}
+.sim__pct{font-size:13px;color:var(--ink-2);margin-bottom:20px}
+.brk{margin-bottom:22px}
+.brk .r{display:grid;grid-template-columns:128px 1fr 78px;gap:12px;align-items:center;font-size:12px;color:var(--ink-2);padding:5px 0}
+.brk .bar{height:8px;border-radius:4px;background:var(--bg-2);overflow:hidden}
+.brk .bar i{display:block;height:100%;background:var(--cyan);border-radius:4px;transition:width .3s}
+.brk .v{text-align:right;font-weight:600;color:var(--ink)}
+.sim__cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+.sim__cta input{flex:1;min-width:170px;background:var(--bg-2);border:1px solid var(--line);border-radius:999px;padding:12px 18px;font-family:var(--sans);font-size:13.5px;color:var(--ink)}
+.sim__lgpd{font-size:11px;color:var(--ink-3);margin-top:12px}
+
+/* eventos */
+.events{display:grid;grid-template-columns:1.15fr .85fr;gap:24px}
+.ev-next{background:linear-gradient(140deg,var(--navy),#123067);color:#fff;border-radius:22px;padding:38px;display:flex;gap:30px;align-items:center;box-shadow:var(--shadow)}
+.ev-date{background:var(--green-soft);color:#04351F;border-radius:16px;padding:16px 20px;text-align:center;min-width:96px}
+.ev-date b{display:block;font-size:34px;line-height:1}
+.ev-date span{font-size:12px;font-weight:600;letter-spacing:.1em}
+.ev-next .kicker{color:var(--green-soft)}
+.ev-next h3{font-size:21px;font-weight:600;margin:6px 0}
+.ev-next p{color:#C7D6F4;font-size:14px;font-weight:300}
+.ev-past{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:32px}
+.ev-past h4{font-size:12px;font-weight:600;letter-spacing:.12em;margin-bottom:14px;color:var(--ink-3)}
+.ev-item{display:flex;justify-content:space-between;gap:14px;padding:13px 0;border-top:1px solid var(--line);font-size:14px}
+.ev-item a{color:var(--blue);font-weight:600;white-space:nowrap}
+
+/* diretoria */
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.dir{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:26px;display:flex;gap:16px;align-items:center;transition:transform .15s}
+.dir:hover{transform:translateY(-3px)}
+.avatar{width:54px;height:54px;border-radius:50%;background:linear-gradient(140deg,var(--blue),var(--cyan));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;flex-shrink:0;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+
+/* associados */
+.assoc h3{font-size:11.5px;letter-spacing:.18em;color:var(--ink-3);font-weight:600;margin:32px 0 14px;text-align:center}
+.logo-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.logo-grid--big{grid-template-columns:repeat(3,1fr)}
+.lgt{background:var(--card);border-radius:16px;box-shadow:var(--shadow);height:82px;display:flex;align-items:center;justify-content:center;font-weight:700;letter-spacing:.05em;color:#51648D;font-size:15px;transition:transform .15s}
+.lgt:hover{transform:translateY(-3px)}
+.lgt--main{height:104px;font-size:19px;background:var(--navy);color:#DCE9FF}
+.lgt--more{color:var(--blue);font-size:13px;font-weight:600;box-shadow:none;border:1.5px dashed rgba(30,107,242,.35)}
+@media(max-width:900px){.logo-grid{grid-template-columns:1fr 1fr}.logo-grid--big{grid-template-columns:1fr}}
+.dir h3{font-size:15.5px;font-weight:600}
+.dir p{font-size:12.5px;color:var(--ink-2)}
+.dir a{font-size:12.5px;font-weight:600;color:var(--blue)}
+
+/* planos */
+.plans-wrap{overflow-x:auto;border-radius:22px;box-shadow:var(--shadow)}
+table.plans{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:22px;overflow:hidden;font-size:13px;min-width:780px}
+.plans th,.plans td{padding:13px 16px;text-align:center;border-top:1px solid var(--line)}
+.plans thead th{background:var(--navy);color:#fff;font-size:12px;letter-spacing:.1em;font-weight:600;padding:17px 16px;border-top:0}
+.plans thead th.hl{background:var(--blue)}
+.plans thead th:first-child{background:#071228}
+.plans tbody th{text-align:left;font-weight:500;color:var(--ink-2);font-size:12.5px;background:#FAFBFD;max-width:220px}
+.plans td.hl{background:rgba(30,107,242,.04);font-weight:600}
+.plans .price{font-size:15px;font-weight:700;color:var(--ink);line-height:1.3}
+.plans .price small{display:block;font-weight:400;color:var(--ink-3);font-size:11px}
+.plans .ok{color:var(--green);font-weight:700;font-size:15px}
+.plans .no{color:#C9CFDC;font-size:15px}
+.plans tfoot td{padding:16px;background:#FAFBFD}
+
+/* newsletter */
+.nl{background:var(--navy);color:#fff;padding:80px 0}
+.nl__in{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.nl h2{font-size:27px;font-weight:700;margin-bottom:8px;letter-spacing:-.01em}
+.nl h2 em{color:var(--green-soft);font-style:normal}
+.nl p{color:#C7D6F4;font-size:15px;font-weight:300}
+.nl form{display:flex;gap:10px;min-width:380px}
+.nl input{flex:1;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:13px 18px;color:#fff;font-family:var(--sans)}
+.nl input::placeholder{color:#8FA5D0}
+.nl .btn--green{background:var(--green-soft);color:#04351F}
+
+/* contato */
+.contact{padding:0 0 90px}
+.contact__in{display:grid;grid-template-columns:.85fr 1.15fr;gap:44px;align-items:stretch}
+.contact__aside h2{font-size:30px;font-weight:700;letter-spacing:-.015em;margin-bottom:12px}
+.contact__aside p{color:var(--ink-2);font-size:15px;font-weight:300;max-width:40ch}
+.contact__ch{margin-top:30px;display:flex;flex-direction:column;gap:14px}
+.contact__ch a{display:flex;align-items:center;gap:14px;font-size:14.5px;color:var(--ink);font-weight:500}
+.contact__ch .ci{width:44px;height:44px;border-radius:12px;background:#fff;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.contact__ch a small{display:block;color:var(--ink-2);font-size:12px;font-weight:400}
+.cform{background:#fff;border-radius:22px;padding:36px;box-shadow:var(--shadow)}
+.cform .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.cform label{display:block;font-size:11.5px;font-weight:600;letter-spacing:.06em;color:var(--ink-2);margin-bottom:6px}
+.cform input,.cform select,.cform textarea{width:100%;background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-family:var(--sans);font-size:14px;color:var(--ink)}
+.cform textarea{resize:vertical;min-height:96px}
+.cform .full{margin-bottom:14px}
+.cform .sub{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:6px}
+.cform .sub small{font-size:11.5px;color:var(--ink-2);max-width:34ch}
+.cform .done{padding:30px 0;text-align:center}
+.cform .done b{color:var(--green);font-size:18px}
+
+footer{background:var(--bg-2);color:var(--ink-3);padding:52px 0 34px;border-top:1px solid var(--line)}
+.foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+.foot img{height:30px;margin-bottom:12px}
+.foot ul{list-style:none;display:flex;gap:22px;flex-wrap:wrap;font-size:13px}
+.foot a:hover{color:var(--ink)}
+.foot .credit{font-size:11.5px;margin-top:26px;width:100%;border-top:1px solid var(--line);padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.foot .credit b{color:var(--ink-2);font-weight:500}
+
+@media(max-width:900px){
+  .news,.board,.events,.sim__grid{grid-template-columns:1fr}
+  .mag{grid-template-columns:1fr;padding:34px}
+  .mag__cover{display:none}
+  .nl__in{grid-template-columns:1fr}
+  .nl form{min-width:0}
+  .nav__links{display:none}
+  .hero{padding:64px 0 24px}
+  .contact__in{grid-template-columns:1fr}
+  .cform .frow{grid-template-columns:1fr}
+}
+/* ── mobile fino ── */
+html,body{overflow-x:hidden}
+@media(max-width:520px){
+  .wrap{padding:0 18px}
+  .sec{padding:56px 0}
+  .hero h1{font-size:32px}
+  .hero p{font-size:15.5px}
+  .orbit{width:min(300px,86vw)}
+  .chip{width:94px}
+  .chip__ic{width:44px;height:44px}
+  .chip__ic svg{width:20px;height:20px}
+  .chip span{font-size:8.5px;letter-spacing:.05em}
+  .btn{padding:11px 20px;font-size:13.5px}
+  .sec__head h2{font-size:24px}
+  .mag{padding:24px}
+  .mag__txt h2{font-size:21px}
+  .ev-next{flex-wrap:wrap;padding:24px;gap:18px}
+  .panel{padding:20px}
+  .brk .r{grid-template-columns:96px 1fr 70px;gap:8px}
+  .logo-grid,.logo-grid--big{grid-template-columns:1fr 1fr}
+  .lgt--main{font-size:16px}
+  .contact__aside h2{font-size:24px}
+  .cform{padding:22px}
+  .nl{padding:56px 0}
+  .nl h2{font-size:21px}
+  .foot ul{gap:14px}
+}
+</style>
+</head>
+<body>
+
+<div class="proto-badge">Protótipo Selo7 · versão Soft · dados ilustrativos</div>
+
+<div class="ticker" aria-label="Agora no setor">
+  <div class="ticker__label"><span class="dot"></span> PAGOS AGORA</div>
+  <div class="ticker__track">
+    <span><b>Reunião Mensal</b> em 12 dias · Café Journal, SP <em>→ inscrições abertas</em></span>
+    <span><b>e-Magazine #43</b> no ar · 35 páginas sobre o semestre dos pagamentos</span>
+    <span><b>LinkedIn Pagos</b> <em>+13,7%</em> no trimestre · o maior crescimento entre as associações do setor</span>
+    <span><b>Radar Pagos:</b> BC abre consulta sobre interoperabilidade de arranjos</span>
+    <span><b>PAGOS Conecta:</b> +4.300 líderes do setor recebem toda semana</span>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="wrap nav__in">
+    <a class="nav__logo" href="#"><img src="assets/logo-colorida.webp" alt="Pagos"></a>
+    <div class="nav__links">
+      <a href="#">A Pagos</a><a href="prototipo-publicacoes.html">Publicações</a><a href="#eventos">Eventos</a><a href="#conteudo">Conteúdo</a><a href="#contato">Fale Conosco</a>
+    </div>
+    <button class="btn btn--green">Seja associado</button>
+  </div>
+</nav>
+
+<!-- HERO centrado -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">ASSOCIAÇÃO BRASILEIRA DO ECOSSISTEMA DE PAGAMENTOS</span>
+    <h1>Instituições de Pagamento <span>Construindo o Futuro</span></h1>
+    <p>Representamos, fortalecemos e impulsionamos a inovação, a regulação e o desenvolvimento do ecossistema de pagamentos no Brasil.</p>
+    <div class="hero__ctas">
+      <button class="btn btn--green">eBook Comércio Agêntico</button>
+      <button class="btn btn--link">Reuniões Mensais →</button>
+    </div>
+  </div>
+</header>
+
+<div class="orbit-stage">
+  <div class="orbit" aria-hidden="true">
+    <div class="orbit__ring"></div><div class="orbit__ring orbit__ring--2"></div><div class="orbit__ring orbit__ring--3"></div>
+    <div class="orbit__sat"><i></i></div>
+    <div class="orbit__sat orbit__sat--2"><i></i></div>
+    <div class="orbit__core"><img src="assets/logo-colorida.webp" alt=""></div>
+    <div class="orbit__spin">
+      <div class="orbiter"><div class="chip"><div class="chip__ic"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="8" height="8" rx="1.5"/><path d="M12 3v5M12 16v5M3 12h5M16 12h5M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"/></svg></div><span>Pagamentos Agênticos</span></div></div>
+      <div class="orbiter"><div class="chip"><div class="chip__ic"><svg viewBox="0 0 24 24"><path d="M12 2.5l8 4.5v9l-8 4.5-8-4.5V7l8-4.5z"/><path d="M12 11.5L20 7M12 11.5L4 7M12 11.5v9"/></svg></div><span>Tokens e Ativos Digitais</span></div></div>
+      <div class="orbiter"><div class="chip"><div class="chip__ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5.5c0 4.3-2.9 7.2-7 8.5-4.1-1.3-7-4.2-7-8.5V6l7-3z"/><path d="M9 12l2 2 4-4.5"/></svg></div><span>Confiança e Compliance</span></div></div>
+      <div class="orbiter"><div class="chip"><div class="chip__ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13.5l9 5 9-5"/><path d="M3 17.5l9 5 9-5" opacity=".5"/></svg></div><span>Infraestrutura e Interoperabilidade</span></div></div>
+      <div class="orbiter"><div class="chip"><div class="chip__ic"><svg viewBox="0 0 24 24"><path d="M4 9.5l8-5.5 8 5.5"/><path d="M5.5 9.5V18M10 9.5V18M14 9.5V18M18.5 9.5V18M3.5 20.5h17"/></svg></div><span>Regulação e Governança</span></div></div>
+      <div class="orbiter"><div class="chip"><div class="chip__ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19.5c0-3 2.4-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9.5" r="2.4"/><path d="M16.5 15.2c2.6.3 4.3 2 4.3 4.3"/></svg></div><span>Pessoas e Ecossistema</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTÍCIAS -->
+<section class="sec sec--gray" id="conteudo">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">O AGORA DO SETOR</span>
+      <h2>Análises assinadas pela diretoria</h2>
+      <p>Notícia com padrão de imprensa, autoridade de quem constrói o mercado.</p>
+    </div>
+    <div class="news">
+      <a class="card" href="prototipo-artigo.html">
+        <div class="card__media card__media--ph" style="background-image:url('assets/foto-noticia.webp')"><span class="tag">REGULAÇÃO</span></div>
+        <div class="card__body">
+          <h3>Pix Automático muda a régua da recorrência no varejo</h3>
+          <p>Assinaturas, mensalidades e cobrança recorrente entram em nova fase; o que muda para facilitadores e subadquirentes.</p>
+          <div class="byline">Por <b>Daniel Nery</b> · VP Facilitadores de Pagamentos<br>16 jul 2026, 09h40 · 6 min de leitura</div>
+        </div>
+      </a>
+      <article class="card">
+        <div class="card__media alt card__media--ph" style="background-image:url('assets/foto-cartoes.webp')"><span class="tag">EMISSÃO</span></div>
+        <div class="card__body">
+          <h3>Pré-pagos: o que a revisão do interchange significa para emissores</h3>
+          <p>A conta do novo teto, os efeitos na oferta de cartões e o espaço que abre para os arranjos fechados.</p>
+          <div class="byline">Por <b>Valéria Carrete</b> · VP Emissores<br>15 jul 2026, 17h05 · 8 min de leitura</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card__media alt2 card__media--ph" style="background-image:url('assets/foto-tokens.webp')"><span class="tag">TOKENIZAÇÃO</span></div>
+        <div class="card__body">
+          <h3>Tokens de recebíveis saem do piloto — e o mercado precisa de trilhos</h3>
+          <p>Interoperabilidade, custódia e o papel das IPs na infraestrutura que vai liquidar o ativo mais brasileiro que existe.</p>
+          <div class="byline">Por <b>Luiz Carlos Pereira</b> · VP Tecnologia e Governança<br>14 jul 2026, 08h15 · 7 min de leitura</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- E-MAGAZINE -->
+<section class="sec" id="publicacoes">
+  <div class="wrap">
+    <div class="mag">
+      <img class="mag__cover" src="assets/capa-panorama.webp" alt="Capa do Panorama Econômico Pagos — 10ª edição">
+      <div class="mag__txt">
+        <span class="kicker">PUBLICAÇÃO OFICIAL</span>
+        <h2>Panorama Econômico · 10ª edição</h2>
+        <p>"Um ponto de inflexão para as fintechs brasileiras" — 42 páginas de análise com a visão da diretoria sobre riscos, compliance e o futuro regulatório. Deixe seu e-mail e receba esta e as próximas edições em primeira mão.</p>
+      </div>
+      <form class="mag__form" onsubmit="event.preventDefault();this.innerHTML='<b style=\'color:var(--green)\'>✓ Panorama enviado!</b><small>Você agora recebe o PAGOS Conecta.</small>'">
+        <input type="text" placeholder="Seu nome" required>
+        <input type="email" placeholder="E-mail corporativo" required>
+        <button class="btn btn--green" type="submit">Baixar o Panorama (PDF)</button>
+        <small>Ao baixar, você passa a receber o PAGOS Conecta. Sem spam, cancele quando quiser.</small>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- SIMULADOR -->
+<section class="sec sec--gray" id="simulador">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker" style="color:var(--green)">FERRAMENTA PAGOS · EM DESENVOLVIMENTO</span>
+      <h2>Quanto custa aceitar pagamentos no seu negócio?</h2>
+      <p>Simule taxas, equipamento e Pix — e compare com a média do seu segmento. Educativo, gratuito e sem citar marcas.</p>
+    </div>
+    <div class="sim__grid">
+      <form class="panel" onsubmit="event.preventDefault()">
+        <div class="row">
+          <label for="s-seg">SEGMENTO</label>
+          <select id="s-seg">
+            <option value="varejo">Varejo alimentar</option>
+            <option value="moda">Moda e vestuário</option>
+            <option value="servicos" selected>Serviços</option>
+            <option value="food">Food service</option>
+            <option value="ecom">E-commerce</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="s-fat">FATURAMENTO MENSAL <output id="s-fat-out">R$ 60.000</output></label>
+          <input type="range" id="s-fat" min="5000" max="500000" step="5000" value="60000">
+        </div>
+        <div class="row">
+          <label for="s-mix">QUANTO ENTRA POR CARTÃO <output id="s-mix-out">70%</output></label>
+          <input type="range" id="s-mix" min="10" max="100" step="5" value="70">
+          <p class="sim__note" style="margin-top:8px">O restante consideramos recebido via Pix.</p>
+        </div>
+        <p class="sim__note">Estimativa educativa com médias de mercado. Não substitui a negociação com seu provedor.</p>
+      </form>
+      <div class="panel sim__res" aria-live="polite">
+        <small>CUSTO ESTIMADO DE ACEITAÇÃO</small>
+        <div class="sim__big" id="s-total">R$ 1.484<span> /mês</span></div>
+        <div class="sim__pct" id="s-pct">2,47% do faturamento · média do seu segmento: 3,4%</div>
+        <div class="brk">
+          <div class="r"><span>Taxas · crédito</span><div class="bar"><i id="b-cred" style="width:55%"></i></div><b class="v" id="v-cred">R$ 815</b></div>
+          <div class="r"><span>Taxas · débito</span><div class="bar"><i id="b-deb" style="width:18%"></i></div><b class="v" id="v-deb">R$ 264</b></div>
+          <div class="r"><span>Pix</span><div class="bar"><i id="b-pix" style="width:5%"></i></div><b class="v" id="v-pix">R$ 72</b></div>
+          <div class="r"><span>Equipamento</span><div class="bar"><i id="b-pos" style="width:16%"></i></div><b class="v" id="v-pos">R$ 158</b></div>
+        </div>
+        <form class="sim__cta" onsubmit="event.preventDefault();this.innerHTML='<b style=\'color:var(--green)\'>✓ Diagnóstico a caminho do seu e-mail!</b>'">
+          <input type="email" placeholder="E-mail para receber o diagnóstico em PDF" required>
+          <button class="btn btn--green" type="submit">Receber diagnóstico</button>
+        </form>
+        <p class="sim__lgpd">Com o seu consentimento, os dados alimentam — de forma anônima e agregada — o futuro <b>Índice Pagos de Custo de Aceitação</b>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTOS -->
+<section class="sec" id="eventos">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">ENCONTROS QUE MOVEM O SETOR</span>
+      <h2>Eventos</h2>
+    </div>
+    <div class="events">
+      <div class="ev-next">
+        <div class="ev-date"><b>28</b><span>JUL</span></div>
+        <div>
+          <span class="kicker">PRÓXIMA REUNIÃO MENSAL</span>
+          <h3>O futuro dos facilitadores: consolidação ou especialização?</h3>
+          <p>Café Journal, São Paulo · 8h30 · exclusivo para associados e convidados</p>
+          <div style="margin-top:14px"><button class="btn btn--green">Garantir presença</button></div>
+        </div>
+      </div>
+      <div class="ev-past">
+        <h4>REALIZADOS RECENTEMENTE</h4>
+        <div class="ev-item"><span>Webinar · Reforma Tributária nos meios de pagamento</span><a href="#">Cobertura →</a></div>
+        <div class="ev-item"><span>Reunião Mensal · Arquitetas dos Pagamentos</span><a href="prototipo-evento.html">Fotos e vídeos →</a></div>
+        <div class="ev-item"><span>PAGOS Conecta ao vivo · Open Finance na prática</span><a href="#">Assistir →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRETORIA -->
+<section class="sec sec--gray">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">QUEM CONSTRÓI A PAGOS</span>
+      <h2>Diretoria executiva</h2>
+    </div>
+    <div class="board">
+      <div class="dir"><div class="avatar"><img src="assets/linconl.webp" alt="Linconl Rocha"></div><div><h3>Linconl Rocha</h3><p>Diretor Presidente</p><a href="#">5 artigos assinados →</a></div></div>
+      <div class="dir"><div class="avatar"><img src="assets/valeria.webp" alt="Valéria Carrete"></div><div><h3>Valéria Carrete</h3><p>VP Emissores</p><a href="#">3 artigos assinados →</a></div></div>
+      <div class="dir"><div class="avatar"><img src="assets/luiz.webp" alt="Luiz Carlos Pereira"></div><div><h3>Luiz Carlos Pereira</h3><p>VP Tecnologia e Governança</p><a href="#">4 artigos assinados →</a></div></div>
+      <div class="dir"><div class="avatar"><img src="assets/marcio.webp" alt="Marcio Campos"></div><div><h3>Marcio Campos</h3><p>VP Financeiro e Assuntos Internos</p><a href="#">2 artigos assinados →</a></div></div>
+      <div class="dir"><div class="avatar"><img src="assets/sandro.webp" alt="Sandro Ari Pinto"></div><div><h3>Sandro Ari Pinto</h3><p>VP Marketing e Parcerias</p><a href="#">2 artigos assinados →</a></div></div>
+      <div class="dir"><div class="avatar"><img src="assets/carlos.webp" alt="Carlos Akira Sato"></div><div><h3>Carlos Akira Sato</h3><p>VP Relações Institucionais</p><a href="#">3 artigos assinados →</a></div></div>
+      <div class="dir"><div class="avatar"><img src="assets/carlosogata.webp" alt="Carlos Ogata"></div><div><h3>Carlos Ogata</h3><p>VP Educação e Estratégia</p><a href="#">2 artigos assinados →</a></div></div>
+      <div class="dir"><div class="avatar"><img src="assets/pedrina.webp" alt="Pedrina Braga"></div><div><h3>Pedrina Braga</h3><p>VP Regulatório e Compliance</p><a href="#">3 artigos assinados →</a></div></div>
+      <div class="dir"><div class="avatar"><img src="assets/daniel.webp" alt="Daniel Nery"></div><div><h3>Daniel Nery</h3><p>VP Facilitadores de Pagamentos</p><a href="#">6 artigos assinados →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ASSOCIADOS E MANTENEDORES -->
+<section class="sec assoc">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">QUEM FAZ PARTE</span>
+      <h2>Empresas que constroem a Pagos</h2>
+    </div>
+    <h3>MANTENEDORES</h3>
+    <div class="logo-grid logo-grid--big">
+      <div class="lgt lgt--main">BMP</div>
+      <div class="lgt lgt--main">Ecomm</div>
+      <div class="lgt lgt--main">TNS</div>
+    </div>
+    <h3>ASSOCIADOS</h3>
+    <div class="logo-grid">
+      <div class="lgt">Verifone</div>
+      <div class="lgt">RoadCard</div>
+      <div class="lgt">Maps IP</div>
+      <div class="lgt">TJP Soluções</div>
+      <div class="lgt lgt--more">+ dezenas de empresas →</div>
+    </div>
+    <h3>PARCEIROS</h3>
+    <div class="logo-grid">
+      <div class="lgt">IDEA BR</div>
+      <div class="lgt">AFRAC</div>
+      <div class="lgt">Node</div>
+      <div class="lgt lgt--more">Seja parceiro →</div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section class="sec" id="associe-se">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">FAÇA PARTE</span>
+      <h2>Planos de associação</h2>
+    </div>
+    <div class="plans-wrap">
+      <table class="plans">
+        <thead>
+          <tr><th></th><th class="hl">MANTENEDOR</th><th>PLENO</th><th>START UP</th><th>MEI / PF</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Participação nos grupos de comunicação dos associados</th><td class="hl">Até 8 pessoas</td><td>Até 5 pessoas</td><td>Até 2 pessoas</td><td>Até 1 pessoa</td></tr>
+          <tr><th>Participação nas reuniões presenciais mensais</th><td class="hl">Até 8 pessoas</td><td>Até 5 pessoas</td><td>Até 2 pessoas</td><td>Até 1 pessoa</td></tr>
+          <tr><th>Participação nos grupos de trabalho</th><td class="hl">Até 8 pessoas</td><td>Até 5 pessoas</td><td>Até 2 pessoas</td><td>Até 1 pessoa</td></tr>
+          <tr><th>Descontos e benefícios em eventos e parceiros</th><td class="hl"><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td></tr>
+          <tr><th>Desconto no Instituto de Formação PAGOS</th><td class="hl">75%</td><td>50%</td><td>25%</td><td>10%</td></tr>
+          <tr><th>Acesso a estudos e pesquisas de mercado exclusivos</th><td class="hl"><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="no">✕</span></td></tr>
+          <tr><th>Logo no site e publicações da PAGOS</th><td class="hl"><span class="ok">✓</span> destaque</td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="no">✕</span></td></tr>
+          <tr>
+            <th>Contribuição associativa</th>
+            <td class="hl"><div class="price">R$ 10.000<small>por mês</small></div></td>
+            <td><div class="price">R$ 1.499<small>/mês ou R$ 16.180/ano</small></div></td>
+            <td><div class="price">R$ 399<small>/mês ou R$ 4.305/ano</small></div></td>
+            <td><div class="price">R$ 199<small>/mês ou R$ 2.141/ano</small></div></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td><button class="btn btn--green" style="width:100%">Quero me associar</button></td>
+            <td><button class="btn btn--green" style="width:100%">Quero me associar</button></td>
+            <td><button class="btn btn--green" style="width:100%">Quero me associar</button></td>
+            <td><button class="btn btn--green" style="width:100%">Quero me associar</button></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="nl">
+  <div class="wrap nl__in">
+    <div>
+      <span class="kicker" style="color:var(--green-soft)">PAGOS CONECTA</span>
+      <h2>O que importa no mercado de pagamentos, <em>toda terça, 7h</em>.</h2>
+      <p>+4.300 líderes do setor já recebem. Sem juridiquês, direto ao ponto.</p>
+    </div>
+    <form onsubmit="event.preventDefault();this.innerHTML='<b style=\'color:var(--green-soft);font-size:18px\'>✓ Bem-vindo ao Conecta!</b>'">
+      <input type="email" placeholder="Seu melhor e-mail" required>
+      <button class="btn btn--green" type="submit">Assinar</button>
+    </form>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="sec contact" id="contato">
+  <div class="wrap">
+    <div class="sec__head">
+      <span class="kicker">FALE CONOSCO</span>
+      <h2>Vamos conversar</h2>
+    </div>
+    <div class="contact__in">
+      <div class="contact__aside">
+        <h2>A porta de entrada da Pagos.</h2>
+        <p>Associação, imprensa, parcerias ou eventos — conte o que você precisa e a pessoa certa responde.</p>
+        <div class="contact__ch">
+          <a href="#"><span class="ci">✉️</span><span>contato@pagos.org.br<small>Resposta em até 1 dia útil</small></span></a>
+          <a href="#"><span class="ci">💬</span><span>WhatsApp institucional<small>Seg a sex, 9h às 18h</small></span></a>
+          <a href="#"><span class="ci">📰</span><span>Sala de imprensa<small>Assessoria e banco de imagens</small></span></a>
+          <a href="#"><span class="ci">in</span><span>@pagos no LinkedIn<small>4.929 seguidores</small></span></a>
+        </div>
+      </div>
+      <form class="cform" onsubmit="event.preventDefault();this.innerHTML='<div class=&quot;done&quot;><b>✓ Mensagem enviada!</b><p style=&quot;color:var(--ink-2);font-size:14px;margin-top:8px&quot;>A equipe da Pagos responde em breve.</p></div>'">
+        <div class="frow">
+          <div><label>Nome</label><input type="text" placeholder="Seu nome" required></div>
+          <div><label>E-mail</label><input type="email" placeholder="voce@empresa.com" required></div>
+        </div>
+        <div class="frow">
+          <div><label>Empresa</label><input type="text" placeholder="Sua empresa"></div>
+          <div><label>Assunto</label>
+            <select>
+              <option>Quero me associar</option>
+              <option>Imprensa</option>
+              <option>Parcerias e patrocínio</option>
+              <option>Eventos</option>
+              <option>Outro</option>
+            </select>
+          </div>
+        </div>
+        <div class="full"><label>Mensagem</label><textarea placeholder="Como podemos ajudar?"></textarea></div>
+        <div class="sub">
+          <small>Ao enviar, você concorda com a nossa política de privacidade (LGPD).</small>
+          <button class="btn btn--green" type="submit">Enviar mensagem</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <img src="assets/logo-colorida.webp" alt="Pagos">
+      <p style="font-size:13px;max-width:34ch">Associação de gestão dos meios de pagamentos eletrônicos, desde 2009.</p>
+    </div>
+    <ul>
+      <li><a href="#">e-Magazine</a></li><li><a href="#">PAGOS Radar</a></li><li><a href="#">PAGOS Conecta</a></li><li><a href="#">PAGOS Social</a></li><li><a href="#">Eventos</a></li><li><a href="#">Universidade Pagos</a></li>
+    </ul>
+    <div class="credit">
+      <span>© 2026 Associação Pagos · pagos.org.br</span>
+      <span>Tecnologia e comunicação: <b>Selo7</b></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const st=document.querySelector('.orbit-stage');
+  st.addEventListener('pointermove',e=>{
+    const r=st.getBoundingClientRect();
+    st.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+    st.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+  });
+})();
+(function(){
+  const seg={varejo:{c:2.4,d:1.1,avg:3.0},moda:{c:2.9,d:1.3,avg:3.3},servicos:{c:3.1,d:1.4,avg:3.4},food:{c:2.6,d:1.2,avg:3.1},ecom:{c:3.4,d:0,avg:3.8}};
+  const $=id=>document.getElementById(id);
+  const brl=v=>v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+  function calc(){
+    const s=seg[$('s-seg').value], fat=+$('s-fat').value, mix=+$('s-mix').value/100;
+    $('s-fat-out').textContent=brl(fat); $('s-mix-out').textContent=Math.round(mix*100)+'%';
+    const cartao=fat*mix;
+    const cred=cartao*0.7*s.c/100, deb=s.d?cartao*0.3*s.d/100:cartao*0.3*s.c*0.5/100;
+    const pix=fat*(1-mix)*0.004;
+    const pos=$('s-seg').value==='ecom'?0:Math.min(6,Math.max(1,Math.round(cartao/30000)))*79;
+    const total=cred+deb+pix+pos, pct=(total/fat*100);
+    $('s-total').innerHTML=brl(total)+'<span> /mês</span>';
+    $('s-pct').textContent=pct.toFixed(2).replace('.',',')+'% do faturamento · média do seu segmento: '+s.avg.toFixed(1).replace('.',',')+'%';
+    const mx=Math.max(cred,deb,pix,pos)||1;
+    [['cred',cred],['deb',deb],['pix',pix],['pos',pos]].forEach(([k,v])=>{
+      $('b-'+k).style.width=Math.max(3,v/mx*100)+'%'; $('v-'+k).textContent=brl(v);
+    });
+  }
+  ['s-seg','s-fat','s-mix'].forEach(id=>$(id).addEventListener('input',calc));
+  calc();
+})();
+</script>
+</body>
+</html>

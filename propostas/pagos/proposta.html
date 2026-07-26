@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<script>/* acesso reservado - Selo7 */(function(){try{var t=localStorage.getItem("s7p_pagos_ok");if(t&&(Date.now()-parseInt(t,10))<60*864e5)return;var p=location.pathname.split("/").pop();if(/^[a-z0-9-]+\.html$/.test(p))localStorage.setItem("s7p_pagos_next",p);location.replace("./")}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAGOS 2.0 · Proposta de Reposicionamento Digital · Selo7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-950:#050F26; --navy-900:#081735; --navy-800:#0D2350;
+  --blue:#1E6BF2; --cyan:#35C7F0; --green:#2BE39B;
+  --ink:#EAF1FF; --ink-2:#AEC0E6; --ink-3:#6F83AC; --line:rgba(148,178,235,.14);
+  --sans:'Poppins',system-ui,sans-serif; --serif:'Source Serif 4',Georgia,serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--navy-950);color:var(--ink);line-height:1.6}
+section{min-height:100vh;scroll-snap-align:start;display:flex;align-items:center;position:relative;padding:72px 0}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px;width:100%}
+h2{font-size:clamp(28px,3.4vw,42px);font-weight:700;letter-spacing:-.015em;line-height:1.15}
+.kicker{font-size:12px;font-weight:600;letter-spacing:.24em;color:var(--green);display:block;margin-bottom:18px}
+.lead{color:var(--ink-2);font-size:17.5px;max-width:62ch;margin-top:18px}
+b{font-weight:600;color:#fff}
+
+/* dots de navegação */
+.dots{position:fixed;right:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:11px;z-index:60}
+.dots a{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.22);transition:background .2s,transform .2s}
+.dots a.on{background:var(--green);transform:scale(1.35)}
+.hint{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:var(--ink-3);font-size:11.5px;letter-spacing:.08em;z-index:60}
+
+/* capa */
+.cover{background:radial-gradient(1100px 600px at 70% 20%,#123067,var(--navy-900) 55%,var(--navy-950));text-align:left}
+.cover::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(53,199,240,.13) 1px,transparent 1px);background-size:36px 36px;mask-image:radial-gradient(800px 600px at 70% 30%,#000 20%,transparent 75%)}
+.cover .wrap{position:relative}
+.cover img{height:44px;margin-bottom:44px}
+.cover h1{font-size:clamp(44px,6vw,76px);font-weight:700;line-height:1.04;letter-spacing:-.02em}
+.cover h1 em{font-style:normal;color:var(--green)}
+.cover .sub{font-size:19px;color:var(--ink-2);margin-top:22px;max-width:52ch}
+.cover .meta{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);display:flex;gap:44px;flex-wrap:wrap;font-size:13.5px;color:var(--ink-3)}
+.cover .meta b{display:block;color:var(--ink);font-size:14.5px}
+
+/* tese */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.big{font-size:clamp(72px,10vw,128px);font-weight:700;line-height:.95;letter-spacing:-.03em;color:var(--green)}
+.big small{display:block;font-size:15px;font-weight:500;letter-spacing:.04em;color:var(--ink-2);margin-top:14px;max-width:32ch}
+.contrast{border-left:3px solid rgba(255,255,255,.18);padding-left:26px}
+.contrast p{color:var(--ink-2);font-size:16.5px;margin-top:14px}
+
+/* cadeira vazia */
+.chairs{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
+.chair{background:var(--navy-800);border:1px solid var(--line);border-radius:14px;padding:26px 22px}
+.chair small{font-size:10.5px;letter-spacing:.16em;color:var(--ink-3);font-weight:600}
+.chair h3{font-size:19px;font-weight:600;margin:8px 0 4px}
+.chair p{font-size:12.5px;color:var(--ink-2)}
+.chair--empty{background:transparent;border:1.5px dashed rgba(43,227,155,.5);display:flex;flex-direction:column;justify-content:center;text-align:center;animation:breathe 3s ease-in-out infinite}
+.chair--empty h3{color:var(--green);font-size:30px}
+.chair--empty p{color:var(--green)}
+@keyframes breathe{50%{border-color:rgba(43,227,155,.95);box-shadow:0 0 34px rgba(43,227,155,.12)}}
+@media (prefers-reduced-motion:reduce){.chair--empty{animation:none}}
+
+/* benchmark */
+.bench{display:flex;flex-wrap:wrap;gap:9px;margin:34px 0}
+.bench span{font-size:12.5px;color:var(--ink-2);border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:rgba(255,255,255,.02)}
+.bench span.hl{border-color:var(--green);color:var(--green)}
+.findings{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+.find{background:var(--navy-800);border:1px solid var(--line);border-radius:12px;padding:20px 22px}
+.find h3{font-size:15px;font-weight:600;color:var(--cyan);margin-bottom:6px}
+.find p{font-size:13.5px;color:var(--ink-2)}
+
+/* visão — links para protótipos */
+.protos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+.proto{display:block;background:linear-gradient(150deg,var(--navy-800),var(--navy-900));border:1px solid var(--line);border-radius:18px;padding:36px 32px;text-decoration:none;color:inherit;transition:transform .18s,border-color .18s;position:relative;overflow:hidden}
+.proto:hover{transform:translateY(-5px);border-color:var(--green)}
+.proto::after{content:"ABRIR PROTÓTIPO →";position:absolute;right:26px;bottom:22px;font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--green)}
+.proto small{font-size:11px;letter-spacing:.18em;color:var(--ink-3);font-weight:600}
+.proto h3{font-size:24px;font-weight:700;margin:10px 0 8px}
+.proto p{color:var(--ink-2);font-size:14px;max-width:38ch;margin-bottom:30px}
+
+/* máquina — fluxo */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:44px}
+.fstep{background:var(--navy-800);border:1px solid var(--line);border-radius:14px;padding:22px 18px;position:relative}
+.fstep::after{content:"→";position:absolute;right:-16px;top:50%;transform:translateY(-50%);color:var(--green);font-size:18px;z-index:2}
+.fstep:last-child::after{content:""}
+.fstep .n{width:30px;height:30px;border-radius:50%;background:var(--green);color:#04351F;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.fstep h3{font-size:14.5px;font-weight:600;margin-bottom:6px}
+.fstep p{font-size:12px;color:var(--ink-2)}
+.quote{margin-top:38px;font-family:var(--serif);font-size:clamp(19px,2.4vw,25px);line-height:1.45;color:#fff;border-left:3px solid var(--green);padding-left:26px;max-width:56ch}
+
+/* escopo */
+.mods{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+.mod{background:var(--navy-800);border:1px solid var(--line);border-radius:12px;padding:20px 18px}
+.mod .ic{font-size:20px;margin-bottom:10px;display:block}
+.mod h3{font-size:13.5px;font-weight:600;margin-bottom:5px}
+.mod p{font-size:11.8px;color:var(--ink-2)}
+.own{margin-top:26px;background:rgba(43,227,155,.07);border:1px solid rgba(43,227,155,.3);border-radius:12px;padding:18px 22px;font-size:14px;color:var(--ink-2)}
+.own b{color:var(--green)}
+
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.rcard{background:var(--navy-800);border:1px solid var(--line);border-radius:14px;padding:26px 24px;display:flex;flex-direction:column}
+.rcard small{font-size:10.5px;letter-spacing:.16em;color:var(--green);font-weight:600}
+.rcard h3{font-size:18px;font-weight:600;margin:10px 0 8px}
+.rcard p{font-size:13px;color:var(--ink-2);flex:1}
+.rcard .when{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-3);letter-spacing:.06em}
+
+/* mais serviços (fechamento) */
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.scard{background:linear-gradient(155deg,var(--navy-800),var(--navy-900) 70%);border:1px solid var(--line);border-radius:16px;padding:26px 22px;transition:transform .18s,border-color .18s}
+.scard:hover{transform:translateY(-4px);border-color:var(--green)}
+.scard .si{width:44px;height:44px;border-radius:12px;background:rgba(43,227,155,.10);border:1px solid rgba(43,227,155,.3);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px}
+.scard h3{font-size:16px;font-weight:600;margin-bottom:6px}
+.scard p{font-size:12.5px;color:var(--ink-2)}
+.svc-close{margin-top:40px;background:linear-gradient(120deg,rgba(43,227,155,.10),rgba(30,107,242,.08));border:1px solid rgba(43,227,155,.3);border-radius:16px;padding:30px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.svc-close h3{font-size:21px;font-weight:700;letter-spacing:-.01em;max-width:24ch}
+.svc-close p{color:var(--ink-2);font-size:14px;margin-top:6px;max-width:52ch}
+.svc-close .big-note{font-family:var(--serif);font-size:15px;color:#fff}
+
+/* central de documentos */
+.dochub{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:40px}
+.dgroup{background:var(--navy-800);border:1px solid var(--line);border-radius:16px;padding:26px 24px}
+.dgroup>h3{font-size:11.5px;letter-spacing:.18em;color:var(--green);font-weight:600;margin-bottom:16px}
+.dlink{display:flex;align-items:center;gap:13px;padding:11px 0;border-top:1px solid var(--line);color:var(--ink);text-decoration:none;transition:padding-left .15s}
+.dgroup .dlink:first-of-type{border-top:0}
+.dlink:hover{padding-left:6px}
+.dlink .di{width:34px;height:34px;border-radius:9px;background:rgba(30,107,242,.14);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.dlink .di.pdf{background:rgba(226,74,74,.16)}
+.dlink .di.xls{background:rgba(15,191,126,.16)}
+.dlink b{font-size:14px;font-weight:600;display:block}
+.dlink small{font-size:11.5px;color:var(--ink-3)}
+.dlink .arw{margin-left:auto;color:var(--green);font-weight:700;opacity:.5;transition:opacity .15s}
+.dlink:hover .arw{opacity:1}
+
+/* investimento */
+.anchor{display:flex;align-items:baseline;gap:22px;margin-top:36px;flex-wrap:wrap}
+.anchor .old{font-size:26px;color:var(--ink-3);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.4)}
+.anchor .old small{display:block;font-size:11.5px;text-decoration:none;letter-spacing:.1em}
+.anchor .new{font-size:clamp(48px,6vw,72px);font-weight:700;letter-spacing:-.02em;color:#fff}
+.anchor .new small{display:block;font-size:13px;font-weight:500;color:var(--ink-2);letter-spacing:.04em}
+.pays{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.pay{background:var(--navy-800);border:1px solid var(--line);border-radius:16px;padding:28px 24px;position:relative}
+.pay--hl{border-color:var(--green);background:linear-gradient(160deg,rgba(43,227,155,.10),var(--navy-800) 60%)}
+.pay .fl{position:absolute;top:-11px;left:22px;background:var(--green);color:#04351F;font-size:10px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:999px}
+.pay small{font-size:11px;letter-spacing:.16em;color:var(--ink-3);font-weight:600}
+.pay .v{font-size:30px;font-weight:700;margin:10px 0 2px}
+.pay .v em{font-style:normal;font-size:14px;font-weight:500;color:var(--ink-2)}
+.pay p{font-size:12.5px;color:var(--ink-2)}
+.pay .save{margin-top:10px;font-size:12px;color:var(--green);font-weight:600}
+.inc{margin-top:26px;font-size:13px;color:var(--ink-3)}
+
+/* fechamento */
+.steps{margin-top:40px;display:grid;gap:0}
+.pstep{display:flex;gap:20px;padding:17px 0;border-top:1px solid var(--line);align-items:baseline}
+.pstep .n{color:var(--green);font-weight:700;font-size:15px;min-width:26px}
+.pstep h3{font-size:15.5px;font-weight:600}
+.pstep p{font-size:13px;color:var(--ink-2)}
+.final{margin-top:48px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:28px}
+.final .sig b{font-size:17px}
+.final .sig p{color:var(--ink-3);font-size:13px}
+.badge-val{background:rgba(43,227,155,.1);border:1px solid rgba(43,227,155,.35);color:var(--green);border-radius:10px;padding:10px 18px;font-size:12.5px;font-weight:600}
+
+@media(max-width:900px){
+  .split,.findings,.protos{grid-template-columns:1fr}
+  .chairs{grid-template-columns:1fr 1fr}
+  .flow{grid-template-columns:1fr}.fstep::after{content:"↓";right:auto;left:22px;top:auto;bottom:-16px;transform:none}
+  .mods{grid-template-columns:1fr 1fr}.road,.pays{grid-template-columns:1fr}
+  .dots{display:none}
+  section{min-height:auto;padding:64px 0}
+  html{scroll-snap-type:none}
+}
+/* ── mobile fino ── */
+html,body{overflow-x:hidden}
+@media(max-width:560px){
+  .wrap{padding:0 20px}
+  section{padding:52px 0}
+  .cover img{height:34px;margin-bottom:30px}
+  .cover .meta{gap:20px}
+  .big{font-size:64px}
+  .chairs{grid-template-columns:1fr}
+  .chair--empty{min-height:120px}
+  .bench span{font-size:11px;padding:5px 11px}
+  .findings{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .mods{grid-template-columns:1fr}
+  .anchor .new{font-size:44px}
+  .anchor .old{font-size:20px}
+  .pay{padding:22px 20px}
+  .quote{font-size:17px}
+  .proto{padding:26px 22px}
+  .proto::after{position:static;display:block;margin-top:14px}
+  .hint{display:none}
+  .final{flex-direction:column;align-items:flex-start}
+  .svc{grid-template-columns:1fr}
+  .svc-close{flex-direction:column;align-items:flex-start;padding:24px}
+  .svc-close h3{font-size:18px}
+  .dochub{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="dots" aria-label="Seções">
+  <a href="#s0" class="on"></a><a href="#s1"></a><a href="#s2"></a><a href="#s3"></a><a href="#s4"></a><a href="#s4b"></a><a href="#s5"></a><a href="#s6"></a><a href="#s7"></a><a href="#s8"></a><a href="#s9"></a><a href="#s10"></a><a href="#s11"></a>
+</nav>
+<div class="hint">use ↑ ↓ ou role para navegar</div>
+
+<!-- 0 · CAPA -->
+<section class="cover" id="s0">
+  <div class="wrap">
+    <img src="assets/logo-branca.webp" alt="Pagos">
+    <h1>PAGOS <em>2.0</em><br>O reposicionamento digital</h1>
+    <p class="sub">Um novo ambiente na internet, com uma máquina de conteúdo própria, para colocar a Pagos entre as associações de referência do mercado de pagamentos.</p>
+    <div class="meta">
+      <div><b>Proposta para</b>Associação Pagos</div>
+      <div><b>Por</b>Bruno Massa · Selo7</div>
+      <div><b>Data</b>Julho de 2026</div>
+      <div><b>Entrega</b>60–75 dias</div>
+    </div>
+  </div>
+</section>
+
+<!-- 1 · TESE -->
+<section id="s1">
+  <div class="wrap split">
+    <div>
+      <span class="kicker">A TESE</span>
+      <div class="big">+13,7%<small>o crescimento da Pagos no LinkedIn no trimestre, o maior entre as associações relevantes do setor</small></div>
+    </div>
+    <div class="contrast">
+      <h2>A marca cresce.<br>O site não acompanha.</h2>
+      <p>Quem descobre a Pagos hoje encontra um site que não convida, uma revista que qualquer um baixa sem deixar nem o e-mail e uma diretoria com autoridade real, mas sem canal com ritmo.</p>
+      <p><b>Este projeto corrige a rota:</b> um portal vivo do setor + uma máquina de conteúdo que a própria equipe opera.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · CADEIRA VAZIA -->
+<section id="s2">
+  <div class="wrap">
+    <span class="kicker">A OPORTUNIDADE</span>
+    <h2>Toda associação de referência é dona de um número.</h2>
+    <p class="lead">É assim que elas viram fonte obrigatória da imprensa e citação permanente do mercado.</p>
+    <div class="chairs">
+      <div class="chair"><small>CARTÕES</small><h3>Monitor Abecs</h3><p>Balanço trimestral do setor. Manchete garantida a cada divulgação</p></div>
+      <div class="chair"><small>MERCADO DE CAPITAIS</small><h3>IMA · ANBIMA</h3><p>Índices diários que são infraestrutura do mercado</p></div>
+      <div class="chair"><small>CONSTRUÇÃO CIVIL</small><h3>CUB · SindusCon</h3><p>Publicado todo dia 5, há décadas. Virou hábito da imprensa</p></div>
+      <div class="chair chair--empty"><small>PAGAMENTOS</small><h3>?</h3><p>a cadeira está vazia</p></div>
+    </div>
+    <p class="lead" style="margin-top:34px">O mercado de pagamentos <b>não tem indicador de referência</b>. Este projeto prepara a Pagos para ocupar essa cadeira. O roadmap mostra como.</p>
+  </div>
+</section>
+
+<!-- 3 · BENCHMARK -->
+<section id="s3">
+  <div class="wrap">
+    <span class="kicker">O QUE ANALISAMOS</span>
+    <h2>20 sites, em profundidade.</h2>
+    <div class="bench">
+      <span>ANBIMA</span><span>Febraban</span><span>Abecs</span><span>ABBC</span><span>ABFintechs</span><span>Acrefi</span><span>ABcripto</span><span>Zetta</span><span>ABCD</span><span class="hl">ABIPAG</span><span>AFRAC</span><span>ABToken</span><span>ABBaaS</span><span class="hl">SindusCon-SP</span><span>HSM</span><span>Mundo do Marketing</span><span class="hl">Let's Money</span><span>StartSe</span><span>M15</span><span>Anamid</span>
+    </div>
+    <div class="findings">
+      <div class="find"><h3>Nenhum combina tudo</h3><p>Hub de publicações, eventos com sistema, busca, newsletter, área logada, dados próprios: cada site tem 2 ou 3 desses itens. O novo site da Pagos nasce com todos.</p></div>
+      <div class="find"><h3>O padrão é WordPress. A limitação também.</h3><p>Quase todos rodam WordPress genérico. Nenhum tem automação, IA ou publicador de redes. É por isso que todos parecem iguais.</p></div>
+      <div class="find"><h3>A concorrente direta é vencível</h3><p>A ABIPAG investiu em site de agência, mas não tem área logada, newsletter nem educação. A Pagos já tem os três. Faltava o ambiente à altura.</p></div>
+      <div class="find"><h3>Ninguém captura o leitor</h3><p>Todo o setor entrega estudos e revistas sem pedir nem o e-mail. Cada download da e-Magazine deveria ser um lead da associação. No novo site, será.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · A VISÃO (protótipos) -->
+<section id="s4">
+  <div class="wrap">
+    <span class="kicker">A VISÃO · NAVEGUE AGORA</span>
+    <h2>Não vamos descrever. Vamos mostrar.</h2>
+    <p class="lead">Protótipos navegáveis, construídos para esta proposta a partir da referência visual que a diretoria aprovou. O novo site vem em <b>duas direções de arte</b>, para a escolha ser de vocês.</p>
+    <div class="protos">
+      <a class="proto" href="prototipo-home.html" target="_blank" rel="noopener">
+        <small>O NOVO SITE · DIREÇÃO A</small>
+        <h3>Impacto</h3>
+        <p>Azul profundo e a órbita dos seis pilares: a evolução direta da referência que vocês aprovaram.</p>
+      </a>
+      <a class="proto" href="prototipo-home-light.html" target="_blank" rel="noopener">
+        <small>O NOVO SITE · DIREÇÃO B</small>
+        <h3>Soft</h3>
+        <p>Fundo claro e muito espaço em branco. A sofisticação discreta dos grandes sites de produto.</p>
+      </a>
+      <a class="proto" href="prototipo-painel.html" target="_blank" rel="noopener">
+        <small>PROTÓTIPO 02</small>
+        <h3>O Painel</h3>
+        <p>Estúdio de conteúdo com IA na voz de cada diretor, calendário de redes e analytics com relatório automático.</p>
+      </a>
+    </div>
+    <p class="lead" style="font-size:14px;margin-top:22px">Nos protótipos do site: análises assinadas pela diretoria (com fotos reais), e-Magazine com captura de leads, planos de associação, mantenedores e associados em vitrine, além do preview do <b>simulador de custo de aceitação</b>. Páginas internas navegáveis: <a href="prototipo-artigo.html" target="_blank" rel="noopener" style="color:var(--green)">artigo assinado (padrão imprensa) →</a>, <a href="prototipo-evento.html" target="_blank" rel="noopener" style="color:var(--green)">evento realizado (galeria, vídeos e cobertura) →</a> e <a href="prototipo-publicacoes.html" target="_blank" rel="noopener" style="color:var(--green)">publicações com leitor no ar e área logada (com simulação de login) →</a></p>
+  </div>
+</section>
+
+<!-- 4b · O PLANEJAMENTO (destaque) -->
+<section id="s4b">
+  <div class="wrap">
+    <span class="kicker">O PLANEJAMENTO · PARTE DA ENTREGA</span>
+    <h2>LinkedIn como força.<br>Instagram como apoio.</h2>
+    <p class="lead">O site novo não vive sem ritmo. Por isso esta proposta entrega, junto com a plataforma, o <b>plano de operação de redes</b>: metas medidas todo mês e papéis claros para cada lado.</p>
+    <div class="findings" style="margin-top:38px">
+      <div class="find"><h3>Metas de 12 meses</h3><p>De 4.329 para <b>9.000+ seguidores</b> no LinkedIn (top 8 entre as associações do benchmark), 2× a base da newsletter e 300+ leads/mês.</p></div>
+      <div class="find"><h3>Cadência que cabe na agenda</h3><p>Mínimo de 3 publicações/semana no LinkedIn, programadas em <b>1 hora por semana</b>. A máquina desdobra 1 conteúdo em N formatos.</p></div>
+      <div class="find"><h3>5 pilares editoriais</h3><p>Análise assinada, Dados &amp; Radar, Eventos, Comunidade e Produtos Pagos, com templates prontos para cada formato.</p></div>
+      <div class="find"><h3>Papéis sem ambiguidade</h3><p><b>A Selo7 constrói e mantém a máquina. O conteúdo é da Pagos.</b> Matriz de responsabilidades entrega por entrega.</p></div>
+    </div>
+    <a class="proto" href="plano-redes.html" target="_blank" rel="noopener" style="display:block;margin-top:26px">
+      <small>DOCUMENTO ILUSTRADO · NAVEGÁVEL</small>
+      <h3>Abrir o Planejamento de Redes completo</h3>
+      <p style="max-width:60ch">Com a semana-padrão dia a dia, os mockups das peças aplicadas no LinkedIn e no Instagram (post, carrossel e story) e a matriz de quem faz o quê.</p>
+    </a>
+  </div>
+</section>
+
+<!-- 5 · A MÁQUINA -->
+<section id="s5">
+  <div class="wrap">
+    <span class="kicker">O DIFERENCIAL QUE NENHUMA ASSOCIAÇÃO TEM</span>
+    <h2>A máquina de conteúdo</h2>
+    <div class="flow">
+      <div class="fstep"><div class="n">1</div><h3>O diretor manda um áudio</h3><p>2 minutos de opinião sobre uma pauta, direto do WhatsApp para o Painel</p></div>
+      <div class="fstep"><div class="n">2</div><h3>A IA escreve na voz dele</h3><p>Perfil de voz individual, calibrado com amostras reais de cada diretor. Nada de "cara de IA"</p></div>
+      <div class="fstep"><div class="n">3</div><h3>A equipe aprova</h3><p>Nada é publicado sem validação humana. Ajustou, aprovou</p></div>
+      <div class="fstep"><div class="n">4</div><h3>Publica site + redes</h3><p>No ar no site na hora; agendado no LinkedIn no formato certo, com arte na identidade</p></div>
+      <div class="fstep"><div class="n">5</div><h3>O relatório chega sozinho</h3><p>PDF executivo mensal no e-mail da diretoria, com a leitura da IA e sugestão de pauta</p></div>
+    </div>
+    <p class="quote">"O site deixa de ser um cartão de visitas e vira um ativo que produz, publica e mede. E quem opera é a própria equipe da Pagos."</p>
+  </div>
+</section>
+
+<!-- 6 · ESCOPO -->
+<section id="s6">
+  <div class="wrap">
+    <span class="kicker">O QUE SERÁ ENTREGUE</span>
+    <h2>Escopo do projeto</h2>
+    <div class="mods">
+      <div class="mod"><span class="ic">🌐</span><h3>Site institucional premium</h3><p>Home viva, publicações, eventos, diretoria com artigos assinados, busca</p></div>
+      <div class="mod"><span class="ic">🧠</span><h3>CMS Painel, 100% próprio</h3><p>Sem WordPress, sem licenças. Código da Pagos, sob medida</p></div>
+      <div class="mod"><span class="ic">🎙</span><h3>IA com tom de voz por autor</h3><p>Cada diretor com perfil calibrado por amostras reais</p></div>
+      <div class="mod"><span class="ic">📣</span><h3>Publicador de redes</h3><p>Calendário, agendamento LinkedIn e artes na identidade</p></div>
+      <div class="mod"><span class="ic">📊</span><h3>Analytics + relatório PDF</h3><p>Site e redes num painel só; relatório mensal automático por e-mail</p></div>
+      <div class="mod"><span class="ic">✉️</span><h3>Newsletter + captura de leads</h3><p>e-Magazine e materiais ricos com cadastro. A base é da Pagos</p></div>
+      <div class="mod"><span class="ic">📦</span><h3>Migração completa</h3><p>Todo o conteúdo do WordPress atual extraído e reaproveitado com IA</p></div>
+      <div class="mod"><span class="ic">🎓</span><h3>Treinamento + documentação</h3><p>Equipe operando sozinha, com 30 dias de acompanhamento incluído</p></div>
+    </div>
+    <div class="own"><b>Propriedade total:</b> domínio, hospedagem, banco de dados e contas de IA ficam no CNPJ da Pagos. A Selo7 configura, deixa rodando e documenta todos os custos de operação (estimados em R$ 250–700/mês, pagos direto aos fornecedores). Sem dependência, sem aluguel escondido.</div>
+  </div>
+</section>
+
+<!-- 7 · ROADMAP -->
+<section id="s7">
+  <div class="wrap">
+    <span class="kicker">DEPOIS DO LANÇAMENTO · A VISÃO DE LONGO PRAZO</span>
+    <h2>O ambiente cresce com a Pagos</h2>
+    <p class="lead">Cada fronteira é um projeto próprio, contratado quando fizer sentido. A arquitetura já nasce pronta para recebê-las.</p>
+    <div class="road">
+      <div class="rcard"><small>FRONTEIRA 01</small><h3>Simulador → Índice Pagos</h3><p>Calculadora pública de custo de aceitação para o lojista, que alimenta, com consentimento, o banco de dados do setor. É dela que nasce o índice mensal capaz de ocupar a cadeira vazia.</p><div class="when">PROPOSTA DEDICADA · <a href="prototipo-home.html#simulador" target="_blank" rel="noopener" style="color:var(--green)">VER PREVIEW →</a></div></div>
+      <div class="rcard"><small>FRONTEIRA 02</small><h3>Área do associado + pagamento</h3><p>Login, perfis (PF, PJ, MEI, portes) e assinatura recorrente integrada a gateway. Essa parte, aliás, é a especialidade dos próprios associados.</p><div class="when">PROPOSTA DEDICADA</div></div>
+      <div class="rcard"><small>FRONTEIRA 03</small><h3>Hub multimídia Pagos</h3><p>Podcast, cortes de eventos e entrevistas em vídeo: o braço de mídia da associação, no modelo dos grandes hubs editoriais.</p><div class="when">PROPOSTA DEDICADA</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 · INVESTIMENTO -->
+<section id="s8">
+  <div class="wrap">
+    <span class="kicker">INVESTIMENTO</span>
+    <h2>Projeto fechado, sem surpresas.</h2>
+    <div class="anchor">
+      <div class="old">R$ 82.000<small>VALOR DE MERCADO DESTE ESCOPO</small></div>
+      <div class="new">R$ 32.500<small>condição de parceiro fundador do reposicionamento · entrega em 60–75 dias</small></div>
+    </div>
+    <div class="pays">
+      <div class="pay pay--hl">
+        <span class="fl">MELHOR CONDIÇÃO</span>
+        <small>PARCEIRO</small>
+        <div class="v">R$ 29.500</div>
+        <p>50% na assinatura<br>50% na entrega</p>
+        <div class="save">Economia de R$ 3.000</div>
+      </div>
+      <div class="pay">
+        <small>PADRÃO</small>
+        <div class="v">4× <em>de</em> R$ 8.125</div>
+        <p>Primeira parcela na assinatura, demais mensais</p>
+      </div>
+      <div class="pay">
+        <small>FACILITADO</small>
+        <div class="v">8× <em>de</em> R$ 4.062</div>
+        <p>O mesmo esforço mensal já avaliado em março, só que por tempo limitado e virando um ativo próprio</p>
+      </div>
+    </div>
+    <p class="inc">Inclui tudo do escopo apresentado + 30 dias de acompanhamento assistido. Não inclui: fronteiras do roadmap e operação de conteúdo do dia a dia (a máquina é de vocês). Manutenção continuada: tratada em documento próprio na entrega. Até 2 rodadas de ajuste por entrega.</p>
+  </div>
+</section>
+
+<!-- 9 · PRÓXIMOS PASSOS -->
+<section id="s9">
+  <div class="wrap">
+    <span class="kicker">PARCERIA E PRÓXIMOS PASSOS</span>
+    <h2>Como começamos</h2>
+    <div class="steps">
+      <div class="pstep"><span class="n">01</span><div><h3>Aprovação e assinatura</h3><p>Escolha da condição de pagamento e definição do ponto focal da Pagos</p></div></div>
+      <div class="pstep"><span class="n">02</span><div><h3>Kickoff · semana 1</h3><p>Contas no CNPJ da Pagos, acessos, coleta das amostras de voz da diretoria (1 áudio + 1 artigo por diretor)</p></div></div>
+      <div class="pstep"><span class="n">03</span><div><h3>Sprint 1 · semanas 1 a 4</h3><p>Novo site em versão beta + migração do conteúdo</p></div></div>
+      <div class="pstep"><span class="n">04</span><div><h3>Sprint 2 · semanas 5 a 8</h3><p>Painel completo, treinamento da equipe e virada oficial do pagos.org.br</p></div></div>
+    </div>
+    <p class="lead" style="margin-top:30px">Como parceira de tecnologia e comunicação, a Selo7 participa de <b>2 Reuniões Mensais por ano</b> como palestrante convidada, falando de comunicação e narrativa na estrutura de negócios.</p>
+  </div>
+</section>
+
+<!-- 10 · A SELO7 COMPLETA (fechamento) -->
+<section id="s10">
+  <div class="wrap">
+    <span class="kicker">O SITE É O COMEÇO</span>
+    <h2>Uma agência inteira, à disposição da Pagos.</h2>
+    <p class="lead">Quando a máquina estiver no ar, a Pagos passa a ter mais que um fornecedor de site: ganha uma parceira que resolve comunicação de ponta a ponta. Tudo já falando a mesma língua da marca, sem precisar de novos briefings.</p>
+    <div class="svc">
+      <div class="scard"><div class="si">🎤</div><h3>Produção de eventos</h3><p>Da Reunião Mensal ao congresso anual: concepção, identidade visual, ambientação e operação no dia.</p></div>
+      <div class="scard"><div class="si">🎬</div><h3>Audiovisual</h3><p>Captação e edição de vídeos, cortes de painéis, aftermovies e conteúdo para as redes.</p></div>
+      <div class="scard"><div class="si">🧭</div><h3>Planejamento de comunicação</h3><p>Calendário, narrativa e direção de conteúdo para manter a Pagos relevante o ano todo.</p></div>
+      <div class="scard"><div class="si">📈</div><h3>Consultoria de marketing</h3><p>Posicionamento, funil de associação e estratégia de crescimento com leitura de dados.</p></div>
+      <div class="scard"><div class="si">⚙️</div><h3>Automação de processos</h3><p>Fluxos que conectam site, redes, e-mail e CRM, para a comunicação rodar sozinha.</p></div>
+      <div class="scard"><div class="si">🎙️</div><h3>Gestão de podcasts</h3><p>Do roteiro à publicação: o braço em áudio e vídeo da autoridade da Pagos.</p></div>
+    </div>
+    <div class="svc-close">
+      <div>
+        <h3>O plano completo custa menos que a soma das partes.</h3>
+        <p>Concentrar tudo numa parceira que já conhece a marca economiza tempo, mantém a consistência e sai mais barato do que contratar cada frente separadamente.</p>
+      </div>
+      <div class="big-note">"Começamos pelo site.<br>Terminamos donos da conversa do setor."</div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · CENTRAL DE DOCUMENTOS (tela final) -->
+<section id="s11">
+  <div class="wrap">
+    <span class="kicker">TUDO EM UM LUGAR</span>
+    <h2>Central de materiais</h2>
+    <p class="lead">Todos os protótipos navegáveis e os documentos da proposta, prontos para explorar e assinar.</p>
+    <div class="dochub">
+      <div class="dgroup">
+        <h3>A EXPERIÊNCIA · PROTÓTIPOS</h3>
+        <a class="dlink" href="prototipo-home.html" target="_blank" rel="noopener"><span class="di">🖥️</span><span><b>Novo site · Direção A (Impacto)</b><small>Home azul profundo com órbita e simulador</small></span><span class="arw">→</span></a>
+        <a class="dlink" href="prototipo-home-light.html" target="_blank" rel="noopener"><span class="di">☀️</span><span><b>Novo site · Direção B (Soft)</b><small>Versão clara, estilo site de produto</small></span><span class="arw">→</span></a>
+        <a class="dlink" href="prototipo-painel.html" target="_blank" rel="noopener"><span class="di">🧠</span><span><b>O Painel (CMS com IA)</b><small>Estúdio, redes e analytics</small></span><span class="arw">→</span></a>
+        <a class="dlink" href="prototipo-artigo.html" target="_blank" rel="noopener"><span class="di">📰</span><span><b>Artigo assinado</b><small>Notícia no padrão imprensa</small></span><span class="arw">→</span></a>
+        <a class="dlink" href="prototipo-evento.html" target="_blank" rel="noopener"><span class="di">📅</span><span><b>Evento realizado</b><small>Galeria, vídeos e cobertura</small></span><span class="arw">→</span></a>
+        <a class="dlink" href="prototipo-publicacoes.html" target="_blank" rel="noopener"><span class="di">📖</span><span><b>Publicações + área logada</b><small>Leitor no ar e download por conta</small></span><span class="arw">→</span></a>
+        <a class="dlink" href="plano-redes.html" target="_blank" rel="noopener"><span class="di">📱</span><span><b>Plano de redes ilustrado</b><small>Metas, cadência e mockups</small></span><span class="arw">→</span></a>
+        <a class="dlink" href="../../../Design/design-system.html" target="_blank" rel="noopener"><span class="di">🎨</span><span><b>Design System + templates</b><small>Cores, tipografia e artes de rede</small></span><span class="arw">→</span></a>
+      </div>
+      <div class="dgroup">
+        <h3>OS DOCUMENTOS</h3>
+        <a class="dlink" href="../documentos/proposta-comercial-assinatura.pdf" target="_blank" rel="noopener"><span class="di pdf">📄</span><span><b>Proposta comercial (assinatura)</b><small>PDF · escopo, preço e aceite</small></span><span class="arw">→</span></a>
+        <a class="dlink" href="../documentos/pre-contrato.pdf" target="_blank" rel="noopener"><span class="di pdf">📑</span><span><b>Pré-contrato</b><small>PDF · minuta em 10 cláusulas</small></span><span class="arw">→</span></a>
+        <a class="dlink" href="../documentos/guia-de-acessos.pdf" target="_blank" rel="noopener"><span class="di pdf">🔑</span><span><b>Guia de acessos</b><small>PDF · o que a Pagos precisa fornecer</small></span><span class="arw">→</span></a>
+        <a class="dlink" href="../documentos/cronograma-pagos.xlsx" target="_blank" rel="noopener"><span class="di xls">📊</span><span><b>Cronograma de execução</b><small>Excel · Gantt e matriz de responsáveis</small></span><span class="arw">→</span></a>
+        <h3 style="margin-top:24px">CONTATO</h3>
+        <a class="dlink" href="mailto:brunobrm@gmail.com"><span class="di">✉️</span><span><b>brunobrm@gmail.com</b><small>Bruno Massa · Selo7</small></span><span class="arw">→</span></a>
+      </div>
+    </div>
+    <div class="final">
+      <div class="sig"><b>Bruno Massa</b><p>Selo7 · Tecnologia e Comunicação<br>brunobrm@gmail.com</p></div>
+      <div class="badge-val">Proposta válida por 15 dias</div>
+    </div>
+  </div>
+</section>
+
+<script>
+const secs=[...document.querySelectorAll('section')];
+const dots=[...document.querySelectorAll('.dots a')];
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ const i=secs.indexOf(e.target); dots.forEach((d,j)=>d.classList.toggle('on',j===i)); }});
+},{threshold:.5});
+secs.forEach(s=>io.observe(s));
+document.addEventListener('keydown',e=>{
+  const cur=dots.findIndex(d=>d.classList.contains('on'));
+  if(e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();secs[Math.min(cur+1,secs.length-1)].scrollIntoView({behavior:'smooth'})}
+  if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();secs[Math.max(cur-1,0)].scrollIntoView({behavior:'smooth'})}
+});
+</script>
+</body>
+</html>

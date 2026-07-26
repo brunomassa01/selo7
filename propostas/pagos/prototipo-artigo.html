@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<script>/* acesso reservado - Selo7 */(function(){try{var t=localStorage.getItem("s7p_pagos_ok");if(t&&(Date.now()-parseInt(t,10))<60*864e5)return;var p=location.pathname.split("/").pop();if(/^[a-z0-9-]+\.html$/.test(p))localStorage.setItem("s7p_pagos_next",p);location.replace("./")}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pix Automático muda a régua da recorrência no varejo — PAGOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-950:#050F26; --navy-900:#081735; --navy-800:#0D2350;
+  --blue:#1E6BF2; --cyan:#35C7F0; --green:#2BE39B; --green-dark:#0FBF7E;
+  --paper:#FFFFFF; --paper-2:#F4F8FE; --ink:#0B1B3A; --ink-soft:#44557A; --ink-3:#7A89A8;
+  --line:rgba(255,255,255,.09); --line-ink:rgba(11,27,58,.1);
+  --sans:'Poppins',system-ui,sans-serif; --serif:'Source Serif 4',Georgia,serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:16px;line-height:1.65}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+button{font-family:var(--sans);cursor:pointer}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.wrap--read{max-width:760px}
+.proto-badge{position:fixed;bottom:16px;left:16px;z-index:99;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.06em;padding:7px 12px;border-radius:999px;opacity:.85}
+
+/* barra de progresso de leitura */
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--green);z-index:60;width:0%}
+
+.nav{background:var(--navy-900);position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;gap:36px;height:72px}
+.nav__logo img{height:34px;display:block}
+.nav__links{display:flex;gap:30px;margin-left:auto}
+.nav__links a{color:#C7D6F4;font-size:14.5px;font-weight:500}
+.nav__links a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:14px;border-radius:10px;padding:11px 20px;border:0;transition:transform .15s}
+.btn--green{background:var(--green);color:#04351F}
+.btn--green:hover{transform:translateY(-1px)}
+
+/* cabeçalho do artigo */
+.ahead{padding:56px 0 34px}
+.crumb{font-size:12.5px;color:var(--ink-3);display:block;margin-bottom:22px}
+.crumb a{color:var(--blue);font-weight:500}
+.cat{display:inline-block;background:var(--green);color:#04351F;font-size:10.5px;font-weight:700;letter-spacing:.14em;padding:6px 13px;border-radius:6px;margin-bottom:18px}
+.ahead h1{font-family:var(--serif);font-size:clamp(30px,4.4vw,46px);line-height:1.14;font-weight:700;letter-spacing:-.01em}
+.standfirst{font-size:18.5px;color:var(--ink-soft);margin-top:16px;line-height:1.55;font-weight:400}
+.meta{display:flex;align-items:center;gap:16px;margin-top:28px;padding-top:22px;border-top:1px solid var(--line-ink);flex-wrap:wrap}
+.meta__av{width:52px;height:52px;border-radius:50%;overflow:hidden;flex-shrink:0}
+.meta__av img{width:100%;height:100%;object-fit:cover}
+.meta b{font-size:14.5px;font-weight:600;display:block}
+.meta small{font-size:12.5px;color:var(--ink-soft)}
+.meta .when{margin-left:auto;text-align:right;font-size:12.5px;color:var(--ink-3)}
+.share{display:flex;gap:8px}
+.share button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line-ink);background:#fff;font-size:14px;color:var(--ink-soft);transition:all .15s}
+.share button:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* imagem hero */
+.aimg{border-radius:16px;background:linear-gradient(130deg,var(--navy-800),var(--blue) 75%,var(--cyan));aspect-ratio:21/9;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:20px;margin:10px 0 44px}
+.aimg::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.15) 1px,transparent 1px);background-size:26px 26px}
+.aimg--ph{background-size:cover !important;background-position:center 32%}
+.aimg--ph::before{display:none}
+.aimg--ph span{background:rgba(5,15,38,.65);padding:5px 10px;border-radius:6px}
+.aimg span{position:relative;font-size:11px;color:#C7E4FF;letter-spacing:.1em;font-weight:600}
+
+/* corpo do artigo */
+.abody{font-family:var(--serif);font-size:18.5px;line-height:1.8;color:#1C2C52}
+.abody p{margin-bottom:26px}
+.abody p:first-of-type::first-letter{font-size:58px;font-weight:700;float:left;line-height:.85;margin:6px 12px 0 0;color:var(--blue)}
+.abody h2{font-family:var(--sans);font-size:23px;font-weight:700;color:var(--ink);letter-spacing:-.01em;margin:40px 0 16px}
+.abody b{color:var(--ink)}
+.abody ul{margin:0 0 26px 22px}
+.abody li{margin-bottom:10px}
+.pull{font-size:24px;line-height:1.5;font-weight:600;color:var(--ink);border-left:4px solid var(--green-dark);padding:6px 0 6px 26px;margin:36px 0}
+.databox{font-family:var(--sans);background:var(--paper-2);border:1px solid var(--line-ink);border-radius:14px;padding:24px 26px;margin:36px 0}
+.databox h3{font-size:11px;letter-spacing:.18em;color:var(--blue);font-weight:700;margin-bottom:14px}
+.databox .row{display:flex;justify-content:space-between;gap:14px;font-size:14px;padding:9px 0;border-top:1px solid var(--line-ink)}
+.databox .row:first-of-type{border-top:0}
+.databox .row b{font-weight:700}
+.databox small{display:block;font-size:11px;color:var(--ink-3);margin-top:12px}
+
+/* CTA newsletter no corpo */
+.inline-nl{font-family:var(--sans);background:var(--navy-900);color:#fff;border-radius:14px;padding:26px 28px;margin:40px 0;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.inline-nl b{font-size:15px;display:block}
+.inline-nl small{color:#C7D6F4;font-size:12.5px}
+.inline-nl form{display:flex;gap:8px;flex:1;min-width:260px}
+.inline-nl input{flex:1;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.25);border-radius:9px;padding:11px 13px;color:#fff;font-family:var(--sans);font-size:13px}
+.inline-nl input::placeholder{color:#8FA5D0}
+
+/* tags */
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:40px 0}
+.tags a{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--blue);border:1px solid rgba(30,107,242,.3);border-radius:999px;padding:7px 15px}
+.tags a:hover{background:rgba(30,107,242,.06)}
+
+/* autor */
+.author{font-family:var(--sans);background:var(--paper-2);border:1px solid var(--line-ink);border-radius:16px;padding:28px;display:flex;gap:20px;align-items:center;margin:10px 0 50px}
+.author img{width:76px;height:76px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.author h3{font-size:16px;font-weight:600}
+.author p{font-size:13px;color:var(--ink-soft);margin:4px 0 8px}
+.author a{font-size:13px;font-weight:600;color:var(--blue)}
+
+/* relacionadas */
+.rel{background:var(--paper-2);padding:64px 0;border-top:1px solid var(--line-ink)}
+.kicker{font-size:11.5px;font-weight:600;letter-spacing:.2em;color:var(--blue);display:block;margin-bottom:10px}
+.rel h2{font-size:24px;font-weight:700;margin-bottom:28px}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rcard{background:#fff;border:1px solid var(--line-ink);border-radius:14px;overflow:hidden;transition:transform .15s,box-shadow .15s;display:flex;flex-direction:column}
+.rcard:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(11,27,58,.09)}
+.rcard .m{height:110px;background:linear-gradient(120deg,#0A3D63,var(--cyan));position:relative}
+.rcard .m.v2{background:linear-gradient(120deg,#123067,var(--green-dark))}
+.rcard .m.v3{background:linear-gradient(120deg,var(--navy-800),var(--blue))}
+.rcard .m--ph{background-size:cover !important;background-position:center}
+.rcard .m i{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.93);color:var(--navy-900);font-style:normal;font-size:9.5px;font-weight:700;letter-spacing:.12em;padding:4px 9px;border-radius:5px;z-index:1}
+.rcard .b{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.rcard h3{font-family:var(--serif);font-size:16.5px;line-height:1.3;font-weight:700}
+.rcard small{margin-top:auto;font-size:11.5px;color:var(--ink-3)}
+
+footer{background:var(--navy-900);color:#8FA5D0;padding:40px 0 30px}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px}
+.foot b{color:#C7D6F4;font-weight:500}
+
+@media(max-width:900px){
+  .nav__links{display:none}
+  .rgrid{grid-template-columns:1fr}
+  .meta .when{margin-left:0;text-align:left;width:100%}
+  .abody{font-size:17px}
+}
+/* ── mobile fino ── */
+html,body{overflow-x:hidden}
+@media(max-width:560px){
+  .wrap{padding:0 20px}
+  .ahead{padding:40px 0 26px}
+  .ahead h1{font-size:27px}
+  .standfirst{font-size:16px}
+  .abody{font-size:16.5px}
+  .abody p:first-of-type::first-letter{font-size:44px}
+  .pull{font-size:19px;padding-left:18px}
+  .databox{padding:18px}
+  .databox .row{flex-wrap:wrap;gap:6px}
+  .inline-nl{padding:20px}
+  .author{flex-direction:column;text-align:center;padding:22px}
+  .aimg{aspect-ratio:16/10}
+  .rel{padding:48px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="prog"></div>
+<div class="proto-badge">Protótipo Selo7 · dados ilustrativos</div>
+
+<nav class="nav">
+  <div class="wrap nav__in">
+    <a class="nav__logo" href="prototipo-home.html"><img src="assets/logo-branca.webp" alt="Pagos"></a>
+    <div class="nav__links">
+      <a href="prototipo-home.html">A Pagos</a><a href="prototipo-publicacoes.html">Publicações</a><a href="prototipo-home.html#eventos">Eventos</a><a href="prototipo-home.html#conteudo" style="color:#fff">Conteúdo</a><a href="#">Fale Conosco</a>
+    </div>
+    <button class="btn btn--green">Seja associado</button>
+  </div>
+</nav>
+
+<!-- CABEÇALHO DO ARTIGO -->
+<header class="ahead">
+  <div class="wrap wrap--read">
+    <span class="crumb"><a href="prototipo-home.html">Home</a> / <a href="prototipo-home.html#conteudo">Conteúdo</a> / Regulação</span>
+    <span class="cat">REGULAÇÃO</span>
+    <h1>Pix Automático muda a régua da recorrência no varejo</h1>
+    <p class="standfirst">Assinaturas, mensalidades e cobrança recorrente entram em nova fase com a agenda do Banco Central — e a conta muda mais para o facilitador do que para o banco. O que os associados precisam decidir ainda neste semestre.</p>
+    <div class="meta">
+      <div class="meta__av"><img src="assets/daniel.webp" alt="Daniel Nery"></div>
+      <div>
+        <b>Daniel Nery</b>
+        <small>VP Facilitadores de Pagamentos · Associação Pagos</small>
+      </div>
+      <div class="when">
+        16 jul 2026, 09h40<br>6 min de leitura
+      </div>
+      <div class="share">
+        <button title="Compartilhar no LinkedIn" aria-label="LinkedIn">in</button>
+        <button title="Compartilhar no WhatsApp" aria-label="WhatsApp">✆</button>
+        <button title="Copiar link" aria-label="Copiar link">⧉</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap wrap--read">
+  <div class="aimg aimg--ph" style="background-image:url('assets/foto-noticia.webp')"><span>FOTO · GERADA NO PAINEL COM IA</span></div>
+</div>
+
+<!-- CORPO -->
+<article class="wrap wrap--read abody">
+  <p>Quem opera cobrança recorrente sabe: o problema nunca foi cobrar, foi prever. O cartão resolve a previsibilidade com um custo que o lojista conhece de cor; o boleto resolve o custo criando inadimplência. O Pix Automático chega prometendo o melhor dos dois mundos — e é exatamente por isso que ele muda a régua de todo o mercado de recorrência.</p>
+  <p>O comunicado do Banco Central da semana passada encerrou a fase de testes e colocou datas na mesa. A partir daí, a conversa deixou de ser técnica e virou comercial: <b>quem captura a recorrência captura o cliente</b> — e o cliente de recorrência é o mais fiel que existe no varejo.</p>
+
+  <div class="pull">"O facilitador que tratar o Pix Automático como uma tarifa a menos vai perder a discussão. Isso não é preço — é produto."</div>
+
+  <h2>O que muda na prática</h2>
+  <p>Para os associados da Pagos, três frentes exigem decisão ainda neste semestre:</p>
+  <ul>
+    <li><b>Grade de produto:</b> a recorrência via Pix precisa nascer integrada à esteira atual — split, conciliação e antecipação inclusos — ou vira produto de segunda classe;</li>
+    <li><b>Precificação:</b> a régua de comparação do lojista será o MDR do cartão. A margem está na gestão do fluxo, não na transação;</li>
+    <li><b>Experiência de autorização:</b> o mandato de consentimento é o novo checkout. Quem simplificar o opt-in do pagador leva a base.</li>
+  </ul>
+
+  <div class="databox">
+    <h3>OS NÚMEROS DA RECORRÊNCIA</h3>
+    <div class="row"><span>Participação de cobranças recorrentes no faturamento do varejo de serviços</span><b>~31%</b></div>
+    <div class="row"><span>Custo médio de aceitação em cartão (crédito, recorrente)</span><b>2,9%</b></div>
+    <div class="row"><span>Inadimplência média do boleto em assinaturas</span><b>12–18%</b></div>
+    <small>Dados ilustrativos para o protótipo. No site final: dados do Panorama Pagos e do futuro Índice de Custo de Aceitação, com fonte e data.</small>
+  </div>
+
+  <h2>Onde a Pagos entra</h2>
+  <p>A associação levará ao Banco Central, na consulta que abre em agosto, a posição construída no nosso grupo de trabalho: interoperabilidade plena dos mandatos entre instituições e regras de portabilidade que não travem a competição. A defesa é simples — <b>recorrência boa é recorrência que o pagador controla e o mercado inteiro consegue operar</b>.</p>
+
+  <div class="inline-nl">
+    <div>
+      <b>Recebeu esta análise de alguém?</b>
+      <small>Assine o PAGOS Conecta — toda terça, 7h, no seu e-mail.</small>
+    </div>
+    <form onsubmit="event.preventDefault();this.innerHTML='<b style=\'color:var(--green)\'>✓ Bem-vindo ao Conecta!</b>'">
+      <input type="email" placeholder="Seu melhor e-mail" required>
+      <button class="btn btn--green" type="submit">Assinar</button>
+    </form>
+  </div>
+
+  <p>O semestre vai separar quem viu o Pix Automático como ameaça de quem viu como o maior redesenho de receita desde a abertura da adquirência. Da parte da Pagos, seguimos do lado de quem constrói — e o convite para essa construção está aberto a todos os associados no GT de Facilitadores.</p>
+
+  <div class="tags">
+    <a href="#">#PixAutomático</a><a href="#">#Recorrência</a><a href="#">#Regulação</a><a href="#">#Facilitadores</a><a href="#">#BancoCentral</a>
+  </div>
+
+  <div class="author">
+    <img src="assets/daniel.webp" alt="Daniel Nery">
+    <div>
+      <h3>Daniel Nery</h3>
+      <p>VP Facilitadores de Pagamentos da Associação Pagos. Atua há mais de 15 anos no mercado de meios de pagamento, com passagens por adquirência e subadquirência.</p>
+      <a href="#">Todos os 6 artigos de Daniel Nery →</a>
+    </div>
+  </div>
+</article>
+
+<!-- RELACIONADAS -->
+<section class="rel">
+  <div class="wrap">
+    <span class="kicker">CONTINUE LENDO</span>
+    <h2>Relacionadas</h2>
+    <div class="rgrid">
+      <a class="rcard" href="#">
+        <div class="m m--ph" style="background-image:url('assets/foto-cartoes.webp')"><i>EMISSÃO</i></div>
+        <div class="b"><h3>Pré-pagos: o que a revisão do interchange significa para emissores</h3><small>Valéria Carrete · 15 jul 2026</small></div>
+      </a>
+      <a class="rcard" href="#">
+        <div class="m m--ph" style="background-image:url('assets/foto-tokens.webp')"><i>TOKENIZAÇÃO</i></div>
+        <div class="b"><h3>Tokens de recebíveis saem do piloto — e o mercado precisa de trilhos</h3><small>Luiz Carlos Pereira · 14 jul 2026</small></div>
+      </a>
+      <a class="rcard" href="#">
+        <div class="m m--ph" style="background-image:url('assets/foto-evento.webp')"><i>REGULAÇÃO</i></div>
+        <div class="b"><h3>O que as arquitetas dos pagamentos nos ensinaram sobre o futuro do setor</h3><small>Valéria Carrete · 29 mai 2026</small></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Associação Pagos · pagos.org.br</span>
+    <span>Tecnologia e comunicação: <b>Selo7</b></span>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+},{passive:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<script>/* acesso reservado - Selo7 */(function(){try{var t=localStorage.getItem("s7p_pagos_ok");if(t&&(Date.now()-parseInt(t,10))<60*864e5)return;var p=location.pathname.split("/").pop();if(/^[a-z0-9-]+\.html$/.test(p))localStorage.setItem("s7p_pagos_next",p);location.replace("./")}catch(e){}})();</script>
+<title>Guia de Acessos · O que a Selo7 precisa da Pagos · PAGOS 2.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@page{size:A4;margin:15mm 14mm}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',system-ui,sans-serif;color:#0B1B3A;font-size:9.5pt;line-height:1.5;background:#fff}
+.page{max-width:182mm;margin:0 auto;padding:8mm 0}
+header.doc{border-bottom:3px solid #1E6BF2;padding-bottom:12px;margin-bottom:14px}
+header.doc h1{font-size:15pt;font-weight:700}
+header.doc .sub{color:#44557A;font-size:9pt;margin-top:3px}
+.intro{background:#F4F8FE;border-left:3px solid #1E6BF2;padding:10px 14px;font-size:9pt;margin-bottom:16px;border-radius:0 6px 6px 0}
+h2{font-size:11pt;font-weight:700;margin:16px 0 7px;display:flex;align-items:center;gap:8px}
+h2 .n{background:#1E6BF2;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9pt;flex-shrink:0}
+table{width:100%;border-collapse:collapse;margin-bottom:8px;font-size:8.7pt}
+th{background:#0B1B3A;color:#fff;padding:6px 8px;text-align:left;font-weight:600;font-size:8pt}
+td{padding:6px 8px;border-bottom:1px solid #E4EAF4;vertical-align:top}
+.who{font-size:7.5pt;font-weight:700;padding:2px 7px;border-radius:99px;white-space:nowrap}
+.who.p{background:#E7F0FF;color:#1E6BF2}
+.who.s{background:#EAF6F0;color:#0FBF7E}
+.chk{width:14px;height:14px;border:1.5px solid #7A89A8;border-radius:3px;display:inline-block}
+.tip{font-size:8pt;color:#44557A;font-style:italic;margin:2px 0 12px}
+footer.doc{margin-top:20px;padding-top:8px;border-top:1px solid #DCE4F2;font-size:8pt;color:#7A89A8;display:flex;justify-content:space-between}
+.legend{font-size:8pt;color:#44557A;margin-bottom:14px}
+.legend b.p{color:#1E6BF2}.legend b.s{color:#0FBF7E}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="doc">
+  <h1>Guia de Acessos · PAGOS 2.0</h1>
+  <div class="sub">Tudo que a Selo7 precisa receber da Pagos para colocar a máquina no ar</div>
+</header>
+
+<div class="intro">Este guia lista contas, acessos e materiais necessários. <b>Regra de ouro:</b> todas as contas de ferramenta são abertas no CNPJ e no e-mail institucional da Pagos — a Selo7 configura tudo, mas a propriedade e a titularidade são sempre da associação. Nenhuma senha deve ser enviada por e-mail ou mensagem: use um cofre de senhas compartilhado (ex.: Bitwarden, 1Password) ou o recurso de "convidar por e-mail" de cada plataforma.</div>
+
+<div class="legend">Responsável por prover: <b class="p">P</b> = Pagos abre/fornece &nbsp;·&nbsp; <b class="s">S</b> = Selo7 configura depois de receber o acesso.</div>
+
+<h2><span class="n">1</span> Infraestrutura técnica (contas no CNPJ da Pagos)</h2>
+<table>
+<tr><th style="width:22%">Item</th><th style="width:9%">Prover</th><th>O que fazer</th><th style="width:8%">OK</th></tr>
+<tr><td><b>Hospedagem (Vercel)</b></td><td><span class="who p">Pagos</span></td><td>Criar conta com e-mail institucional e convidar a Selo7 como membro do time. Plano inicial gratuito; upgrade conforme necessidade.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>Banco de dados (Neon Postgres)</b></td><td><span class="who p">Pagos</span></td><td>Criar projeto e conceder acesso à Selo7. As strings de conexão ficam guardadas no cofre.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>Armazenamento de mídia</b></td><td><span class="who s">Selo7</span></td><td>Configurado dentro da hospedagem, após o acesso do item acima.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>API de IA de texto (Anthropic)</b></td><td><span class="who p">Pagos</span></td><td>Criar conta, adicionar cartão corporativo e gerar a chave de API. Definir limite de gasto mensal.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>API de IA de imagem</b></td><td><span class="who p">Pagos</span></td><td>Criar conta com billing ativo e gerar a chave. Usada para artes e capas.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>E-mail transacional (envio de relatórios/newsletter)</b></td><td><span class="who p">Pagos</span></td><td>Conta em serviço de e-mail (ex.: Resend/SendGrid) para os relatórios em PDF e a newsletter.</td><td><span class="chk"></span></td></tr>
+</table>
+<p class="tip">Estimativa de custo mensal somado destas ferramentas: R$ 250 a R$ 700, conforme o volume de uso de IA. Documentado em detalhe na entrega.</p>
+
+<h2><span class="n">2</span> Domínio e DNS</h2>
+<table>
+<tr><th style="width:22%">Item</th><th style="width:9%">Prover</th><th>O que fazer</th><th style="width:8%">OK</th></tr>
+<tr><td><b>Domínio pagos.org.br</b></td><td><span class="who p">Pagos</span></td><td>Acesso ao painel do registrador (Registro.br ou onde estiver) para apontar o DNS. Confirmar quem é o titular e tem o login.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>Configuração de DNS</b></td><td><span class="who s">Selo7</span></td><td>Apontar o domínio para a nova hospedagem, sem derrubar o site atual até a virada.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>E-mails @pagos.org.br</b></td><td><span class="who p">Pagos</span></td><td>Confirmar onde os e-mails são hospedados, para não haver interrupção ao mexer no DNS.</td><td><span class="chk"></span></td></tr>
+</table>
+
+<h2><span class="n">3</span> Site atual (para a migração)</h2>
+<table>
+<tr><th style="width:22%">Item</th><th style="width:9%">Prover</th><th>O que fazer</th><th style="width:8%">OK</th></tr>
+<tr><td><b>Acesso ao WordPress atual</b></td><td><span class="who p">Pagos</span></td><td>Login de administrador (ou exportação do conteúdo) para extrair posts, páginas, edições e mídias.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>Acervo de publicações</b></td><td><span class="who p">Pagos</span></td><td>PDFs das edições do e-Magazine e do Panorama Econômico que devem entrar no novo acervo.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>Base de associados atual</b></td><td><span class="who p">Pagos</span></td><td>Lista de associados e planos (planilha), para a página "Associe-se" e a vitrine.</td><td><span class="chk"></span></td></tr>
+</table>
+
+<h2><span class="n">4</span> Redes sociais</h2>
+<table>
+<tr><th style="width:22%">Item</th><th style="width:9%">Prover</th><th>O que fazer</th><th style="width:8%">OK</th></tr>
+<tr><td><b>Página da Pagos no LinkedIn</b></td><td><span class="who p">Pagos</span></td><td>Adicionar a Selo7 como administrador da Company Page (para configurar o publicador/agendador).</td><td><span class="chk"></span></td></tr>
+<tr><td><b>App do LinkedIn (integração)</b></td><td><span class="who s">Selo7</span></td><td>Criar e autorizar o app de publicação usando a conta da Pagos.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>Instagram Business + Página do Facebook</b></td><td><span class="who p">Pagos</span></td><td>Conta Business vinculada a uma Página do Facebook (pré-requisito da Meta para publicação via API, quando aprovada).</td><td><span class="chk"></span></td></tr>
+<tr><td><b>Acesso ao Google Analytics (se houver)</b></td><td><span class="who p">Pagos</span></td><td>Conceder acesso ao GA4 atual, se existir, para consolidar dados históricos.</td><td><span class="chk"></span></td></tr>
+</table>
+
+<h2><span class="n">5</span> Marca e conteúdo</h2>
+<table>
+<tr><th style="width:22%">Item</th><th style="width:9%">Prover</th><th>O que fazer</th><th style="width:8%">OK</th></tr>
+<tr><td><b>Identidade visual</b></td><td><span class="who p">Pagos</span></td><td>Logos em alta (já recebidos), manual de marca se houver, e a fonte oficial, se licenciada.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>Fotos da diretoria e de eventos</b></td><td><span class="who p">Pagos</span></td><td>Fotos oficiais (já recebidas as da diretoria) e o acervo de fotos/vídeos dos eventos para as galerias.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>Amostras de voz por diretor</b></td><td><span class="who p">Pagos</span></td><td>De cada diretor que vai assinar conteúdo: 1 áudio explicando um tema técnico + 1 texto escrito por ele. Base para calibrar a IA.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>Textos institucionais</b></td><td><span class="who p">Pagos</span></td><td>Missão, histórico, mini-currículo dos diretores, descrição dos associados para a vitrine.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>Logos dos associados e parceiros</b></td><td><span class="who p">Pagos</span></td><td>Arquivos em alta (já recebidos), com nome e uma linha sobre cada empresa.</td><td><span class="chk"></span></td></tr>
+</table>
+
+<h2><span class="n">6</span> Gestão do projeto</h2>
+<table>
+<tr><th style="width:22%">Item</th><th style="width:9%">Prover</th><th>O que fazer</th><th style="width:8%">OK</th></tr>
+<tr><td><b>Ponto focal único</b></td><td><span class="who p">Pagos</span></td><td>Uma pessoa responsável por aprovações e envio de insumos, com retorno em até 3 dias úteis.</td><td><span class="chk"></span></td></tr>
+<tr><td><b>Cofre de senhas compartilhado</b></td><td><span class="who s">Selo7</span></td><td>Selo7 sugere e configura; Pagos guarda as chaves-mestras. Nada de senha solta em chat.</td><td><span class="chk"></span></td></tr>
+</table>
+
+<footer class="doc">
+  <span>Selo7 · Tecnologia e Comunicação · brunobrm@gmail.com</span>
+  <span>Guia de Acessos PAGOS 2.0 · julho/2026 · Anexo II do contrato</span>
+</footer>
+
+</div>
+</body>
+</html>

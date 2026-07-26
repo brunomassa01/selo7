@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<script>/* acesso reservado - Selo7 */(function(){try{var t=localStorage.getItem("s7p_pagos_ok");if(t&&(Date.now()-parseInt(t,10))<60*864e5)return;var p=location.pathname.split("/").pop();if(/^[a-z0-9-]+\.html$/.test(p))localStorage.setItem("s7p_pagos_next",p);location.replace("./")}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publicações — PAGOS · e-Magazine, Panorama e estudos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-950:#050F26; --navy-900:#081735; --navy-800:#0D2350;
+  --blue:#1E6BF2; --cyan:#35C7F0; --green:#2BE39B; --green-dark:#0FBF7E;
+  --paper:#F4F8FE; --ink:#0B1B3A; --ink-soft:#44557A;
+  --line:rgba(255,255,255,.09); --line-ink:rgba(11,27,58,.1);
+  --sans:'Poppins',system-ui,sans-serif; --serif:'Source Serif 4',Georgia,serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:16px;line-height:1.6}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+button{font-family:var(--sans);cursor:pointer}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.proto-badge{position:fixed;bottom:16px;left:16px;z-index:99;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.06em;padding:7px 12px;border-radius:999px;opacity:.85}
+
+.nav{background:var(--navy-900);position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;gap:36px;height:72px}
+.nav__logo img{height:34px;display:block}
+.nav__links{display:flex;gap:30px;margin-left:auto}
+.nav__links a{color:#C7D6F4;font-size:14.5px;font-weight:500}
+.nav__links a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:14px;border-radius:10px;padding:11px 20px;border:0;transition:transform .15s,box-shadow .15s}
+.btn--green{background:var(--green);color:#04351F}
+.btn--green:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(43,227,155,.35)}
+.btn--blue{background:var(--blue);color:#fff}
+.btn--ghost-d{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.btn--ghost{background:transparent;color:var(--blue);border:1.5px solid rgba(30,107,242,.4)}
+
+/* simulador de login (demo) */
+.demo-auth{position:fixed;bottom:16px;right:16px;z-index:99;background:#fff;border:1px solid var(--line-ink);box-shadow:0 10px 30px rgba(11,27,58,.15);border-radius:12px;padding:12px 14px;font-size:12px;display:flex;align-items:center;gap:10px}
+.demo-auth b{font-size:11px;letter-spacing:.08em;color:var(--ink-soft)}
+.demo-auth button{border:0;border-radius:8px;padding:8px 13px;font-size:12px;font-weight:600;background:var(--blue);color:#fff}
+body.auth .demo-auth button{background:#B4432F}
+
+/* header */
+.phead{background:radial-gradient(900px 420px at 80% 0%,#123067,var(--navy-900) 60%,var(--navy-950));color:#fff;padding:56px 0 44px}
+.kicker{font-size:11.5px;font-weight:600;letter-spacing:.2em;color:var(--green);display:block;margin-bottom:10px}
+.phead h1{font-size:clamp(32px,4vw,46px);font-weight:700;letter-spacing:-.015em}
+.phead p{color:#C7D6F4;font-size:16px;margin-top:10px;max-width:58ch}
+.ptabs{display:flex;gap:8px;margin-top:30px;flex-wrap:wrap}
+.ptabs a{font-size:13px;font-weight:600;padding:9px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.25);color:#C7D6F4}
+.ptabs a.on{background:var(--green);border-color:var(--green);color:#04351F}
+
+.sec{padding:64px 0}
+.sec h2{font-size:25px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+.sec .sub{color:var(--ink-soft);font-size:14.5px;margin-bottom:30px}
+.kicker--ink{color:var(--blue)}
+
+/* edição do mês (embargo) */
+.month{background:var(--navy-900);border-radius:20px;color:#fff;padding:44px;display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center;position:relative;overflow:hidden}
+.month::before{content:"";position:absolute;left:-60px;bottom:-90px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(43,227,155,.25),transparent 70%)}
+.mcover{width:158px;aspect-ratio:3/4;border-radius:10px;background:linear-gradient(160deg,#0FBF7E,#0A2458 75%);box-shadow:0 24px 50px rgba(0,0,0,.45);padding:16px;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:1}
+body:not(.auth) .mcover .mtitle{filter:blur(5px)}
+.mcover .msub{font-size:9.5px;color:#B9F5DC;letter-spacing:.14em}
+.mcover .mtitle{font-weight:700;font-size:16px;line-height:1.25;transition:filter .3s}
+.lock{display:inline-flex;align-items:center;gap:8px;background:rgba(43,227,155,.13);border:1px solid rgba(43,227,155,.45);color:var(--green);font-size:10.5px;font-weight:700;letter-spacing:.12em;padding:6px 13px;border-radius:999px;margin-bottom:14px}
+.month h2{font-size:24px;font-weight:700}
+.month p{color:#C7D6F4;font-size:14px;margin-top:8px;max-width:46ch}
+.month .zone{position:relative;z-index:1;display:flex;flex-direction:column;gap:10px;min-width:250px}
+.month .note{font-size:11.5px;color:#8FA5D0}
+body.auth .only-guest{display:none}
+body:not(.auth) .only-auth{display:none}
+
+/* leitor no ar */
+.reader{background:var(--navy-950);border-radius:20px;padding:26px;color:#fff}
+.reader__bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0 6px 16px;flex-wrap:wrap}
+.reader__bar b{font-size:14px;font-weight:600}
+.reader__bar small{color:#8FA5D0;font-size:12px}
+.reader__ctrl{display:flex;gap:8px;align-items:center}
+.reader__ctrl button{background:rgba(255,255,255,.09);border:1px solid var(--line);color:#fff;border-radius:8px;padding:8px 13px;font-size:13px}
+.reader__ctrl .pg{font-size:12px;color:#C7D6F4;min-width:86px;text-align:center}
+.pagev{background:#fff;color:var(--ink);border-radius:10px;aspect-ratio:16/9.6;max-height:540px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.pg-l,.pg-r{padding:38px 40px;position:relative}
+.pg-l{border-right:1px solid var(--line-ink)}
+.pagev .folio{position:absolute;bottom:16px;font-size:10px;color:var(--ink-soft);letter-spacing:.1em}
+.pg-l .folio{left:40px}.pg-r .folio{right:40px}
+.pagev h3{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1.25;margin-bottom:12px}
+.pagev .rub{font-size:10px;letter-spacing:.2em;color:var(--green-dark);font-weight:700;margin-bottom:10px;display:block}
+.pagev p{font-size:12px;color:#3A4C74;margin-bottom:10px;line-height:1.7}
+.pagev .ph{background:linear-gradient(140deg,var(--navy-800),var(--blue));border-radius:8px;height:120px;margin-bottom:14px;display:flex;align-items:flex-end;padding:10px}
+.pagev .ph span{font-size:9px;color:#C7E4FF;letter-spacing:.1em;font-weight:600}
+.pagev .quote{font-family:var(--serif);font-size:15px;color:var(--ink);border-left:3px solid var(--green-dark);padding-left:14px;margin:14px 0}
+.reader__note{text-align:center;font-size:12px;color:#8FA5D0;padding-top:14px}
+
+/* área de download */
+.dl{display:grid;grid-template-columns:1fr;gap:0;background:#fff;border:1px solid var(--line-ink);border-radius:16px;overflow:hidden}
+.dl__row{display:flex;align-items:center;gap:18px;padding:18px 24px;border-top:1px solid var(--line-ink)}
+.dl__row:first-child{border-top:0}
+.dl__cvr{width:40px;height:53px;border-radius:5px;flex-shrink:0;background:linear-gradient(160deg,var(--blue),#0A2458)}
+.dl__cvr.g{background:linear-gradient(160deg,var(--green-dark),#0A2458)}
+.dl__cvr.c{background:linear-gradient(160deg,var(--cyan),#0A2458)}
+.dl__row b{font-size:14px;font-weight:600;display:block}
+.dl__row small{font-size:12px;color:var(--ink-soft)}
+.dl__act{margin-left:auto;display:flex;gap:8px;align-items:center}
+.badge-lock{font-size:10px;font-weight:700;letter-spacing:.1em;color:#8A5A00;background:rgba(245,192,68,.18);padding:5px 10px;border-radius:6px;white-space:nowrap}
+.badge-open{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--green-dark);background:rgba(15,191,126,.12);padding:5px 10px;border-radius:6px}
+body:not(.auth) .dl .btn--dl{display:none}
+body.auth .dl .badge-lock,body.auth .dl .gate{display:none}
+.btn--dl{background:var(--blue);color:#fff;font-size:12.5px;padding:9px 15px}
+.gate{font-size:12px;color:var(--blue);font-weight:600;white-space:nowrap}
+.dl-note{font-size:12.5px;color:var(--ink-soft);margin-top:14px}
+.dl-note b{color:var(--ink)}
+
+/* acervo */
+.arch{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.ed{background:#fff;border:1px solid var(--line-ink);border-radius:14px;overflow:hidden;transition:transform .15s,box-shadow .15s}
+.ed:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(11,27,58,.1)}
+.ed__cvr{aspect-ratio:3/2.1;background:linear-gradient(150deg,var(--navy-800),var(--blue));position:relative;padding:14px;display:flex;flex-direction:column;justify-content:space-between;color:#fff}
+.ed__cvr.v2{background:linear-gradient(150deg,#0A3D63,var(--cyan))}
+.ed__cvr.v3{background:linear-gradient(150deg,#123067,var(--green-dark))}
+.ed__cvr small{font-size:9px;letter-spacing:.16em;color:#C7E4FF;font-weight:600}
+.ed__cvr b{font-size:14px;font-weight:700;line-height:1.25}
+.ed__b{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--ink-soft)}
+.ed__b a{color:var(--blue);font-weight:600}
+
+footer{background:var(--navy-900);color:#8FA5D0;padding:40px 0 30px;margin-top:70px}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px}
+.foot b{color:#C7D6F4;font-weight:500}
+
+@media(max-width:900px){
+  .nav__links{display:none}
+  .month{grid-template-columns:1fr;padding:30px}
+  .mcover{display:none}
+  .pagev{grid-template-columns:1fr}
+  .pg-r{display:none}
+  .arch{grid-template-columns:1fr 1fr}
+  .dl__act{flex-direction:column;align-items:flex-end}
+}
+/* ── mobile fino ── */
+html,body{overflow-x:hidden}
+@media(max-width:560px){
+  .wrap{padding:0 20px}
+  .sec{padding:48px 0}
+  .phead{padding:40px 0 32px}
+  .phead h1{font-size:28px}
+  .ptabs a{font-size:12px;padding:8px 14px}
+  .month{padding:24px;gap:20px}
+  .month h2{font-size:20px}
+  .reader{padding:16px}
+  .reader__bar{gap:8px}
+  .pagev{max-height:none}
+  .pg-l{padding:24px 22px}
+  .dl__row{flex-wrap:wrap;gap:10px}
+  .dl__act{margin-left:0;width:100%;justify-content:flex-end;flex-direction:row;flex-wrap:wrap}
+  .arch{grid-template-columns:1fr}
+  .demo-auth{bottom:60px}
+}
+/* guias de clique (modo apresentação) */
+.demo-auth{animation:authglow 1.4s ease-in-out infinite}
+@keyframes authglow{0%,100%{box-shadow:0 10px 30px rgba(11,27,58,.15)}50%{box-shadow:0 0 0 5px rgba(43,227,155,.55),0 12px 34px rgba(43,227,155,.4)}}
+.chint{position:fixed;bottom:74px;right:16px;z-index:99;display:inline-flex;align-items:center;gap:6px;background:var(--green,#2BE39B);color:#04351F;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:999px;box-shadow:0 6px 22px rgba(43,227,155,.6);animation:chbob 1.3s ease-in-out infinite;pointer-events:none;white-space:nowrap}
+.chint::before{content:"👇";font-size:14px}
+@keyframes chbob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+body.guides-off .chint,body.guides-off .demo-auth{animation:none}
+body.guides-off .chint{display:none}
+.gtoggle{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:98;background:var(--navy-900,#081735);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:9px 18px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+</style>
+</head>
+<body>
+
+<div class="proto-badge">Protótipo Selo7 · dados ilustrativos</div>
+<div class="demo-auth"><b>DEMO · ÁREA LOGADA</b><button id="authbtn" onclick="document.body.classList.toggle('auth');this.textContent=document.body.classList.contains('auth')?'Sair da conta':'Simular login'">Simular login</button></div>
+<span class="chint">clique para virar associado</span>
+<button class="gtoggle" onclick="document.body.classList.toggle('guides-off');this.textContent=document.body.classList.contains('guides-off')?'💡 Mostrar guias':'🙈 Ocultar guias'">🙈 Ocultar guias</button>
+
+<nav class="nav">
+  <div class="wrap nav__in">
+    <a class="nav__logo" href="prototipo-home.html"><img src="assets/logo-branca.webp" alt="Pagos"></a>
+    <div class="nav__links">
+      <a href="prototipo-home.html">A Pagos</a><a href="#" style="color:#fff">Publicações</a><a href="prototipo-home.html#eventos">Eventos</a><a href="prototipo-home.html#conteudo">Conteúdo</a><a href="#">Fale Conosco</a>
+    </div>
+    <button class="btn btn--green">Seja associado</button>
+  </div>
+</nav>
+
+<header class="phead">
+  <div class="wrap">
+    <span class="kicker">O CONHECIMENTO DO SETOR, ORGANIZADO</span>
+    <h1>Publicações</h1>
+    <p>e-Magazine, Panorama Econômico, Radar e estudos — o acervo completo da Pagos, com leitura no ar e download para quem tem conta.</p>
+    <div class="ptabs">
+      <a href="#" class="on">e-Magazine</a><a href="#">Panorama Econômico</a><a href="#">PAGOS Radar</a><a href="#">Estudos e pesquisas</a><a href="#">Na mídia</a>
+    </div>
+  </div>
+</header>
+
+<!-- EDIÇÃO DO MÊS — EXCLUSIVA DE ASSOCIADOS -->
+<section class="sec">
+  <div class="wrap">
+    <div class="month">
+      <div class="mcover">
+        <div class="msub">PAGOS e-MAGAZINE · #44 · JULHO 2026</div>
+        <div class="mtitle">Facilitadores: consolidar ou especializar?</div>
+        <div class="msub">EDIÇÃO DO MÊS</div>
+      </div>
+      <div>
+        <span class="lock">🔒 EXCLUSIVA PARA ASSOCIADOS ATÉ 15/AGO</span>
+        <h2>Edição #44 — quem é associado lê primeiro</h2>
+        <p>A edição do mês circula com 30 dias de exclusividade para associados. Depois do embargo, entra no acervo aberto — e o mercado inteiro lê o que você leu um mês antes.</p>
+      </div>
+      <div class="zone">
+        <div class="only-guest">
+          <button class="btn btn--green" style="width:100%">Entrar na minha conta</button>
+          <button class="btn btn--ghost-d" style="width:100%;margin-top:10px">Quero ser associado</button>
+          <p class="note" style="margin-top:10px">Associado tem acesso imediato a esta e a todas as edições.</p>
+        </div>
+        <div class="only-auth">
+          <button class="btn btn--green" style="width:100%">📖 Ler a edição #44 agora</button>
+          <button class="btn btn--ghost-d" style="width:100%;margin-top:10px">⬇ Baixar PDF (35 págs)</button>
+          <p class="note" style="margin-top:10px">✓ Você está logado como associado Pleno.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEITOR NO AR -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <span class="kicker kicker--ink">LEIA SEM SAIR DO SITE</span>
+    <h2>e-Magazine #43 — edição aberta</h2>
+    <p class="sub">O leitor oficial da Pagos: folheie no navegador, no celular ou no tablet. Sem plugin, sem download obrigatório.</p>
+    <div class="reader">
+      <div class="reader__bar">
+        <div><b>PAGOS e-Magazine · Edição 43 · Junho 2026</b><br><small>35 páginas · publicada em 30/06/2026</small></div>
+        <div class="reader__ctrl">
+          <button onclick="pg(-1)" aria-label="Página anterior">←</button>
+          <span class="pg" id="pgind">págs. 12–13 de 35</span>
+          <button onclick="pg(1)" aria-label="Próxima página">→</button>
+          <button aria-label="Ampliar">⤢</button>
+        </div>
+      </div>
+      <div class="pagev" id="spread">
+        <div class="pg-l">
+          <span class="rub">CAPA · MERCADO</span>
+          <h3>O semestre que redesenhou os pagamentos</h3>
+          <p>Seis meses, três consultas públicas e um recorde de transações depois, o mercado brasileiro de pagamentos chega ao meio do ano com outra cara. O que era piloto virou infraestrutura; o que era promessa virou cobrança de resultado.</p>
+          <div class="quote">"O Brasil não discute mais se o dinheiro será digital. Discute quem vai operá-lo."</div>
+          <p>Nesta edição, a diretoria da Pagos analisa os movimentos do semestre e o que esperar até dezembro...</p>
+          <span class="folio">12 · PAGOS e-MAGAZINE</span>
+        </div>
+        <div class="pg-r">
+          <div class="ph"><span>FOTO · REUNIÃO MENSAL DE MAIO</span></div>
+          <span class="rub">ENTREVISTA</span>
+          <h3 style="font-size:17px">"Regulação boa é a que chega antes do problema"</h3>
+          <p>A VP de Regulatório e Compliance da Pagos recebe a redação para uma conversa sobre a agenda do BC, o custo da conformidade para instituições menores e o papel da associação nas consultas públicas do semestre.</p>
+          <span class="folio">EDIÇÃO 43 · 13</span>
+        </div>
+      </div>
+      <p class="reader__note">No site final: leitor com o PDF real da edição (flip de páginas, zoom, modo tela cheia) — cada leitura contando no analytics do Painel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ÁREA DE DOWNLOAD -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <span class="kicker kicker--ink">ACERVO PARA LEVAR</span>
+    <h2>Área de download</h2>
+    <p class="sub">Baixar em PDF é para quem tem conta — cada download identificado alimenta o relacionamento da Pagos com seu público. <b>Use o botão "Simular login" no canto da tela para ver a diferença.</b></p>
+    <div class="dl">
+      <div class="dl__row">
+        <div class="dl__cvr g"></div>
+        <div><b>e-Magazine #44 · Julho 2026</b><small>35 págs · edição do mês</small></div>
+        <div class="dl__act">
+          <span class="badge-lock">🔒 SÓ ASSOCIADOS ATÉ 15/AGO</span>
+          <button class="btn btn--dl">⬇ Baixar PDF</button>
+        </div>
+      </div>
+      <div class="dl__row">
+        <div class="dl__cvr"></div>
+        <div><b>e-Magazine #43 · Junho 2026</b><small>35 págs · aberta ao público</small></div>
+        <div class="dl__act">
+          <a class="gate" href="#">criar conta grátis para baixar →</a>
+          <button class="btn btn--dl">⬇ Baixar PDF</button>
+        </div>
+      </div>
+      <div class="dl__row">
+        <div class="dl__cvr c"></div>
+        <div><b>Panorama Econômico Pagos · Novembro 2025</b><small>análise mensal · <span class="badge-open">PUBLICAÇÃO REAL — ABRE O PDF OFICIAL</span></small></div>
+        <div class="dl__act">
+          <a class="gate" href="#">criar conta grátis para baixar →</a>
+          <a class="btn btn--dl" href="assets/Panorama-Economico-Pagos-NOVEMBRO-2025.pdf" target="_blank" rel="noopener">⬇ Baixar PDF</a>
+        </div>
+      </div>
+      <div class="dl__row">
+        <div class="dl__cvr g"></div>
+        <div><b>Estudo · O custo de aceitação no varejo brasileiro</b><small>28 págs · dados do simulador Pagos <span class="badge-open">AGREGADOS ABERTOS</span></small></div>
+        <div class="dl__act">
+          <a class="gate" href="#">criar conta grátis para baixar →</a>
+          <button class="btn btn--dl">⬇ Baixar PDF</button>
+        </div>
+      </div>
+    </div>
+    <p class="dl-note"><b>Como funciona:</b> visitante lê tudo no ar · conta gratuita baixa o acervo aberto (e entra no PAGOS Conecta) · <b>associado</b> baixa tudo, inclusive a edição do mês em primeira mão.</p>
+  </div>
+</section>
+
+<!-- ACERVO -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <span class="kicker kicker--ink">EDIÇÕES ANTERIORES</span>
+    <h2>Acervo e-Magazine</h2>
+    <p class="sub">Filtre por ano · ordene por mais lidas</p>
+    <div class="arch">
+      <div class="ed"><div class="ed__cvr"><small>EDIÇÃO 42 · MAIO</small><b>Arquitetas dos pagamentos</b></div><div class="ed__b"><span>2,1k leituras</span><a href="#">Ler no ar →</a></div></div>
+      <div class="ed"><div class="ed__cvr v2"><small>EDIÇÃO 41 · ABRIL</small><b>Pix Automático: o guia definitivo</b></div><div class="ed__b"><span>3,4k leituras</span><a href="#">Ler no ar →</a></div></div>
+      <div class="ed"><div class="ed__cvr v3"><small>EDIÇÃO 40 · MARÇO</small><b>Tokenização sai do papel</b></div><div class="ed__b"><span>1,8k leituras</span><a href="#">Ler no ar →</a></div></div>
+      <div class="ed"><div class="ed__cvr"><small>EDIÇÃO 39 · FEVEREIRO</small><b>O ano regulatório que vem aí</b></div><div class="ed__b"><span>2,7k leituras</span><a href="#">Ler no ar →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Associação Pagos · pagos.org.br</span>
+    <span>Tecnologia e comunicação: <b>Selo7</b></span>
+  </div>
+</footer>
+
+<script>
+const spreads=[
+  {ind:'págs. 12–13 de 35'},
+  {ind:'págs. 14–15 de 35'},
+  {ind:'págs. 10–11 de 35'}
+];
+let cur=0;
+function pg(d){
+  cur=(cur+d+spreads.length)%spreads.length;
+  document.getElementById('pgind').textContent=spreads[cur].ind;
+  const s=document.getElementById('spread');
+  s.style.opacity=0; setTimeout(()=>s.style.opacity=1,140);
+}
+document.getElementById('spread').style.transition='opacity .14s';
+</script>
+</body>
+</html>

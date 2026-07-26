@@ -3,3 +3,6 @@ projeto-selo7-ia/
 *.zip
 *.pdf
 README-CLAUDE.md
+
+# Exceção: materiais que fazem parte de propostas publicadas
+!propostas/**/*.pdf

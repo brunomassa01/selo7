@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<script>/* acesso reservado - Selo7 */(function(){try{var t=localStorage.getItem("s7p_pagos_ok");if(t&&(Date.now()-parseInt(t,10))<60*864e5)return;var p=location.pathname.split("/").pop();if(/^[a-z0-9-]+\.html$/.test(p))localStorage.setItem("s7p_pagos_next",p);location.replace("./")}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Pagos — CMS próprio (protótipo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080F1F; --panel:#0D1B36; --panel-2:#122347; --line:rgba(148,178,235,.14);
+  --ink:#EAF1FF; --ink-2:#9FB3DA; --ink-3:#66799F;
+  --blue:#1E6BF2; --cyan:#35C7F0; --green:#2BE39B; --amber:#F5C044;
+  --sans:'Poppins',system-ui,sans-serif; --serif:'Source Serif 4',Georgia,serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55;min-height:100vh}
+button{font-family:var(--sans);cursor:pointer}
+.proto-badge{position:fixed;bottom:14px;right:14px;z-index:99;background:#fff;color:#0B1B3A;font-size:11px;letter-spacing:.05em;padding:6px 12px;border-radius:999px;opacity:.9}
+
+.app{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
+
+/* sidebar */
+.side{background:var(--panel);border-right:1px solid var(--line);padding:22px 14px;display:flex;flex-direction:column;gap:4px}
+.side__logo{display:flex;align-items:center;gap:10px;padding:4px 10px 20px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.side__logo img{height:26px}
+.side__logo span{font-size:11px;color:var(--ink-3);letter-spacing:.12em;font-weight:600}
+.side a{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:9px;color:var(--ink-2);font-size:13.5px;font-weight:500;text-decoration:none;transition:background .15s,color .15s}
+.side a:hover{background:var(--panel-2);color:var(--ink)}
+.side a.on{background:var(--blue);color:#fff}
+.side a .ic{width:17px;text-align:center;opacity:.9}
+.side .grp{font-size:10.5px;letter-spacing:.14em;color:var(--ink-3);font-weight:600;padding:16px 12px 6px}
+.side .user{margin-top:auto;border-top:1px solid var(--line);padding-top:14px;display:flex;gap:10px;align-items:center}
+.uavatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(140deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px;color:#fff}
+.user small{color:var(--ink-3);display:block;font-size:11px}
+
+/* main */
+.main{padding:26px 32px;max-width:1160px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.top h1{font-size:20px;font-weight:600}
+.top p{color:var(--ink-2);font-size:13px}
+.tabs{display:flex;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:5px}
+.tabs button{background:transparent;border:0;color:var(--ink-2);font-size:13px;font-weight:500;padding:8px 16px;border-radius:8px}
+.tabs button.on{background:var(--blue);color:#fff}
+.view{display:none}.view.on{display:block}
+
+.grid{display:grid;grid-template-columns:1.5fr 1fr;gap:20px;align-items:start}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+.card h2{font-size:15px;font-weight:600;margin-bottom:4px}
+.card .sub{color:var(--ink-3);font-size:12px;margin-bottom:16px}
+
+/* estúdio: fluxo áudio → voz */
+.step{display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.step:first-of-type{border-top:0}
+.step__n{width:26px;height:26px;border-radius:50%;background:var(--panel-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--cyan);flex-shrink:0}
+.step__n.done{background:var(--green);border-color:var(--green);color:#04351F}
+.step h3{font-size:13.5px;font-weight:600}
+.step p{color:var(--ink-2);font-size:12.5px}
+.audio{margin-top:8px;display:flex;align-items:center;gap:10px;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:9px 13px;max-width:360px}
+.audio .play{width:26px;height:26px;border-radius:50%;background:var(--cyan);color:#04283A;border:0;font-size:11px}
+.wave{display:flex;gap:2.5px;align-items:center;height:20px;flex:1}
+.wave i{width:3px;border-radius:2px;background:var(--cyan);opacity:.75}
+.audio small{color:var(--ink-3)}
+.draft{margin-top:10px;background:var(--panel-2);border:1px solid var(--line);border-left:3px solid var(--green);border-radius:10px;padding:16px 18px}
+.draft .vtag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;color:var(--green);letter-spacing:.08em;margin-bottom:8px}
+.draft h4{font-family:var(--serif);font-size:17px;font-weight:600;margin-bottom:6px}
+.draft p{color:var(--ink-2);font-size:12.5px}
+.actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.btn{border:0;border-radius:9px;padding:10px 16px;font-size:13px;font-weight:600}
+.btn--green{background:var(--green);color:#04351F}
+.btn--blue{background:var(--blue);color:#fff}
+.btn--ghost{background:transparent;color:var(--ink-2);border:1px solid var(--line)}
+
+/* perfis de voz */
+.voice{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line)}
+.voice:first-of-type{border-top:0}
+.vavatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(140deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#fff;flex-shrink:0;overflow:hidden}
+.vavatar img{width:100%;height:100%;object-fit:cover}
+.voice b{font-size:13px;font-weight:600;display:block}
+.voice small{color:var(--ink-3);font-size:11.5px}
+.pill{margin-left:auto;font-size:10.5px;font-weight:600;padding:4px 10px;border-radius:999px;letter-spacing:.04em;white-space:nowrap}
+.pill--ok{background:rgba(43,227,155,.14);color:var(--green)}
+.pill--wait{background:rgba(245,192,68,.14);color:var(--amber)}
+
+/* calendário de redes */
+.week{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.day{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;min-height:190px}
+.day h3{font-size:11px;color:var(--ink-3);letter-spacing:.1em;font-weight:600;margin-bottom:10px}
+.post{border-radius:9px;padding:10px 11px;font-size:11.5px;margin-bottom:9px;background:var(--panel-2);border:1px solid var(--line)}
+.post b{display:block;font-size:12px;font-weight:600;margin-bottom:3px}
+.post .st{display:inline-flex;align-items:center;gap:5px;margin-top:7px;font-size:10px;font-weight:600;letter-spacing:.05em}
+.st i{width:7px;height:7px;border-radius:50%;display:inline-block}
+.st--pub{color:var(--green)}.st--pub i{background:var(--green)}
+.st--sch{color:var(--cyan)}.st--sch i{background:var(--cyan)}
+.st--dr{color:var(--amber)}.st--dr i{background:var(--amber)}
+.net{font-size:10px;color:var(--ink-3)}
+
+/* analytics */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+.tile small{color:var(--ink-3);font-size:11.5px;letter-spacing:.06em;font-weight:600;display:block;margin-bottom:8px}
+.tile b{font-size:28px;font-weight:700;letter-spacing:-.01em}
+.tile .delta{font-size:12px;color:var(--green);font-weight:600;margin-left:8px}
+.chart{height:150px;display:flex;align-items:flex-end;gap:10px;padding-top:10px}
+.bar{flex:1;background:var(--cyan);border-radius:4px 4px 0 0;position:relative;min-width:20px}
+.bar span{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--ink-2);font-weight:600}
+.xlab{display:flex;gap:10px;margin-top:8px}
+.xlab span{flex:1;text-align:center;font-size:10.5px;color:var(--ink-3)}
+.ai-box{background:linear-gradient(120deg,rgba(30,107,242,.16),rgba(43,227,155,.10));border:1px solid rgba(53,199,240,.3);border-radius:14px;padding:20px;margin-top:20px}
+.ai-box h3{font-size:13.5px;font-weight:600;color:var(--cyan);margin-bottom:8px}
+.ai-box p{color:var(--ink-2);font-size:13px}
+.report{display:flex;align-items:center;gap:12px;margin-top:20px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px;font-size:13px}
+.report .ok{color:var(--green);font-weight:600}
+
+@media(max-width:940px){
+  .app{grid-template-columns:1fr}.side{flex-direction:row;flex-wrap:wrap;position:static}
+  .side .user,.side .grp{display:none}
+  .grid{grid-template-columns:1fr}.tiles{grid-template-columns:repeat(2,1fr)}
+  .week{grid-template-columns:1fr 1fr}
+}
+/* ── mobile fino ── */
+html,body{overflow-x:hidden}
+@media(max-width:600px){
+  .main{padding:18px 16px}
+  .top{gap:10px}
+  .top h1{font-size:17px}
+  .tabs{width:100%;justify-content:space-between}
+  .tabs button{padding:8px 10px;font-size:12px;flex:1}
+  .side{padding:14px 10px;gap:2px}
+  .side a{padding:8px 10px;font-size:12.5px}
+  .side__logo{width:100%;border-bottom:0;margin-bottom:6px;padding-bottom:0}
+  .week{grid-template-columns:1fr}
+  .tiles{grid-template-columns:1fr 1fr;gap:10px}
+  .tile{padding:14px}
+  .tile b{font-size:22px}
+  .card{padding:16px}
+  .actions .btn{padding:9px 12px;font-size:12px}
+  .audio{max-width:100%}
+  .chart{gap:6px}
+}
+</style>
+</head>
+<body>
+<div class="proto-badge">Protótipo Selo7 · dados ilustrativos</div>
+<div class="app">
+
+  <aside class="side">
+    <div class="side__logo"><img src="assets/logo-branca.webp" alt="Pagos"><span>PAINEL</span></div>
+    <a href="#" class="on"><span class="ic">✦</span> Estúdio de conteúdo</a>
+    <a href="#"><span class="ic">📰</span> Blog e notícias</a>
+    <a href="#"><span class="ic">📄</span> Páginas e Home</a>
+    <a href="#"><span class="ic">📣</span> Redes sociais</a>
+    <a href="#"><span class="ic">🎙</span> Tom de voz</a>
+    <a href="#"><span class="ic">📊</span> Analytics</a>
+    <div class="grp">PUBLICAÇÕES</div>
+    <a href="#"><span class="ic">📖</span> e-Magazine</a>
+    <a href="#"><span class="ic">🗓</span> Eventos</a>
+    <a href="#"><span class="ic">✉️</span> Newsletter Conecta</a>
+    <div class="grp">SISTEMA</div>
+    <a href="#"><span class="ic">🖼</span> Mídia</a>
+    <a href="#"><span class="ic">⚙️</span> Usuários e configurações</a>
+    <div class="user"><div class="uavatar">EA</div><div><b style="font-size:12.5px">Ernesto A.</b><small>Editor · Pagos</small></div></div>
+  </aside>
+
+  <main class="main">
+    <div class="top">
+      <div>
+        <h1>Bom dia, Ernesto 👋</h1>
+        <p>2 rascunhos aguardando aprovação · próximo post agendado hoje, 18h (LinkedIn)</p>
+      </div>
+      <div class="tabs" role="tablist">
+        <button class="on" data-v="estudio" role="tab">Estúdio</button>
+        <button data-v="redes" role="tab">Redes sociais</button>
+        <button data-v="analytics" role="tab">Analytics</button>
+      </div>
+    </div>
+
+    <!-- ══ VIEW 1: ESTÚDIO ══ -->
+    <section class="view on" id="v-estudio">
+      <div class="grid">
+        <div class="card">
+          <h2>Nova publicação por áudio</h2>
+          <div class="sub">O diretor manda o áudio · a IA escreve na voz dele · você aprova e publica</div>
+
+          <div class="step">
+            <div class="step__n done">✓</div>
+            <div>
+              <h3>Áudio recebido — Daniel Nery, hoje 08h12</h3>
+              <div class="audio">
+                <button class="play">▶</button>
+                <div class="wave"><i style="height:6px"></i><i style="height:14px"></i><i style="height:9px"></i><i style="height:18px"></i><i style="height:11px"></i><i style="height:16px"></i><i style="height:7px"></i><i style="height:13px"></i><i style="height:17px"></i><i style="height:8px"></i><i style="height:12px"></i><i style="height:15px"></i><i style="height:6px"></i><i style="height:10px"></i></div>
+                <small>2:14</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step__n done">✓</div>
+            <div>
+              <h3>Transcrito e interpretado</h3>
+              <p>Tema identificado: Pix Automático e o impacto na recorrência. Referência citada: comunicado BC de 14/jul.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step__n done">✓</div>
+            <div style="flex:1">
+              <h3>Rascunho gerado na voz do autor</h3>
+              <div class="draft">
+                <span class="vtag">🎙 VOZ: DANIEL NERY · calibrada em 12/jul</span>
+                <h4>Pix Automático muda a régua da recorrência no varejo</h4>
+                <p>Quem opera cobrança recorrente sabe: o problema nunca foi cobrar, foi prever. Com o Pix Automático, a régua muda — e muda mais para o facilitador do que para o banco. Vou direto ao ponto que interessa aos nossos associados...</p>
+              </div>
+              <div class="actions">
+                <button class="btn btn--green">✓ Aprovar e publicar no site</button>
+                <button class="btn btn--blue">Agendar no LinkedIn →</button>
+                <button class="btn btn--ghost">Editar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="card" style="margin-bottom:20px">
+            <h2>Perfis de voz</h2>
+            <div class="sub">Calibrados com áudio + artigo reais de cada diretor</div>
+            <div class="voice"><div class="vavatar"><img src="assets/daniel.webp" alt=""></div><div><b>Daniel Nery</b><small>VP Facilitadores</small></div><span class="pill pill--ok">CALIBRADO</span></div>
+            <div class="voice"><div class="vavatar"><img src="assets/linconl.webp" alt=""></div><div><b>Linconl Rocha</b><small>Diretor Presidente</small></div><span class="pill pill--ok">CALIBRADO</span></div>
+            <div class="voice"><div class="vavatar"><img src="assets/valeria.webp" alt=""></div><div><b>Valéria Carrete</b><small>VP Emissores</small></div><span class="pill pill--ok">CALIBRADO</span></div>
+            <div class="voice"><div class="vavatar"><img src="assets/luiz.webp" alt=""></div><div><b>Luiz C. Pereira</b><small>VP Tecnologia</small></div><span class="pill pill--wait">AGUARDA AMOSTRAS</span></div>
+            <div class="voice"><div class="vavatar"><img src="assets/pedrina.webp" alt=""></div><div><b>Pedrina Braga</b><small>VP Regulatório</small></div><span class="pill pill--wait">AGUARDA AMOSTRAS</span></div>
+          </div>
+          <div class="card">
+            <h2>Fila de aprovação</h2>
+            <div class="sub">Nada é publicado sem validação humana</div>
+            <div class="voice"><div><b>Tokens de recebíveis saem do piloto</b><small>Blog · voz: Luiz C. Pereira · gerado ontem</small></div><span class="pill pill--wait">REVISAR</span></div>
+            <div class="voice"><div><b>Carrossel: 5 números do semestre</b><small>LinkedIn · arte na identidade · gerado hoje</small></div><span class="pill pill--wait">REVISAR</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ VIEW 2: REDES ══ -->
+    <section class="view" id="v-redes">
+      <div class="card" style="margin-bottom:20px">
+        <h2>Calendário editorial — semana de 14 a 18 de julho</h2>
+        <div class="sub">1 ideia vira N formatos · publicação e agendamento direto no LinkedIn (Instagram: quando a Meta aprovar o app)</div>
+      </div>
+      <div class="week">
+        <div class="day"><h3>SEG · 14</h3>
+          <div class="post"><b>Tokens de recebíveis</b><span class="net">Blog + LinkedIn artigo</span><div class="st st--pub"><i></i> PUBLICADO · 1.2k views</div></div>
+        </div>
+        <div class="day"><h3>TER · 15</h3>
+          <div class="post"><b>PAGOS Conecta #28</b><span class="net">Newsletter · 7h</span><div class="st st--pub"><i></i> ENVIADA · 41% abertura</div></div>
+          <div class="post"><b>Interchange pré-pagos</b><span class="net">LinkedIn post</span><div class="st st--pub"><i></i> PUBLICADO</div></div>
+        </div>
+        <div class="day"><h3>QUA · 16</h3>
+          <div class="post"><b>Pix Automático (D. Nery)</b><span class="net">Blog + LinkedIn · 18h</span><div class="st st--sch"><i></i> AGENDADO</div></div>
+        </div>
+        <div class="day"><h3>QUI · 17</h3>
+          <div class="post"><b>Carrossel: números do semestre</b><span class="net">LinkedIn carrossel</span><div class="st st--dr"><i></i> RASCUNHO</div></div>
+        </div>
+        <div class="day"><h3>SEX · 18</h3>
+          <div class="post"><b>Convite Reunião Mensal 28/jul</b><span class="net">LinkedIn + Instagram</span><div class="st st--dr"><i></i> RASCUNHO</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ VIEW 3: ANALYTICS ══ -->
+    <section class="view" id="v-analytics">
+      <div class="tiles">
+        <div class="tile"><small>VISITAS NO SITE · 30 DIAS</small><b>18.4k</b><span class="delta">+32%</span></div>
+        <div class="tile"><small>LEADS · E-MAGAZINE + EBOOKS</small><b>612</b><span class="delta">+141%</span></div>
+        <div class="tile"><small>ASSINANTES CONECTA</small><b>4.318</b><span class="delta">+9%</span></div>
+        <div class="tile"><small>SEGUIDORES LINKEDIN</small><b>4.929</b><span class="delta">+13,7%</span></div>
+      </div>
+      <div class="card">
+        <h2>Visitas por semana</h2>
+        <div class="sub">Julho de 2026 · fonte: analytics integrado do Painel</div>
+        <div class="chart" role="img" aria-label="Visitas semanais: 3,1 mil; 3,8 mil; 4,6 mil; 6,9 mil na semana do lançamento da edição 43">
+          <div class="bar" style="height:45%"></div>
+          <div class="bar" style="height:55%"></div>
+          <div class="bar" style="height:67%"></div>
+          <div class="bar" style="height:100%"><span>6,9k</span></div>
+        </div>
+        <div class="xlab"><span>Sem 1</span><span>Sem 2</span><span>Sem 3</span><span>Sem 4 · ed. 43 no ar</span></div>
+      </div>
+      <div class="ai-box">
+        <h3>✦ Leitura da IA — sugestão para agosto</h3>
+        <p>Artigos de <b>regulação assinados pela diretoria</b> performam 2,3× acima da média e geram 4× mais leads na e-Magazine. Sugestão: transformar a consulta do BC sobre interoperabilidade em série de 3 artigos (Pedrina + Luiz) e um carrossel-resumo por semana. <u>Gerar rascunhos agora →</u></p>
+      </div>
+      <div class="report">
+        <span class="ok">✓</span> Relatório executivo de junho gerado e enviado em PDF para diretoria@pagos.org.br em 01/jul, 08h00 · <a href="#" style="color:var(--cyan)">ver PDF</a>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+document.querySelectorAll('.tabs button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    document.getElementById('v-'+b.dataset.v).classList.add('on');
+  });
+});
+</script>
+</body>
+</html>

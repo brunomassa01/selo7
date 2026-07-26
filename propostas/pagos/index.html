@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Acesso reservado · Proposta PAGOS 2.0 · Selo7</title>
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-950:#050F26; --navy-900:#081735; --navy-800:#0D2350;
+  --blue:#1E6BF2; --cyan:#35C7F0; --green:#2BE39B;
+  --ink:#EAF1FF; --ink-2:#AEC0E6; --ink-3:#6F83AC; --line:rgba(148,178,235,.14);
+  --sans:'Poppins',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:var(--sans);background:var(--navy-950);color:var(--ink);line-height:1.6;
+  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px 20px;
+  background-image:radial-gradient(1100px 600px at 70% 15%,#123067,var(--navy-900) 55%,var(--navy-950));
+  position:relative;overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(53,199,240,.13) 1px,transparent 1px);background-size:36px 36px;
+  mask-image:radial-gradient(800px 600px at 70% 25%,#000 20%,transparent 75%);
+  -webkit-mask-image:radial-gradient(800px 600px at 70% 25%,#000 20%,transparent 75%);
+}
+
+.card{
+  position:relative;width:100%;max-width:452px;
+  background:rgba(13,35,80,.62);border:1px solid var(--line);border-radius:20px;
+  padding:44px 40px 34px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:0 32px 80px rgba(0,0,0,.44);
+}
+.logo{height:42px;margin-bottom:34px;opacity:.96}
+
+.kicker{font-size:11px;font-weight:600;letter-spacing:.24em;color:var(--green);display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.kicker svg{flex:none;width:13px;height:13px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round}
+h1{font-size:29px;font-weight:700;letter-spacing:-.02em;line-height:1.12}
+h1 em{font-style:normal;color:var(--green)}
+.sub{color:var(--ink-2);font-size:14.5px;margin-top:14px}
+
+form{margin-top:30px}
+label{display:block;font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--ink-3);margin-bottom:9px}
+.field{position:relative}
+input{
+  width:100%;font-family:var(--sans);font-size:16px;font-weight:500;color:#fff;
+  background:rgba(5,15,38,.66);border:1px solid rgba(148,178,235,.24);border-radius:11px;
+  padding:15px 16px;letter-spacing:.04em;transition:border-color .18s,box-shadow .18s;
+}
+input::placeholder{color:var(--ink-3);font-weight:400;letter-spacing:.02em}
+input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(43,227,155,.14)}
+input.err{border-color:#FF6B7A;box-shadow:0 0 0 3px rgba(255,107,122,.13)}
+
+button{
+  width:100%;margin-top:16px;font-family:var(--sans);font-size:15.5px;font-weight:600;
+  color:#04231A;background:var(--green);border:0;border-radius:11px;padding:15px 18px;
+  cursor:pointer;transition:transform .14s,box-shadow .18s,filter .18s;
+}
+button:hover{filter:brightness(1.07);box-shadow:0 10px 28px rgba(43,227,155,.22)}
+button:active{transform:translateY(1px)}
+
+.msg{min-height:19px;margin-top:13px;font-size:13px;color:#FF6B7A;opacity:0;transition:opacity .2s}
+.msg.on{opacity:1}
+.shake{animation:shake .34s}
+@keyframes shake{
+  0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)}
+  40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(3px)}
+}
+
+.foot{
+  margin-top:28px;padding-top:20px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  font-size:12px;color:var(--ink-3);
+}
+.foot a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid rgba(174,192,230,.3)}
+.foot a:hover{color:var(--green);border-bottom-color:var(--green)}
+.by{letter-spacing:.05em}
+.by b{color:var(--ink-2);font-weight:600}
+
+@media (max-width:480px){
+  .card{padding:34px 26px 26px;border-radius:17px}
+  h1{font-size:25px}
+  .logo{height:36px;margin-bottom:27px}
+}
+</style>
+</head>
+<body>
+
+<main class="card" id="card">
+  <img class="logo" src="assets/logo-branca.webp" alt="Pagos">
+
+  <span class="kicker">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.2"/><path d="M8 10.5V7.6a4 4 0 0 1 8 0v2.9"/></svg>
+    ACESSO RESERVADO
+  </span>
+  <h1>Proposta <em>PAGOS 2.0</em></h1>
+  <p class="sub">Material confidencial preparado pela Selo7. Informe o código de acesso para abrir a apresentação.</p>
+
+  <form id="form" autocomplete="off">
+    <label for="codigo">CÓDIGO DE ACESSO</label>
+    <div class="field">
+      <input id="codigo" name="codigo" type="text" placeholder="Digite o código recebido"
+             autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off" required>
+    </div>
+    <button type="submit">Acessar a proposta →</button>
+    <p class="msg" id="msg" role="alert"></p>
+  </form>
+
+  <div class="foot">
+    <span class="by">por <b>Selo7</b></span>
+    <a href="https://api.whatsapp.com/send?phone=5511981655857&text=Ol%C3%A1!%20Preciso%20do%20c%C3%B3digo%20de%20acesso%20da%20proposta%20PAGOS%202.0."
+       target="_blank" rel="noopener">Não tem o código?</a>
+  </div>
+</main>
+
+<script>
+(function(){
+  var KEY = "s7p_pagos_ok";
+  var NEXT = "s7p_pagos_next";
+  var DEST = "proposta.html";
+  var VALID = 274284111;          // código de acesso (hash)
+  var DIAS = 60;                  // acesso lembrado neste dispositivo
+
+  function hash(s){
+    var x = 5381;
+    for (var i = 0; i < s.length; i++) { x = ((x << 5) + x + s.charCodeAt(i)) >>> 0; }
+    return x;
+  }
+
+  // Se o cliente abriu um link direto de uma página interna, volta pra ela depois do código.
+  function destino(){
+    try {
+      var n = localStorage.getItem(NEXT);
+      localStorage.removeItem(NEXT);
+      if (n && /^[a-z0-9-]+\.html$/.test(n) && n !== "index.html") { return n; }
+    } catch(e){}
+    return DEST;
+  }
+
+  // Já liberado neste dispositivo? Entra direto.
+  try {
+    var t = localStorage.getItem(KEY);
+    if (t && (Date.now() - parseInt(t, 10)) < DIAS * 864e5) { location.replace(destino()); return; }
+  } catch(e){}
+
+  var form = document.getElementById("form");
+  var input = document.getElementById("codigo");
+  var msg = document.getElementById("msg");
+  var card = document.getElementById("card");
+
+  input.addEventListener("input", function(){
+    input.classList.remove("err");
+    msg.classList.remove("on");
+  });
+
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var v = (input.value || "").trim().toLowerCase();
+
+    if (hash(v) === VALID) {
+      try { localStorage.setItem(KEY, String(Date.now())); } catch(e){}
+      msg.style.color = "#2BE39B";
+      msg.textContent = "Código confirmado. Abrindo a proposta…";
+      msg.classList.add("on");
+      var ir = destino();
+      setTimeout(function(){ location.replace(ir); }, 420);
+    } else {
+      input.classList.add("err");
+      card.classList.remove("shake");
+      void card.offsetWidth;
+      card.classList.add("shake");
+      msg.style.color = "#FF6B7A";
+      msg.textContent = "Código inválido. Confira a mensagem que enviamos.";
+      msg.classList.add("on");
+      input.select();
+    }
+  });
+
+  input.focus({ preventScroll: true });
+})();
+</script>
+
+</body>
+</html>
